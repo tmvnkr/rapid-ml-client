@@ -1,17 +1,21 @@
 {
   "name": "rapid-ml",
   "version": "0.1.0",
+  "description": "Frontend for the Rapid-ML app",
+  "author": "Codrut Marin, Tim Vaneker",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.84.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": "react-app"
