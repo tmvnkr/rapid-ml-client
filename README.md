@@ -8,6 +8,7 @@
 
 <h3 align="center">University project for minor involving implementing machine learning into web application</h3>
 
+
 ## Usage
 
 After downloading this project, run:
