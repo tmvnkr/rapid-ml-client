@@ -2,10 +2,7 @@
 
 <p align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS36l3O99xOUf0lTiL-vr0JMR6-K62fLg75IbbniDXtpUuRWWM2"></p>
 <p align="center">
-<a href="https://github.com/vaneker/spacelaunch-stats-client/releases"><img src="https://circleci.com/gh/vaneker/rapid-ml.svg?style=svg">
-<a href="https://github.com/vaneker/spacelaunch-stats-client/releases"><img src="https://img.shields.io/badge/version-0.1.0-brightgreen.svg">
-<a href="https://reactjs.org/"><img src="https://img.shields.io/badge/library-React-blue.svg"></a>
-<a href="https://github.com/vaneker/spacelaunch-stats-client/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-red.svg"></a>
+<a href="https://circleci.com/gh/vaneker/rapid-ml"><img src="https://circleci.com/gh/vaneker/rapid-ml.svg?style=svg">
 </p>
 
 <h3 align="center">University project for minor involving implementing machine learning into web application</h3>
