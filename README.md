@@ -9,6 +9,8 @@
 
 ## Usage
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b4ad2451d1b249b9bd6ada6e1240967c)](https://app.codacy.com/app/vaneker/rapid-ml?utm_source=github.com&utm_medium=referral&utm_content=vaneker/rapid-ml&utm_campaign=Badge_Grade_Dashboard)
+
 After downloading this project, run:
 
 **`npm install`**
