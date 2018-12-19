@@ -2,9 +2,8 @@
 
 <p align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS36l3O99xOUf0lTiL-vr0JMR6-K62fLg75IbbniDXtpUuRWWM2"></p>
 <p align="center">
-<a href="https://github.com/vaneker/spacelaunch-stats-client/releases"><img src="https://img.shields.io/badge/version-0.1.0-brightgreen.svg">
-<a href="https://reactjs.org/"><img src="https://img.shields.io/badge/framework-React-blue.svg"></a>
-<a href="https://github.com/vaneker/spacelaunch-stats-client/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-red.svg"></a>
+<a href="https://circleci.com/gh/vaneker/rapid-ml"><img src="https://circleci.com/gh/vaneker/rapid-ml.svg?style=svg">
+<a class="badge-align" href="https://www.codacy.com/app/vaneker/rapid-ml?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vaneker/rapid-ml&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/5c82b2f918ff4d309a4ea1a5a0b3428d"/></a>
 </p>
 
 <h3 align="center">University project for minor involving implementing machine learning into web application</h3>
