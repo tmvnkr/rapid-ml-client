@@ -6,7 +6,6 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "codacy-coverage": "^3.3.0",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
     "react-scripts": "2.1.1",
@@ -16,8 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test-with-coverage": "react-scripts test --coverage && cat ./coverage/lcov.info | codacy-coverage --accountToken c710ccc5d60b4aa88ee714cbf1ca2147  --username vaneker --projectName rapid-ml"
+    "test": "react-scripts test --coverage && cat ./coverage/lcov.info"
   },
   "eslintConfig": {
     "extends": "react-app"
