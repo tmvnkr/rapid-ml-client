@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Button } from 'semantic-ui-react';
 import EventList from '../list/list';
 import EventForm from '../form/form';
+import uuid from 'uuid';
 
 const eventsDashboard = [
   {
@@ -55,14 +56,42 @@ const eventsDashboard = [
 ];
 
 export default function Dashboard() {
+  const [events, setEvents] = useState(eventsDashboard);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleFormOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsOpen(false);
+  };
+
+  const handleCreateEvent = newEvent => {
+    newEvent.id = uuid();
+    newEvent.hostPhotoURL = '/assets/user.png';
+    const updatedEvents = [...events, newEvent];
+    setEvents(updatedEvents);
+    setIsOpen(false);
+  };
+
   return (
     <Grid>
       <Grid.Column width={10}>
-        <EventList events={eventsDashboard} />
+        <EventList events={events} />
       </Grid.Column>
       <Grid.Column width={6}>
-        <Button color="orange" content="Create Event" />
-        <EventForm />
+        <Button
+          onClick={handleFormOpen}
+          color="orange"
+          content="Create Event"
+        />
+        {isOpen && (
+          <EventForm
+            createEvent={handleCreateEvent}
+            handleCancel={handleCancel}
+          />
+        )}
       </Grid.Column>
     </Grid>
   );
