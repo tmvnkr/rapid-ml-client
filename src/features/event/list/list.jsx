@@ -5,7 +5,7 @@ export default function List(props) {
   const { events, onEventOpen, deleteEvent } = props;
   return (
     <div>
-      <h1>Event List</h1>
+      <h1>Collection List</h1>
       {events.map(event => (
         <EventListItem
           key={event.id}

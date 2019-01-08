@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(232, 228, 236) !important;
+  background-color: rgb(232, 228, 236);
 }
 
 /*timepicker style*/
@@ -27,12 +27,12 @@ body {
     rgb(66, 24, 115) 0%,
     rgb(134, 33, 174) 69%,
     rgb(156, 32, 172) 89%
-  ) !important;
+  );
 }
 
 .masthead.segment {
   min-height: 98vh;
-  padding: 1em 0 !important;
+  padding: 1em 0;
 }
 
 .masthead .ui.menu .ui.button,
@@ -74,7 +74,7 @@ body {
     rgb(66, 24, 115) 0%,
     rgb(134, 33, 174) 69%,
     rgb(156, 32, 172) 89%
-  ) !important;
+  );
 }
 
 .ui.main.container,
@@ -92,7 +92,7 @@ body {
 }
 
 .ui.menu .item > img:not(.ui) {
-  margin-right: 1.5em !important;
+  margin-right: 1.5em;
 }
 
 .ui.menu:not(.vertical) .item > .button {
@@ -102,6 +102,6 @@ body {
 /*chat comments*/
 
 .ui.comments .comment .comments {
-  padding-bottom: 0 !important;
-  padding-left: 2em !important;
+  padding-bottom: 0;
+  padding-left: 2em;
 }

@@ -24,7 +24,7 @@ export default function App() {
             <NavBar />
             <Container className="main">
               <Switch>
-                <Route path="/events" component={EventDashboard} />
+                <Route path="/collections" component={EventDashboard} />
                 <Route path="/test" component={TestComponent} />
                 <Route path="/events/:id" component={EventDetailedPage} />
                 <Route path="/people" component={PeopleDashboard} />

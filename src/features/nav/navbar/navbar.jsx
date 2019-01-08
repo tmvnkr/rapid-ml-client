@@ -26,7 +26,7 @@ function Navbar({ history }) {
             </i>
           </h1>
         </Menu.Item>
-        <Menu.Item as={NavLink} to="/events" name="Events" />
+        <Menu.Item as={NavLink} to="/collections" name="Collections" />
         <Menu.Item as={NavLink} to="/test" name="Test" />
         {auth && <Menu.Item as={NavLink} to="/people" name="People" />}
         {auth && (
@@ -36,7 +36,7 @@ function Navbar({ history }) {
               to="/createEvent"
               floated="right"
               color="orange"
-              content="Create Event"
+              content="Create Collection"
             />
           </Menu.Item>
         )}

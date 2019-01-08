@@ -13,7 +13,7 @@ export default function ListItem(props) {
             <Item.Content>
               <Item.Header as="a">{event.title}</Item.Header>
               <Item.Description>
-                Hosted by <a>{event.hostedBy}</a>
+                Created by <a>{event.hostedBy}</a>
               </Item.Description>
             </Item.Content>
           </Item>

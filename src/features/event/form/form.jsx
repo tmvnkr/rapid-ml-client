@@ -43,7 +43,7 @@ export default function EventForm(props) {
     <Segment>
       <Form>
         <Form.Field>
-          <label>Event Title</label>
+          <label>Collection Title</label>
           <input
             name="title"
             onChange={onInputChange}
@@ -52,7 +52,7 @@ export default function EventForm(props) {
           />
         </Form.Field>
         <Form.Field>
-          <label>Event Date</label>
+          <label>Collection Date</label>
           <input
             name="date"
             onChange={onInputChange}
@@ -80,7 +80,7 @@ export default function EventForm(props) {
           />
         </Form.Field>
         <Form.Field>
-          <label>Hosted By</label>
+          <label>Created By</label>
           <input
             name="hostedBy"
             onChange={onInputChange}
