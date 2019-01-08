@@ -26,7 +26,7 @@ export default function App() {
               <Switch>
                 <Route path="/collections" component={EventDashboard} />
                 <Route path="/test" component={TestComponent} />
-                <Route path="/events/:id" component={EventDetailedPage} />
+                <Route path="/collections/:id" component={EventDetailedPage} />
                 <Route path="/people" component={PeopleDashboard} />
                 <Route path="/profile/:id" component={UserDetailedPage} />
                 <Route path="/settings" component={SettingsDashboard} />
