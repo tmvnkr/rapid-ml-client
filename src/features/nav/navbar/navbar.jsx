@@ -27,6 +27,7 @@ function Navbar({ history }) {
           </h1>
         </Menu.Item>
         <Menu.Item as={NavLink} to="/events" name="Events" />
+        <Menu.Item as={NavLink} to="/test" name="Test" />
         {auth && <Menu.Item as={NavLink} to="/people" name="People" />}
         {auth && (
           <Menu.Item>

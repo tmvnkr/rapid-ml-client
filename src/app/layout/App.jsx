@@ -8,6 +8,7 @@ import UserDetailedPage from '../../features/user/detailed/detailed';
 import SettingsDashboard from '../../features/user/settings/dashboard';
 import EventForm from '../../features/event/form/form';
 import HomePage from '../../features/home/homepage';
+import TestComponent from '../../features/testarea/TestComponent';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
             <Container className="main">
               <Switch>
                 <Route path="/events" component={EventDashboard} />
+                <Route path="/test" component={TestComponent} />
                 <Route path="/events/:id" component={EventDetailedPage} />
                 <Route path="/people" component={PeopleDashboard} />
                 <Route path="/profile/:id" component={UserDetailedPage} />
