@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Route, Switch } from 'react-router-dom';
 import { EventDashboard, NavBar } from '../../features';
@@ -12,7 +12,7 @@ import TestComponent from '../../features/testarea/TestComponent';
 
 export default function App() {
   return (
-    <>
+    <Fragment>
       <Switch>
         <Route exact path="/" component={HomePage} />
       </Switch>
@@ -20,7 +20,7 @@ export default function App() {
       <Route
         path="/(.+)"
         render={() => (
-          <>
+          <Fragment>
             <NavBar />
             <Container className="main">
               <Switch>
@@ -33,9 +33,9 @@ export default function App() {
                 <Route path="/createEvent" component={EventForm} />
               </Switch>
             </Container>
-          </>
+          </Fragment>
         )}
       />
-    </>
+    </Fragment>
   );
 }

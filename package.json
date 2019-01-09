@@ -6,7 +6,10 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "apollo-boost": "^0.1.23",
+    "graphql": "^14.0.2",
     "react": "^16.7.0-alpha.2",
+    "react-apollo": "^2.3.3",
     "react-dom": "^16.7.0-alpha.2",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
