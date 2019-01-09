@@ -1,64 +1,26 @@
 import React, { useState } from 'react';
 import { Grid, Button } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 import EventList from '../list/list';
 import EventForm from '../form/form';
 import uuid from 'uuid';
+import { createEvent, deleteEvent, updateEvent } from '../actions';
 
-const eventsDashboard = [
-  {
-    id: '1',
-    title: 'Pictures of my appartment',
-    date: '2018-03-27',
-    category: 'houses',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
-    city: 'Emmen, NL',
-    venue: 'Kapelstraat 121H',
-    hostedBy: 'Tim',
-    hostPhotoURL: 'https://randomuser.me/api/portraits/men/20.jpg',
-    attendees: [
-      {
-        id: 'a',
-        name: 'Tim',
-        photoURL: 'https://randomuser.me/api/portraits/men/20.jpg'
-      },
-      {
-        id: 'b',
-        name: 'Marin',
-        photoURL: 'https://randomuser.me/api/portraits/men/22.jpg'
-      }
-    ]
-  },
-  {
-    id: '2',
-    title: 'Pictures of (a) Stone',
-    date: '2018-03-28',
-    category: 'stones',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
-    city: 'Emmen, NL',
-    venue: 'Stones',
-    hostedBy: 'Marin',
-    hostPhotoURL: 'https://randomuser.me/api/portraits/men/22.jpg',
-    attendees: [
-      {
-        id: 'b',
-        name: 'Marin',
-        photoURL: 'https://randomuser.me/api/portraits/men/22.jpg'
-      },
-      {
-        id: 'a',
-        name: 'Tim',
-        photoURL: 'https://randomuser.me/api/portraits/men/20.jpg'
-      }
-    ]
-  }
-];
+const mapState = state => ({
+  events: state.events
+});
 
-export default function Dashboard() {
-  const [events, setEvents] = useState(eventsDashboard);
+const actions = {
+  createEvent,
+  deleteEvent,
+  updateEvent
+};
+
+function Dashboard(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+  let { events } = props;
 
   const handleFormOpen = () => {
     setSelectedEvent(null);
@@ -70,15 +32,7 @@ export default function Dashboard() {
   };
 
   const handleUpdateEvent = updatedEvent => {
-    setEvents(
-      events.map(event => {
-        if (event.id === updatedEvent.id) {
-          return Object.assign({}, updatedEvent);
-        } else {
-          return event;
-        }
-      })
-    );
+    props.updateEvent(updatedEvent);
     setIsOpen(false);
     setSelectedEvent(null);
   };
@@ -91,14 +45,12 @@ export default function Dashboard() {
   const handleCreateEvent = newEvent => {
     newEvent.id = uuid();
     newEvent.hostPhotoURL = '/assets/user.png';
-    const updatedEvents = [...events, newEvent];
-    setEvents(updatedEvents);
+    props.createEvent(newEvent);
     setIsOpen(false);
   };
 
   const handleDeleteEvent = eventId => () => {
-    const updatedEvents = events.filter(e => e.id !== eventId);
-    setEvents(updatedEvents);
+    props.deleteEvent(eventId);
   };
 
   return (
@@ -128,3 +80,8 @@ export default function Dashboard() {
     </Grid>
   );
 }
+
+export default connect(
+  mapState,
+  actions
+)(Dashboard);
