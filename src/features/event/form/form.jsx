@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Segment, Form, Button } from 'semantic-ui-react';
 
-export default function EventForm(props) {
-  const emptyEvent = {
+const mapState = (state, ownProps) => {
+  const eventId = ownProps.match.params.id;
+
+  let event = {
     title: '',
     date: '',
     city: '',
@@ -10,18 +13,17 @@ export default function EventForm(props) {
     hostedBy: ''
   };
 
-  const [event, setEvent] = useState(emptyEvent);
+  if (eventId && state.events.length > 0) {
+    event = state.events.filter(event => event.id === eventId)[0];
+  }
 
-  useEffect(
-    () => {
-      if (props.selectedEvent !== null) {
-        setEvent(props.selectedEvent);
-      } else {
-        setEvent(emptyEvent);
-      }
-    },
-    [props.selectedEvent]
-  );
+  return {
+    event
+  };
+};
+
+function EventForm(props) {
+  const [event, setEvent] = useState(Object.assign({}, props.event));
 
   const onFormSubmit = evt => {
     evt.preventDefault();
@@ -98,3 +100,5 @@ export default function EventForm(props) {
     </Segment>
   );
 }
+
+export default connect(mapState)(EventForm);

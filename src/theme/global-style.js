@@ -1,41 +1,114 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  html, body {
-    height: 100%;
-  }
   body {
-    margin: 0;
-    padding: 0; 
-  }
-  #root {
-    display: 'flex';
-    flex-direction: column;
-  }
-  * {
-    box-sizing: 'border-box';
-  }
-  h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-    font-weight: 400;
-    color: ${props => props.theme.text}
-  }
-  h1 {
-    font-size: 2em;
-    margin: 0.67em 0;
-    line-height: 1em;
-  }
-  h2 {
-    font-size: 1.8em;
-  }
-  h3 {
-    font-size: 1.5em;
-  }
-  h5 {
-    font-size: 1em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
+  background-color: rgb(234, 234, 234) !important;
+}
+
+/*timepicker style*/
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list {
+  padding-left: 0;
+  padding-right: 0;
+  width: 100px;
+}
+
+.react-datepicker__input-container {
+  width: inherit;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+/*home page styles*/
+.masthead {
+  background-image: radial-gradient(
+    farthest-corner at 400px 100px,
+    rgb(66, 24, 115) 0%,
+    rgb(134, 33, 174) 69%,
+    rgb(156, 32, 172) 89%
+  ) !important;
+}
+
+.masthead.segment {
+  min-height: 700px;
+  padding: 1em 0 !important;
+}
+
+.masthead .ui.menu .ui.button,
+.ui.menu a.ui.inverted.button {
+  margin-left: 0.5em;
+}
+
+.masthead h1.ui.header {
+  margin-top: 3em;
+  margin-bottom: 0;
+  font-size: 4em;
+  font-weight: normal;
+}
+
+.masthead h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+
+.footer.segment {
+  padding: 5em 0;
+}
+
+.secondary.inverted.pointing.menu {
+  border: none;
+}
+
+/*end home page styles*/
+
+/* navbar styles */
+
+.ui.menu .item img.logo {
+  margin-right: 1.5em;
+}
+
+.ui.fixed.menu {
+  background-image: radial-gradient(
+    farthest-corner at 400px 100px,
+    rgb(66, 24, 115) 0%,
+    rgb(134, 33, 174) 69%,
+    rgb(156, 32, 172) 89%
+  ) !important;
+}
+
+.ui.main.container,
+.main.segment {
+  margin-top: 7em;
+}
+
+.ui.center.aligned.segment.attendance-preview {
+  background-color: #f5f5f5;
+}
+
+.masthead .ui.menu .ui.button,
+.ui.menu a.ui.inverted.button {
+  margin-left: 0.5em;
+}
+
+.ui.menu .item > img:not(.ui) {
+  margin-right: 1.5em !important;
+}
+
+.ui.menu:not(.vertical) .item > .button {
+  margin-left: 0.5em;
+}
+
+/*chat comments*/
+
+.ui.comments .comment .comments {
+  padding-bottom: 0 !important;
+  padding-left: 2em !important;
+}
+
 `;
 
 export default GlobalStyle;

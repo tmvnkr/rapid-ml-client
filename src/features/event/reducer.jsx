@@ -6,7 +6,7 @@ const initialState = [
     id: '1',
     title: 'Pictures of my appartment',
     date: '2018-03-27',
-    category: 'houses',
+    category: 'film',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
     city: 'Emmen, NL',
@@ -30,7 +30,7 @@ const initialState = [
     id: '2',
     title: 'Pictures of (a) Stone',
     date: '2018-03-28',
-    category: 'stones',
+    category: 'food',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
     city: 'Emmen, NL',
