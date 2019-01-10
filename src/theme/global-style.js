@@ -1,15 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css?family=Exo+2');
   html, body {
     height: 100%;
   }
   body {
     margin: 0;
-    padding: 0;
-    font-family: 'Exo 2', sans-serif;
-    background-color: ${props => props.theme.background};
+    padding: 0; 
   }
   #root {
     display: 'flex';

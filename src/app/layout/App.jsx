@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Route, Switch } from 'react-router-dom';
 import { EventDashboard, NavBar } from '../../features';
+import { GlobalStyle } from '../../theme';
 import EventDetailedPage from '../../features/event/detailed/detailed';
 import PeopleDashboard from '../../features/user/dashboard/dashboard';
 import UserDetailedPage from '../../features/user/detailed/detailed';
@@ -13,6 +14,7 @@ import TestComponent from '../../features/testarea/TestComponent';
 export default function App() {
   return (
     <Fragment>
+      <GlobalStyle />
       <Switch>
         <Route exact path="/" component={HomePage} />
       </Switch>

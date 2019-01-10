@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(232, 228, 236);
+  background-color: rgb(234, 234, 234) !important;
 }
 
 /*timepicker style*/
@@ -15,6 +15,7 @@ body {
 .react-datepicker__input-container {
   width: inherit;
 }
+
 .react-datepicker-wrapper {
   width: 100%;
 }
@@ -27,12 +28,12 @@ body {
     rgb(66, 24, 115) 0%,
     rgb(134, 33, 174) 69%,
     rgb(156, 32, 172) 89%
-  );
+  ) !important;
 }
 
 .masthead.segment {
-  min-height: 98vh;
-  padding: 1em 0;
+  min-height: 700px;
+  padding: 1em 0 !important;
 }
 
 .masthead .ui.menu .ui.button,
@@ -74,7 +75,7 @@ body {
     rgb(66, 24, 115) 0%,
     rgb(134, 33, 174) 69%,
     rgb(156, 32, 172) 89%
-  );
+  ) !important;
 }
 
 .ui.main.container,
@@ -92,7 +93,7 @@ body {
 }
 
 .ui.menu .item > img:not(.ui) {
-  margin-right: 1.5em;
+  margin-right: 1.5em !important;
 }
 
 .ui.menu:not(.vertical) .item > .button {
@@ -102,6 +103,6 @@ body {
 /*chat comments*/
 
 .ui.comments .comment .comments {
-  padding-bottom: 0;
-  padding-left: 2em;
+  padding-bottom: 0 !important;
+  padding-left: 2em !important;
 }
