@@ -2,8 +2,8 @@
 
 <p align="center"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS36l3O99xOUf0lTiL-vr0JMR6-K62fLg75IbbniDXtpUuRWWM2"></p>
 
-[![Build Status](https://circleci.com/gh/vaneker/rapid-ml.png?style=shield&circle-token=:circle-token)](https://circleci.com/gh/vaneker/rapid-ml)
-<a class="badge-align" href="https://www.codacy.com/app/vaneker/rapid-ml?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vaneker/rapid-ml&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/5c82b2f918ff4d309a4ea1a5a0b3428d"/></a>
+[![CircleCI](https://circleci.com/gh/vaneker/rapid-ml-client.svg?style=svg)](https://circleci.com/gh/vaneker/rapid-ml-client)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5c82b2f918ff4d309a4ea1a5a0b3428d)](https://www.codacy.com/app/vaneker/rapid-ml-client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=vaneker/rapid-ml-client&amp;utm_campaign=Badge_Grade)
 
 
 <h3 align="center">University project for minor involving implementing machine learning into web application</h3>
