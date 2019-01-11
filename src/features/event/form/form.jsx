@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Segment, Form, Button } from 'semantic-ui-react';
+import { createEvent, updateEvent } from '../actions';
+import uuid from 'uuid';
 
 const mapState = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
@@ -22,6 +24,11 @@ const mapState = (state, ownProps) => {
   };
 };
 
+const actions = {
+  createEvent,
+  updateEvent
+};
+
 function EventForm(props) {
   const [event, setEvent] = useState(Object.assign({}, props.event));
 
@@ -29,8 +36,15 @@ function EventForm(props) {
     evt.preventDefault();
     if (event.id) {
       props.updateEvent(event);
+      props.history.goBack();
     } else {
-      props.createEvent(event);
+      const newEvent = {
+        ...event,
+        id: uuid(),
+        hostPhotoURL: 'assets/user.png'
+      };
+      props.createEvent(newEvent);
+      props.history.push('/collections');
     }
   };
 
@@ -93,7 +107,7 @@ function EventForm(props) {
         <Button onClick={onFormSubmit} positive type="submit">
           Submit
         </Button>
-        <Button onClick={handleCancel} type="button">
+        <Button onClick={props.history.goBack} type="button">
           Cancel
         </Button>
       </Form>
@@ -101,4 +115,7 @@ function EventForm(props) {
   );
 }
 
-export default connect(mapState)(EventForm);
+export default connect(
+  mapState,
+  actions
+)(EventForm);

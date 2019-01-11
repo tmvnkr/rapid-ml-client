@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import EventListAttendee from './list-attendee';
 
 export default function ListItem(props) {
-  const { event, onEventOpen, deleteEvent } = props;
+  const { event, deleteEvent } = props;
   return (
     <Segment.Group>
       <Segment>
