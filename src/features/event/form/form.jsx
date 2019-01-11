@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Segment, Form, Button } from 'semantic-ui-react';
+import { reduxForm, Field } from 'redux-form';
+import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react';
 import { createEvent, updateEvent } from '../actions';
 import uuid from 'uuid';
+import TextInput from '../../../app/common/form/text-input';
+import TextArea from '../../../app/common/form/text-area';
 
 const mapState = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
@@ -30,16 +33,14 @@ const actions = {
 };
 
 function EventForm(props) {
-  const [event, setEvent] = useState(Object.assign({}, props.event));
-
   const onFormSubmit = evt => {
     evt.preventDefault();
-    if (event.id) {
-      props.updateEvent(event);
+    if (props.event.id) {
+      props.updateEvent(props.event);
       props.history.goBack();
     } else {
       const newEvent = {
-        ...event,
+        ...props.event,
         id: uuid(),
         hostPhotoURL: 'assets/user.png'
       };
@@ -48,74 +49,64 @@ function EventForm(props) {
     }
   };
 
-  const onInputChange = evt => {
-    const newEvent = event;
-    newEvent[evt.target.name] = evt.target.value;
-    setEvent(newEvent);
-  };
-
-  const { handleCancel } = props;
   return (
-    <Segment>
-      <Form>
-        <Form.Field>
-          <label>Collection Title</label>
-          <input
-            name="title"
-            onChange={onInputChange}
-            value={event.title}
-            placeholder="Event Title"
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Collection Date</label>
-          <input
-            name="date"
-            onChange={onInputChange}
-            value={event.date}
-            type="date"
-            placeholder="Event Date"
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>City</label>
-          <input
-            name="city"
-            onChange={onInputChange}
-            value={event.city}
-            placeholder="City event is taking place"
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Venue</label>
-          <input
-            name="venue"
-            onChange={onInputChange}
-            value={event.venue}
-            placeholder="Enter the Venue of the event"
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Created By</label>
-          <input
-            name="hostedBy"
-            onChange={onInputChange}
-            value={event.hostedBy}
-            placeholder="Enter the name of person hosting"
-          />
-        </Form.Field>
-        <Button onClick={onFormSubmit} positive type="submit">
-          Submit
-        </Button>
-        <Button onClick={props.history.goBack} type="button">
-          Cancel
-        </Button>
-      </Form>
-    </Segment>
+    <Grid>
+      <Grid.Column width={10}>
+        <Segment>
+          <Header sub color="teal" content="Collection Details" />
+          <Form>
+            <Field
+              name="title"
+              type="text"
+              component={TextInput}
+              placeholder="Give this collection a name"
+            />
+            <Field
+              name="category"
+              type="text"
+              component={TextInput}
+              placeholder="What is this collection about"
+            />
+            <Field
+              name="description"
+              type="text"
+              rows={3}
+              component={TextArea}
+              placeholder="Tell use about this collection"
+            />
+            <Header sub color="teal" content="Collection Location Details" />
+            <Field
+              name="city"
+              type="text"
+              component={TextInput}
+              placeholder="Collection city"
+            />
+            <Field
+              name="venue"
+              type="text"
+              component={TextInput}
+              placeholder="Collection venue"
+            />
+            <Field
+              name="date"
+              type="text"
+              component={TextInput}
+              placeholder="Collection date"
+            />
+            <Button onClick={onFormSubmit} positive type="submit">
+              Submit
+            </Button>
+            <Button onClick={props.history.goBack} type="button">
+              Cancel
+            </Button>
+          </Form>
+        </Segment>
+      </Grid.Column>
+    </Grid>
   );
 }
 
 export default connect(
   mapState,
   actions
-)(EventForm);
+)(reduxForm({ form: 'eventForm' })(EventForm));
