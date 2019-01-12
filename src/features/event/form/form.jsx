@@ -1,6 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import {
+  composeValidators,
+  combineValidators,
+  isRequired,
+  hasLengthGreaterThan
+} from 'revalidate';
 import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react';
 import { createEvent, updateEvent } from '../actions';
 import uuid from 'uuid';
@@ -36,6 +42,19 @@ const category = [
   { key: 'travel', text: 'Travel', value: 'travel' }
 ];
 
+const validate = combineValidators({
+  title: isRequired({ message: 'The event title is required' }),
+  category: isRequired({ message: 'Please provide a category' }),
+  description: composeValidators(
+    isRequired({ message: 'Please enter a description' }),
+    hasLengthGreaterThan(4)({
+      message: 'Description needs to be at least 5 characters'
+    })
+  )(),
+  city: isRequired('city'),
+  venue: isRequired('venue')
+});
+
 function EventForm(props) {
   const onFormSubmit = values => {
     if (props.initialValues.id) {
@@ -52,6 +71,8 @@ function EventForm(props) {
       props.history.push('/collections');
     }
   };
+
+  const { invalid, submitting, pristine } = props;
 
   return (
     <Grid>
@@ -99,7 +120,10 @@ function EventForm(props) {
               component={TextInput}
               placeholder="Collection date"
             />
-            <Button positive type="submit">
+            <Button
+              disabled={invalid || submitting || pristine}
+              positive
+              type="submit">
               Submit
             </Button>
             <Button onClick={props.history.goBack} type="button">
@@ -115,4 +139,8 @@ function EventForm(props) {
 export default connect(
   mapState,
   actions
-)(reduxForm({ form: 'eventForm', enableReinitialize: true })(EventForm));
+)(
+  reduxForm({ form: 'eventForm', enableReinitialize: true, validate })(
+    EventForm
+  )
+);
