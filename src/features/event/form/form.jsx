@@ -7,12 +7,14 @@ import {
   isRequired,
   hasLengthGreaterThan
 } from 'revalidate';
+import moment from 'moment';
 import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react';
 import { createEvent, updateEvent } from '../actions';
 import uuid from 'uuid';
 import TextInput from '../../../app/common/form/text-input';
 import TextArea from '../../../app/common/form/text-area';
 import SelectInput from '../../../app/common/form/select-input';
+import DateInput from '../../../app/common/form/date-input';
 
 const mapState = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
@@ -52,11 +54,13 @@ const validate = combineValidators({
     })
   )(),
   city: isRequired('city'),
-  venue: isRequired('venue')
+  venue: isRequired('venue'),
+  date: isRequired('date')
 });
 
 function EventForm(props) {
   const onFormSubmit = values => {
+    values.date = moment(values.date).format();
     if (props.initialValues.id) {
       props.updateEvent(values);
       props.history.goBack();
@@ -117,7 +121,8 @@ function EventForm(props) {
             <Field
               name="date"
               type="text"
-              component={TextInput}
+              component={DateInput}
+              dateFormat="YYYY-MM-DD"
               placeholder="Collection date"
             />
             <Button
