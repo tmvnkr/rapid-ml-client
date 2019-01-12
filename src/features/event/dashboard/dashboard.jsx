@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import EventList from '../list/list';
 import { deleteEvent } from '../actions';
 import LoadingComponent from '../../../app/layout/loading';
+import CollectionActivity from '../activity/activity';
 
 const mapState = state => ({
   events: state.events,
@@ -27,7 +28,9 @@ function Dashboard(props) {
       <Grid.Column width={10}>
         <EventList deleteEvent={handleDeleteEvent} events={events} />
       </Grid.Column>
-      <Grid.Column width={6} />
+      <Grid.Column width={6}>
+        <CollectionActivity />
+      </Grid.Column>
     </Grid>
   );
 }
