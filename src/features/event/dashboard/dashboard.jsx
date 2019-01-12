@@ -3,9 +3,11 @@ import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import EventList from '../list/list';
 import { deleteEvent } from '../actions';
+import LoadingComponent from '../../../app/layout/loading';
 
 const mapState = state => ({
-  events: state.events
+  events: state.events,
+  loading: state.async.loading
 });
 
 const actions = {
@@ -13,8 +15,9 @@ const actions = {
 };
 
 function Dashboard(props) {
-  const { events } = props;
+  const { events, loading } = props;
 
+  if (loading) return <LoadingComponent inverted={true} />;
   const handleDeleteEvent = eventId => () => {
     props.deleteEvent(eventId);
   };
