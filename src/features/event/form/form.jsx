@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react';
@@ -6,24 +6,19 @@ import { createEvent, updateEvent } from '../actions';
 import uuid from 'uuid';
 import TextInput from '../../../app/common/form/text-input';
 import TextArea from '../../../app/common/form/text-area';
+import SelectInput from '../../../app/common/form/select-input';
 
 const mapState = (state, ownProps) => {
   const eventId = ownProps.match.params.id;
 
-  let event = {
-    title: '',
-    date: '',
-    city: '',
-    venue: '',
-    hostedBy: ''
-  };
+  let event = {};
 
   if (eventId && state.events.length > 0) {
     event = state.events.filter(event => event.id === eventId)[0];
   }
 
   return {
-    event
+    initialValues: event
   };
 };
 
@@ -32,17 +27,26 @@ const actions = {
   updateEvent
 };
 
+const category = [
+  { key: 'drinks', text: 'Drinks', value: 'drinks' },
+  { key: 'culture', text: 'Culture', value: 'culture' },
+  { key: 'film', text: 'Film', value: 'film' },
+  { key: 'food', text: 'Food', value: 'food' },
+  { key: 'music', text: 'Music', value: 'music' },
+  { key: 'travel', text: 'Travel', value: 'travel' }
+];
+
 function EventForm(props) {
-  const onFormSubmit = evt => {
-    evt.preventDefault();
-    if (props.event.id) {
-      props.updateEvent(props.event);
+  const onFormSubmit = values => {
+    if (props.initialValues.id) {
+      props.updateEvent(values);
       props.history.goBack();
     } else {
       const newEvent = {
-        ...props.event,
+        ...values,
         id: uuid(),
-        hostPhotoURL: 'assets/user.png'
+        hostPhotoURL: 'assets/user.png',
+        hostedBy: 'Bob'
       };
       props.createEvent(newEvent);
       props.history.push('/collections');
@@ -54,7 +58,7 @@ function EventForm(props) {
       <Grid.Column width={10}>
         <Segment>
           <Header sub color="teal" content="Collection Details" />
-          <Form>
+          <Form onSubmit={props.handleSubmit(onFormSubmit)}>
             <Field
               name="title"
               type="text"
@@ -64,7 +68,9 @@ function EventForm(props) {
             <Field
               name="category"
               type="text"
-              component={TextInput}
+              component={SelectInput}
+              options={category}
+              // multiple={true}
               placeholder="What is this collection about"
             />
             <Field
@@ -93,7 +99,7 @@ function EventForm(props) {
               component={TextInput}
               placeholder="Collection date"
             />
-            <Button onClick={onFormSubmit} positive type="submit">
+            <Button positive type="submit">
               Submit
             </Button>
             <Button onClick={props.history.goBack} type="button">
@@ -109,4 +115,4 @@ function EventForm(props) {
 export default connect(
   mapState,
   actions
-)(reduxForm({ form: 'eventForm' })(EventForm));
+)(reduxForm({ form: 'eventForm', enableReinitialize: true })(EventForm));
