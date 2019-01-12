@@ -33,6 +33,55 @@ function EventDetailedInfo({ event }) {
       <Segment attached>
         <Grid verticalAlign="middle">
           <Grid.Column width={1}>
+            <Icon name="tag" size="large" color="teal" />
+          </Grid.Column>
+          <Grid.Column width={15}>
+            <div
+              style={{
+                width: '99%',
+                height: 'auto',
+                backgroundColor: '#9c9c9c'
+              }}>
+              <b>Banana 99%</b>
+            </div>
+            <div
+              style={{
+                width: '49%',
+                height: 'auto',
+                backgroundColor: '#bfbfbf'
+              }}>
+              <b>Fish 49%</b>
+            </div>
+            <div
+              style={{
+                width: '25%',
+                height: 'auto',
+                backgroundColor: '#d4d4d4'
+              }}>
+              <b>Hat 25%</b>
+            </div>
+            <div
+              style={{
+                width: '10%',
+                height: 'auto',
+                backgroundColor: '#dcdcdc'
+              }}>
+              <b>Santa 10%</b>
+            </div>
+            <div
+              style={{
+                width: '5%',
+                height: 'auto',
+                backgroundColor: '#ebebeb'
+              }}>
+              <b>Car 5%</b>
+            </div>
+          </Grid.Column>
+        </Grid>
+      </Segment>
+      <Segment attached>
+        <Grid verticalAlign="middle">
+          <Grid.Column width={1}>
             <Icon name="marker" size="large" color="teal" />
           </Grid.Column>
           <Grid.Column width={11}>

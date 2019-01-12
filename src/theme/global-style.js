@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   body {
   background-color: rgb(234, 234, 234) !important;
+  height: 0% !important;
 }
 
 /*timepicker style*/
@@ -107,6 +108,20 @@ const GlobalStyle = createGlobalStyle`
 .ui.comments .comment .comments {
   padding-bottom: 0 !important;
   padding-left: 2em !important;
+}
+
+body::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+  border-radius: 20px;
 }
 
 `;

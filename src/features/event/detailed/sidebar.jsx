@@ -13,7 +13,9 @@ function EventDetailedSidebar({ attendees }) {
         inverted
         color="teal">
         {attendees && attendees.length}{' '}
-        {attendees && attendees.length === 1 ? ' Person' : ' People'} Going
+        {attendees && attendees.length === 1
+          ? ' Person likes this'
+          : ' People like this'}
       </Segment>
       <Segment attached>
         <List relaxed divided>

@@ -10,11 +10,13 @@ import SettingsDashboard from '../../features/user/settings/dashboard';
 import EventForm from '../../features/event/form/form';
 import HomePage from '../../features/home/homepage';
 import TestComponent from '../../features/testarea/TestComponent';
+import ModalManager from '../../features/modals/manager';
 
 export default function App() {
   return (
     <Fragment>
       <GlobalStyle />
+      <ModalManager />
       <Switch>
         <Route exact path="/" component={HomePage} />
       </Switch>
