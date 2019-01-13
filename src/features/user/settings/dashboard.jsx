@@ -2,29 +2,47 @@ import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import BasicsPage from './basic';
+import BasicPage from './basic';
 import SettingsNav from './nav';
 import AboutPage from './about';
 import PhotosPage from './photos';
 import AccountPage from './account';
 import { updatePassword } from '../../auth/actions';
+import { updateProfile } from '../actions';
 
 const actions = {
-  updatePassword
+  updatePassword,
+  updateProfile
 };
 
 const mapState = state => ({
-  providerId: state.firebase.auth.providerData[0].providerId
+  providerId: state.firebase.auth.providerData[0].providerId,
+  user: state.firebase.profile
 });
 
-function SettingsDashboard({ updatePassword, providerId }) {
+function SettingsDashboard({
+  updatePassword,
+  providerId,
+  user,
+  updateProfile
+}) {
   return (
     <Grid>
       <Grid.Column width={12}>
         <Switch>
           <Redirect exact from="/settings" to="/settings/basics" />
-          <Route path="/settings/basics" component={BasicsPage} />
-          <Route path="/settings/about" component={AboutPage} />
+          <Route
+            path="/settings/basics"
+            render={() => (
+              <BasicPage updateProfile={updateProfile} initialValues={user} />
+            )}
+          />
+          <Route
+            path="/settings/about"
+            render={() => (
+              <AboutPage updateProfile={updateProfile} initialValues={user} />
+            )}
+          />
           <Route path="/settings/photos" component={PhotosPage} />
           <Route
             path="/settings/account"
