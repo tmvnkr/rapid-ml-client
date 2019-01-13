@@ -12,7 +12,8 @@ const actions = {
 };
 
 const mapState = state => ({
-  auth: state.firebase.auth
+  auth: state.firebase.auth,
+  profile: state.firebase.profile
 });
 
 function Navbar(props) {
@@ -56,7 +57,7 @@ function Navbar(props) {
           </Menu.Item>
         )}
         {authenticated ? (
-          <SignedInMenu auth={props.auth} signOut={handleSignOut} />
+          <SignedInMenu profile={props.profile} signOut={handleSignOut} />
         ) : (
           <SignedOutMenu signIn={handleSignIn} register={handleRegister} />
         )}
