@@ -47,3 +47,19 @@ export const registerUser = user => {
     }
   };
 };
+
+export const socialLogin = selectedProvider => {
+  return async (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+    try {
+      dispatch(closeModal());
+      let user = await firebase.login({
+        provider: selectedProvider,
+        type: 'popup'
+      });
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
