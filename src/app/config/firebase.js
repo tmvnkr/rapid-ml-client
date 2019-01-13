@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: `${process.env.REACT_APP_FIREBASE_API_KEY}`,
+  apiKey: 'AIzaSyCYjNCo2Oh9S7PxUc94z8NOyHvKMJIIpt4',
   authDomain: 'rapidml.firebaseapp.com',
   databaseURL: 'https://rapidml.firebaseio.com',
   projectId: 'rapidml',
