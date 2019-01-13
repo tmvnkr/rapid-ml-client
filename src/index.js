@@ -14,10 +14,8 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import App from './app/layout/App';
 import { configureStore } from './app/store/configureStore';
 import ScrollToTop from './app/common/util/scroll-to-top';
-import { loadEvents } from './features/event/actions';
 
 const store = configureStore();
-store.dispatch(loadEvents());
 
 const rootEl = document.getElementById('root');
 

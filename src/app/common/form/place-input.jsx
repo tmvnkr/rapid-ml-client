@@ -28,7 +28,9 @@ class PlaceInput extends Component {
     return (
       <Form.Field error={touched && !!error} width={width}>
         <Script
-          url="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaVaE8gaTo3uAlRadUvSUnT9JdabmMYQY&libraries=places"
+          url={`https://maps.googleapis.com/maps/api/js?key=${
+            process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+          }&libraries=places`}
           onLoad={this.handleScriptLoaded}
         />
         {this.state.scriptLoaded && (

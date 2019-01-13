@@ -1,13 +1,14 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import EventList from '../list/list';
+import { firestoreConnect } from 'react-redux-firebase';
 import { deleteEvent } from '../actions';
+import EventList from '../list/list';
 import LoadingComponent from '../../../app/layout/loading';
 import CollectionActivity from '../activity/activity';
 
 const mapState = state => ({
-  events: state.events,
+  events: state.firestore.ordered.collections,
   loading: state.async.loading
 });
 
@@ -38,4 +39,4 @@ function Dashboard(props) {
 export default connect(
   mapState,
   actions
-)(Dashboard);
+)(firestoreConnect([{ collection: 'collections' }])(Dashboard));
