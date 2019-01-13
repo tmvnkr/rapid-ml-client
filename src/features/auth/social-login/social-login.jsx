@@ -18,7 +18,7 @@ function SocialLogin({ socialLogin }) {
         type="button"
         fluid
         color="google plus">
-        <Icon name="google plus" />
+        <Icon name="google" />
         Login with Google
       </Button>
     </div>
