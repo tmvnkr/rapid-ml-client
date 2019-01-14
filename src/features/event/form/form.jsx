@@ -1,42 +1,45 @@
 /*global google*/
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+//import { withFirestore } from 'react-redux-firebase';
 import {
   composeValidators,
   combineValidators,
   isRequired,
   hasLengthGreaterThan
 } from 'revalidate';
-import moment from 'moment';
+import { withFirestore } from 'react-redux-firebase';
 import Script from 'react-load-script';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react';
-import { createEvent, updateEvent } from '../actions';
-import uuid from 'uuid';
+import { createEvent, updateEvent, cancelToggle } from '../actions';
 import TextInput from '../../../app/common/form/text-input';
 import TextArea from '../../../app/common/form/text-area';
 import SelectInput from '../../../app/common/form/select-input';
 import DateInput from '../../../app/common/form/date-input';
 import PlaceInput from '../../../app/common/form/place-input';
 
-const mapState = (state, ownProps) => {
-  const eventId = ownProps.match.params.id;
-
+const mapState = state => {
   let event = {};
 
-  if (eventId && state.events.length > 0) {
-    event = state.events.filter(event => event.id === eventId)[0];
+  if (
+    state.firestore.ordered.collections &&
+    state.firestore.ordered.collections[0]
+  ) {
+    event = state.firestore.ordered.collections[0];
   }
 
   return {
-    initialValues: event
+    initialValues: event,
+    event
   };
 };
 
 const actions = {
   createEvent,
-  updateEvent
+  updateEvent,
+  cancelToggle
 };
 
 const category = [
@@ -69,6 +72,22 @@ function EventForm(props) {
 
   const handleScriptLoaded = () => setScriptLoaded(true);
 
+  useEffect(() => {
+    const { firestore, match } = props;
+    (async function() {
+      try {
+        await firestore.setListener(`collections/${match.params.id}`);
+        console.log(`listener mounted ${match.params.id}`);
+        return function cleanup() {
+          firestore.setListener(`collections/${match.params.id}`);
+          console.log(`listener UNmounted ${match.params.id}`);
+        };
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+
   const handleCitySelect = selectedCity => {
     geocodeByAddress(selectedCity)
       .then(results => getLatLng(results[0]))
@@ -92,24 +111,28 @@ function EventForm(props) {
   };
 
   const onFormSubmit = values => {
-    values.date = moment(values.date).format();
     values.venueLatLng = venueLatLng;
     if (props.initialValues.id) {
+      if (Object.keys(values.venueLatLng).length === 0) {
+        values.venueLatLng = props.event.venueLatLng;
+      }
       props.updateEvent(values);
       props.history.goBack();
     } else {
-      const newEvent = {
-        ...values,
-        id: uuid(),
-        hostPhotoURL: 'assets/user.png',
-        hostedBy: 'Bob'
-      };
-      props.createEvent(newEvent);
+      props.createEvent(values);
       props.history.push('/collections');
     }
   };
 
-  const { invalid, submitting, pristine } = props;
+  const {
+    handleSubmit,
+    invalid,
+    submitting,
+    pristine,
+    history,
+    event,
+    cancelToggle
+  } = props;
 
   return (
     <Grid>
@@ -122,7 +145,7 @@ function EventForm(props) {
       <Grid.Column width={10}>
         <Segment>
           <Header sub color="teal" content="Collection Details" />
-          <Form onSubmit={props.handleSubmit(onFormSubmit)}>
+          <Form onSubmit={handleSubmit(onFormSubmit)}>
             <Field
               name="title"
               type="text"
@@ -180,9 +203,18 @@ function EventForm(props) {
               type="submit">
               Submit
             </Button>
-            <Button onClick={props.history.goBack} type="button">
+            <Button onClick={history.goBack} type="button">
               Cancel
             </Button>
+            <Button
+              onClick={() => cancelToggle(!event.cancelled, event.id)}
+              color={event.cancelled ? 'green' : 'red'}
+              type="button"
+              floated="right"
+              content={
+                event.cancelled ? 'Show collection publicly' : 'Hide event'
+              }
+            />
           </Form>
         </Segment>
       </Grid.Column>
@@ -190,11 +222,13 @@ function EventForm(props) {
   );
 }
 
-export default connect(
-  mapState,
-  actions
-)(
-  reduxForm({ form: 'eventForm', enableReinitialize: true, validate })(
-    EventForm
+export default withFirestore(
+  connect(
+    mapState,
+    actions
+  )(
+    reduxForm({ form: 'eventForm', enableReinitialize: true, validate })(
+      EventForm
+    )
   )
 );

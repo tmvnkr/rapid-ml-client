@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
+import { Segment, Item, Icon, List, Button, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
 import EventListAttendee from './list-attendee';
@@ -11,32 +11,45 @@ export default function ListItem(props) {
       <Segment>
         <Item.Group>
           <Item>
-            <Item.Image size="tiny" circular src={event.hostedPhotoURL} />
+            <Item.Image size="tiny" circular src={event.hostPhotoURL} />
             <Item.Content>
-              <Item.Header as="a">{event.title}</Item.Header>
+              {!event.cancelled && (
+                <Item.Header as="a">{event.title}</Item.Header>
+              )}
               <Item.Description>
                 Created by <span>{event.hostedBy}</span>
               </Item.Description>
+              {event.cancelled && (
+                <Label
+                  ribbon="right"
+                  color="red"
+                  content="User set this message as hidden"
+                />
+              )}
             </Item.Content>
           </Item>
         </Item.Group>
       </Segment>
-      <Segment>
-        <span>
-          <Icon name="clock" /> {format(event.date, 'DD-MM-YYYY')} |
-          <Icon name="marker" /> {event.venue}
-        </span>
-      </Segment>
-      <Segment secondary>
-        <List horizontal>
-          {event.attendees &&
-            Object.values(event.attendees).map((attendee, index) => (
-              <EventListAttendee key={index} attendee={attendee} />
-            ))}
-        </List>
-      </Segment>
+      {!event.cancelled && (
+        <>
+          <Segment>
+            <span>
+              <Icon name="clock" /> {format(event.date, 'DD-MM-YYYY')} |
+              <Icon name="marker" /> {event.venue}
+            </span>
+          </Segment>
+          <Segment secondary>
+            <List horizontal>
+              {event.attendees &&
+                Object.values(event.attendees).map((attendee, index) => (
+                  <EventListAttendee key={index} attendee={attendee} />
+                ))}
+            </List>
+          </Segment>
+        </>
+      )}
       <Segment clearing>
-        <span>{event.description}</span>
+        {!event.cancelled && <span>{event.description}</span>}
         <Button
           onClick={deleteEvent(event.id)}
           as="a"
