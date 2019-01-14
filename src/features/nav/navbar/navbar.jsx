@@ -57,7 +57,11 @@ function Navbar(props) {
           </Menu.Item>
         )}
         {authenticated ? (
-          <SignedInMenu profile={props.profile} signOut={handleSignOut} />
+          <SignedInMenu
+            auth={props.auth}
+            profile={props.profile}
+            signOut={handleSignOut}
+          />
         ) : (
           <SignedOutMenu signIn={handleSignIn} register={handleRegister} />
         )}
