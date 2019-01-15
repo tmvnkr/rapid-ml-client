@@ -30,10 +30,21 @@ function EventDetailedSidebar({ attendees }) {
                     Host
                   </Label>
                 )}
-                <Item.Image src={attendee.photoURL} />
-                <Item.Content verticalAlign="middle">
+
+                <img
+                  style={{
+                    width: '100px',
+                    float: 'left',
+                    paddingRight: '20px'
+                  }}
+                  src={attendee.photoURL}
+                  alt="attendee"
+                />
+                <Item.Content>
                   <Item.Header as="h3">
-                    <span>{attendee.name}</span>
+                    <span style={{ lineHeight: '4em' }}>
+                      {attendee.displayName}
+                    </span>
                   </Item.Header>
                 </Item.Content>
               </Item>

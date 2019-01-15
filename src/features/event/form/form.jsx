@@ -77,15 +77,13 @@ function EventForm(props) {
     (async function() {
       try {
         await firestore.setListener(`collections/${match.params.id}`);
-        console.log(`listener mounted ${match.params.id}`);
-        return function cleanup() {
-          firestore.setListener(`collections/${match.params.id}`);
-          console.log(`listener UNmounted ${match.params.id}`);
-        };
       } catch (error) {
         console.error(error);
       }
     })();
+    return function cleanup() {
+      firestore.unsetListener(`collections/${match.params.id}`);
+    };
   }, []);
 
   const handleCitySelect = selectedCity => {
