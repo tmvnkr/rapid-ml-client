@@ -4,11 +4,12 @@ import { Form, Segment, Button, Label, Divider } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 import { combineValidators, isRequired } from 'revalidate';
 import TextInput from '../../../app/common/form/text-input';
-import { registerUser } from '../actions';
+import { registerUser, socialLogin } from '../actions';
 import SocialLogin from '../social-login/social-login';
 
 const actions = {
-  registerUser
+  registerUser,
+  socialLogin
 };
 
 const validate = combineValidators({
@@ -22,7 +23,8 @@ function RegisterForm({
   registerUser,
   error,
   invalid,
-  submitting
+  submitting,
+  socialLogin
 }) {
   return (
     <div>
@@ -59,7 +61,7 @@ function RegisterForm({
             Register
           </Button>
           <Divider horizontal>Or</Divider>
-          <SocialLogin />
+          <SocialLogin socialLogin={socialLogin} />
         </Segment>
       </Form>
     </div>

@@ -1,15 +1,14 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
+import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { deleteEvent } from '../actions';
 import EventList from '../list/list';
 import LoadingComponent from '../../../app/layout/loading';
 import CollectionActivity from '../activity/activity';
 
 const mapState = state => ({
-  events: state.firestore.ordered.collections,
-  loading: state.async.loading
+  events: state.firestore.ordered.collections
 });
 
 const actions = {
@@ -17,9 +16,10 @@ const actions = {
 };
 
 function Dashboard(props) {
-  const { events, loading } = props;
+  const { events } = props;
 
-  if (loading) return <LoadingComponent inverted={true} />;
+  if (!isLoaded(events) || isEmpty(events))
+    return <LoadingComponent inverted={true} />;
   const handleDeleteEvent = eventId => () => {
     props.deleteEvent(eventId);
   };

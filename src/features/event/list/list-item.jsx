@@ -6,7 +6,7 @@ import EventListAttendee from './list-attendee';
 import { objectToArray } from '../../../app/common/util/helpers';
 
 export default function ListItem(props) {
-  const { event, deleteEvent } = props;
+  const { event } = props;
   return (
     <Segment.Group>
       <Segment>
@@ -54,13 +54,6 @@ export default function ListItem(props) {
       )}
       <Segment clearing>
         {!event.cancelled && <span>{event.description}</span>}
-        <Button
-          onClick={deleteEvent(event.id)}
-          as="a"
-          color="red"
-          floated="right"
-          content="Delete"
-        />
         <Button
           as={Link}
           to={`/collection/${event.id}`}
