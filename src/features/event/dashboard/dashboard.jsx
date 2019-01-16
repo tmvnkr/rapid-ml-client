@@ -1,25 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { firestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
-import { deleteEvent } from '../actions';
+import { firestoreConnect } from 'react-redux-firebase';
+import { getEventsForDashboard } from '../actions';
 import EventList from '../list/list';
 import LoadingComponent from '../../../app/layout/loading';
 import CollectionActivity from '../activity/activity';
 
 const mapState = state => ({
-  events: state.firestore.ordered.collections
+  events: state.events,
+  loading: state.async.loading
 });
 
 const actions = {
-  deleteEvent
+  getEventsForDashboard
 };
 
 function Dashboard(props) {
-  const { events } = props;
+  const { events, loading } = props;
 
-  if (!isLoaded(events) || isEmpty(events))
-    return <LoadingComponent inverted={true} />;
+  useEffect(() => {
+    props.getEventsForDashboard();
+  }, []);
+
+  if (loading) return <LoadingComponent inverted={true} />;
   const handleDeleteEvent = eventId => () => {
     props.deleteEvent(eventId);
   };
