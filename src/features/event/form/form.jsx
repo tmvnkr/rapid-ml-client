@@ -43,6 +43,10 @@ const actions = {
 };
 
 const category = [
+  { key: 'phone', text: 'Smartphone', value: 'phone' },
+  { key: 'horse', text: 'Horse', value: 'horse' },
+  { key: 'banana', text: 'Banana', value: 'banana' },
+  { key: 'santa', text: 'Santa Claus', value: 'santa' },
   { key: 'drinks', text: 'Drinks', value: 'drinks' },
   { key: 'culture', text: 'Culture', value: 'culture' },
   { key: 'film', text: 'Film', value: 'film' },

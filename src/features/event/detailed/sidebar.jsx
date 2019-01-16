@@ -1,5 +1,6 @@
 import React from 'react';
 import { Segment, List, Item, Label } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 function EventDetailedSidebar({ attendees }) {
   const isHost = false;
@@ -43,7 +44,10 @@ function EventDetailedSidebar({ attendees }) {
                 <Item.Content>
                   <Item.Header as="h3">
                     <span style={{ lineHeight: '4em' }}>
-                      {attendee.displayName}
+                      <Link to={`/profile/${attendee.id}`}>
+                        {' '}
+                        {attendee.displayName}{' '}
+                      </Link>
                     </span>
                   </Item.Header>
                 </Item.Content>

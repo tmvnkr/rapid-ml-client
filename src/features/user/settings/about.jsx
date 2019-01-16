@@ -4,8 +4,9 @@ import { Field, reduxForm } from 'redux-form';
 import RadioInput from '../../../app/common/form/radio-input';
 import TextInput from '../../../app/common/form/text-input';
 import TextArea from '../../../app/common/form/text-area';
-import PlaceInput from '../../../app/common/form/place-input';
 import SelectInput from '../../../app/common/form/select-input';
+import DropdownInput from '../../../app/common/form/dropdown-input';
+import { countryOptions } from '../../../app/common/form/country-input';
 
 const interests = [
   { key: 'drinks', text: 'Drinks', value: 'drinks' },
@@ -67,9 +68,10 @@ const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
         <Field
           width={8}
           name="origin"
-          options={{ types: ['(regions)'] }}
-          component={PlaceInput}
-          placeholder="Country of Origin"
+          component={DropdownInput}
+          options={countryOptions}
+          value="origin"
+          placeholder="Select your country"
         />
         <Divider />
         <Button
