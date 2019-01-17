@@ -20,7 +20,7 @@ const UserDetailedDescription = ({ profile }) => {
       <Segment>
         <Grid columns={2}>
           <Grid.Column width={10}>
-            <Header icon="info" content="About Display Name" />
+            <Header icon="address card outline" content="About Display Name" />
             <p>
               I am a: <strong>{profile.occupation || 'tbn'}</strong>
             </p>

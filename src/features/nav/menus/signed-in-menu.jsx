@@ -6,11 +6,12 @@ function SignedInMenu({ signOut, profile, auth }) {
   return (
     <Menu.Item position="right">
       <Image
-        avatar
+        rounded
+        size="mini"
         spaced="right"
         src={profile.photoURL || '/assets/user.png'}
       />
-      <Dropdown pointing="top left" text={profile.displayName}>
+      <Dropdown pointing="top left" text={profile.displayName} openOnFocus>
         <Dropdown.Menu>
           <Dropdown.Item text="Create Collection" icon="plus" />
           <Dropdown.Item text="My Collections" icon="calendar" />

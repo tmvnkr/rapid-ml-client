@@ -1,5 +1,13 @@
 import React from 'react';
-import { Segment, Item, Icon, List, Button, Label } from 'semantic-ui-react';
+import {
+  Segment,
+  Item,
+  Icon,
+  List,
+  Button,
+  Label,
+  Image
+} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
 import EventListAttendee from './list-attendee';
@@ -12,7 +20,7 @@ export default function ListItem(props) {
       <Segment>
         <Item.Group>
           <Item>
-            <Item.Image size="tiny" circular src={event.hostPhotoURL} />
+            <Item.Image size="tiny" rounded src={event.hostPhotoURL} inline />
             <Item.Content>
               {!event.cancelled && (
                 <Item.Header as={Link} to={`/collection/${event.id}`}>
@@ -34,12 +42,20 @@ export default function ListItem(props) {
           </Item>
         </Item.Group>
       </Segment>
+      <Segment>
+        <Image
+          src={`/assets/categoryImages/${event.category}.jpg`}
+          fluid
+          bordered
+        />
+      </Segment>
       {!event.cancelled && (
         <>
           <Segment>
             <span>
-              <Icon name="clock" /> {format(event.date, 'DD-MM-YYYY')} |
-              <Icon name="marker" /> {event.venue}
+              <Icon name="clock outline" /> {format(event.date, 'DD-MM-YYYY')}
+              {'  |  '}
+              <Icon name="map outline" /> {event.venue}
             </span>
           </Segment>
           <Segment secondary>

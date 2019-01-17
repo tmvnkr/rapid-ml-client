@@ -24,7 +24,6 @@ const UserDetailedHeader = ({ profile }) => {
         <Item.Group>
           <Item>
             <Item.Image
-              avatar
               size="small"
               src={profile.photoURL || '/assets/user.png'}
             />

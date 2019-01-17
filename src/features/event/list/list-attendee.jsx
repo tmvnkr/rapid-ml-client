@@ -10,7 +10,7 @@ export default function ListAttendee(props) {
         as={Link}
         to={`/profile/${attendee.id}`}
         size="mini"
-        circular
+        rounded
         src={attendee.photoURL}
       />
     </List.Item>
