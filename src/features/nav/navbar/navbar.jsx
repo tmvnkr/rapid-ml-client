@@ -53,6 +53,8 @@ function Navbar(props) {
               floated="right"
               color="orange"
               content="Create Collection"
+              icon="images outline"
+              labelPosition="left"
             />
           </Menu.Item>
         )}

@@ -12,6 +12,7 @@ import {
 import { withFirestore } from 'react-redux-firebase';
 import Script from 'react-load-script';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import isEmpty from 'lodash/isEmpty';
 import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react';
 import { createEvent, updateEvent, cancelToggle } from '../actions';
 import TextInput from '../../../app/common/form/text-input';
@@ -19,6 +20,7 @@ import TextArea from '../../../app/common/form/text-area';
 import SelectInput from '../../../app/common/form/select-input';
 import DateInput from '../../../app/common/form/date-input';
 import PlaceInput from '../../../app/common/form/place-input';
+import DropZoneField from '../../../app/common/form/photo-input';
 
 const mapState = state => {
   let event = {};
@@ -42,17 +44,13 @@ const actions = {
   cancelToggle
 };
 
+const imageIsRequired = value => (isEmpty(value) ? 'Required' : undefined);
+
 const category = [
   { key: 'phone', text: 'Smartphone', value: 'phone' },
   { key: 'horse', text: 'Horse', value: 'horse' },
   { key: 'banana', text: 'Banana', value: 'banana' },
-  { key: 'santa', text: 'Santa Claus', value: 'santa' },
-  { key: 'drinks', text: 'Drinks', value: 'drinks' },
-  { key: 'culture', text: 'Culture', value: 'culture' },
-  { key: 'film', text: 'Film', value: 'film' },
-  { key: 'food', text: 'Food', value: 'food' },
-  { key: 'music', text: 'Music', value: 'music' },
-  { key: 'travel', text: 'Travel', value: 'travel' }
+  { key: 'santa', text: 'Santa Claus', value: 'santa' }
 ];
 
 const validate = combineValidators({
@@ -73,6 +71,7 @@ function EventForm(props) {
   const [cityLatLng, setCityLatLng] = useState({});
   const [venueLatLng, setVenueLatLng] = useState({});
   const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [imageFile, setImageFile] = useState(false);
 
   const handleScriptLoaded = () => setScriptLoaded(true);
 
@@ -113,6 +112,7 @@ function EventForm(props) {
   };
 
   const onFormSubmit = values => {
+    values.imageFile = imageFile[0];
     values.venueLatLng = venueLatLng;
     if (props.initialValues.id) {
       if (Object.keys(values.venueLatLng).length === 0) {
@@ -125,6 +125,8 @@ function EventForm(props) {
       props.history.push('/collections');
     }
   };
+
+  const handleOnDrop = newImageFile => setImageFile(newImageFile);
 
   const {
     handleSubmit,
@@ -153,6 +155,14 @@ function EventForm(props) {
               type="text"
               component={TextInput}
               placeholder="Give this collection a name"
+            />
+            <Field
+              name="image"
+              component={DropZoneField}
+              type="file"
+              imagefile={imageFile}
+              handleOnDrop={handleOnDrop}
+              validate={[imageIsRequired]}
             />
             <Field
               name="category"
