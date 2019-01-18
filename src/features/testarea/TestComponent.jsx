@@ -9,23 +9,9 @@ import {
   Label,
   Header
 } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-// import { incrementAsync, decrementAsync } from './testActions';
-// import { openModal } from '../modals/actions';
 import testData from './test.json';
 
-const mapState = state => ({
-  data: state.test.data,
-  loading: state.test.loading
-});
-
-const actions = {
-  // incrementAsync,
-  // decrementAsync,
-  // openModal
-};
-
-let test = testData.result.tags;
+let data = testData.result.tags;
 
 function TestComponent(props) {
   const [hidden, setHidden] = useState(true);
@@ -69,7 +55,7 @@ function TestComponent(props) {
                         content="Show More"
                         color="green"
                         onClick={showMore}
-                        disabled={numberOfItems > test.length}
+                        disabled={numberOfItems > data.length}
                       />
                       <Button
                         labelPosition="left"
@@ -110,7 +96,7 @@ function TestComponent(props) {
                   </Header>
                 </Table.Cell>
               </Table.Row>
-              {Object.values(test).map((value, key) => (
+              {Object.values(data).map((value, key) => (
                 <React.Fragment key={key}>
                   {key < numberOfItems && (
                     <Table.Row>
@@ -163,7 +149,7 @@ function TestComponent(props) {
                   content="Show More"
                   color="green"
                   onClick={showMore}
-                  disabled={numberOfItems > test.length}
+                  disabled={numberOfItems > data.length}
                 />
                 <Button
                   labelPosition="left"
@@ -182,7 +168,4 @@ function TestComponent(props) {
   );
 }
 
-export default connect(
-  mapState,
-  actions
-)(TestComponent);
+export default TestComponent;

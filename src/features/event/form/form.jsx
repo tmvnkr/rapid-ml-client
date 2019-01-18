@@ -12,7 +12,6 @@ import {
 import { withFirestore } from 'react-redux-firebase';
 import Script from 'react-load-script';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import isEmpty from 'lodash/isEmpty';
 import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react';
 import { createEvent, updateEvent, cancelToggle } from '../actions';
 import TextInput from '../../../app/common/form/text-input';
@@ -20,7 +19,7 @@ import TextArea from '../../../app/common/form/text-area';
 import SelectInput from '../../../app/common/form/select-input';
 import DateInput from '../../../app/common/form/date-input';
 import PlaceInput from '../../../app/common/form/place-input';
-import DropZoneField from '../../../app/common/form/photo-input';
+import PhotosPage from './photo';
 
 const mapState = state => {
   let event = {};
@@ -43,8 +42,6 @@ const actions = {
   updateEvent,
   cancelToggle
 };
-
-const imageIsRequired = value => (isEmpty(value) ? 'Required' : undefined);
 
 const category = [
   { key: 'phone', text: 'Smartphone', value: 'phone' },
@@ -71,7 +68,6 @@ function EventForm(props) {
   const [cityLatLng, setCityLatLng] = useState({});
   const [venueLatLng, setVenueLatLng] = useState({});
   const [scriptLoaded, setScriptLoaded] = useState(false);
-  const [imageFile, setImageFile] = useState(false);
 
   const handleScriptLoaded = () => setScriptLoaded(true);
 
@@ -112,7 +108,6 @@ function EventForm(props) {
   };
 
   const onFormSubmit = values => {
-    values.imageFile = imageFile[0];
     values.venueLatLng = venueLatLng;
     if (props.initialValues.id) {
       if (Object.keys(values.venueLatLng).length === 0) {
@@ -125,8 +120,6 @@ function EventForm(props) {
       props.history.push('/collections');
     }
   };
-
-  const handleOnDrop = newImageFile => setImageFile(newImageFile);
 
   const {
     handleSubmit,
@@ -146,7 +139,9 @@ function EventForm(props) {
         }&libraries=places`}
         onLoad={handleScriptLoaded}
       />
-      <Grid.Column width={10}>
+      <Grid.Column width={16}>
+        <PhotosPage />
+        <Grid.Column width={10} />
         <Segment>
           <Header sub color="teal" content="Collection Details" />
           <Form onSubmit={handleSubmit(onFormSubmit)}>
@@ -155,14 +150,6 @@ function EventForm(props) {
               type="text"
               component={TextInput}
               placeholder="Give this collection a name"
-            />
-            <Field
-              name="image"
-              component={DropZoneField}
-              type="file"
-              imagefile={imageFile}
-              handleOnDrop={handleOnDrop}
-              validate={[imageIsRequired]}
             />
             <Field
               name="category"

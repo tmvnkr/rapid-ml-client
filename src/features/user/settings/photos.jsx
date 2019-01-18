@@ -92,11 +92,15 @@ class PhotosPage extends Component {
     }
 
     this.refs.cropper.getCroppedCanvas().toBlob(blob => {
-      let imageUrl = URL.createObjectURL(blob);
-      this.setState({
-        cropResult: imageUrl,
-        image: blob
-      });
+      try {
+        let imageUrl = URL.createObjectURL(blob);
+        this.setState({
+          cropResult: imageUrl,
+          image: blob
+        });
+      } catch (error) {
+        return;
+      }
     }, 'image/jpeg');
   };
 
