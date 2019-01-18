@@ -64,7 +64,7 @@ const validate = combineValidators({
   date: isRequired('date')
 });
 
-function EventForm(props) {
+function EventFormCreate(props) {
   const [cityLatLng, setCityLatLng] = useState({});
   const [venueLatLng, setVenueLatLng] = useState({});
   const [scriptLoaded, setScriptLoaded] = useState(false);
@@ -140,7 +140,6 @@ function EventForm(props) {
         onLoad={handleScriptLoaded}
       />
       <Grid.Column width={16}>
-        <PhotosPage />
         <Grid.Column width={10} />
         <Segment>
           <Header sub color="teal" content="Collection Details" />
@@ -151,6 +150,7 @@ function EventForm(props) {
               component={TextInput}
               placeholder="Give this collection a name"
             />
+            <Field name="image" type="file" component={PhotosPage} />
             <Field
               name="category"
               type="text"
@@ -227,7 +227,7 @@ export default withFirestore(
     actions
   )(
     reduxForm({ form: 'eventForm', enableReinitialize: true, validate })(
-      EventForm
+      EventFormCreate
     )
   )
 );

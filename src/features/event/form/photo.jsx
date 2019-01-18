@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Image, Segment, Header, Grid, Icon } from 'semantic-ui-react';
+import {
+  Image,
+  Segment,
+  Header,
+  Grid,
+  Icon,
+  Form,
+  Label
+} from 'semantic-ui-react';
 import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
@@ -38,6 +46,14 @@ class PhotosPage extends Component {
   };
 
   render() {
+    const {
+      input,
+      type,
+      placeholder,
+      multiple,
+      options,
+      meta: { touched, error }
+    } = this.props;
     return (
       <Segment>
         <Header dividing size="large" content="Create Collection" />
@@ -80,6 +96,7 @@ class PhotosPage extends Component {
               <Image
                 style={{ maxHeight: '600px' }}
                 src={this.state.cropResult}
+                value={input.value}
               />
             )}
           </Grid.Column>
