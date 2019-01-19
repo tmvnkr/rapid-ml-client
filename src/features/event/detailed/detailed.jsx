@@ -8,7 +8,10 @@ import EventDetailedInfo from './info';
 import EventDetailedChat from './chat';
 import EventDetailedSidebar from './sidebar';
 import EventDetailedTaggedImage from './tagged-image';
-import { objectToArray } from '../../../app/common/util/helpers';
+import {
+  objectToArray,
+  createDataTree
+} from '../../../app/common/util/helpers';
 import { goingToEvent, cancelGoingToEvent } from '../../user/actions';
 import { openModal } from '../../modals/actions';
 import { addEventComment } from '../actions';
@@ -66,6 +69,7 @@ function EventDetailedPage(props) {
   const isHost = event.hostUid === auth.uid;
   const isGoing =
     attendees && attendees.some(attendee => attendee.id === auth.uid);
+  const chatTree = !isEmpty(eventChat) && createDataTree(eventChat);
 
   return (
     <Grid>
@@ -82,7 +86,7 @@ function EventDetailedPage(props) {
         <EventDetailedChat
           addEventComment={addEventComment}
           eventId={event.id}
-          eventChat={eventChat}
+          eventChat={chatTree}
         />
       </Grid.Column>
       <Grid.Column width={5}>
