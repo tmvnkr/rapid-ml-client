@@ -16,7 +16,7 @@ const UserDetailedPhotos = ({ photos }) => {
                 height={150}
                 offset={-10}
                 placeholder={<Image src="/assets/user.png" />}>
-                <Image src={photo.url} />
+                <Image fluid src={photo.url} />
               </LazyLoad>
             ))}
         </Image.Group>

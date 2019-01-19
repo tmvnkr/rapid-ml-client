@@ -1,4 +1,5 @@
 import moment from 'moment';
+import request from 'request';
 
 export const objectToArray = object => {
   if (object) {
@@ -24,115 +25,28 @@ export const createNewEvent = (user, photoURL, event) => {
       }
     },
     taggedImage: {
-      imageURL: `www.${user.displayName}.nl`,
+      imageURL: '',
       result: {
-        tags: [
-          { confidence: 100, tag: { en: 'turbine' } },
-          { confidence: 64.8014373779297, tag: { en: 'wind' } },
-          { confidence: 63.3033409118652, tag: { en: 'generator' } },
-          { confidence: 61.4765892028809, tag: { en: 'energy' } },
-          { confidence: 59.6017799377441, tag: { en: 'electricity' } },
-          { confidence: 58.8703842163086, tag: { en: 'power' } },
-          { confidence: 56.0256614685059, tag: { en: 'environment' } },
-          { confidence: 53.1106262207031, tag: { en: 'windmill' } },
-          { confidence: 48.9235954284668, tag: { en: 'alternative' } },
-          { confidence: 48.2363548278809, tag: { en: 'sky' } },
-          { confidence: 47.196231842041, tag: { en: 'mill' } },
-          { confidence: 40.9793891906738, tag: { en: 'landscape' } },
-          { confidence: 40.3423080444336, tag: { en: 'renewable' } },
-          { confidence: 35.5960960388184, tag: { en: 'generation' } },
-          { confidence: 34.7056999206543, tag: { en: 'electric' } },
-          { confidence: 34.2106437683105, tag: { en: 'industry' } },
-          { confidence: 33.960807800293, tag: { en: 'farm' } },
-          { confidence: 32.9961700439453, tag: { en: 'environmental' } },
-          { confidence: 31.2216167449951, tag: { en: 'technology' } },
-          { confidence: 30.2923603057861, tag: { en: 'ecology' } },
-          { confidence: 29.1427555084229, tag: { en: 'propeller' } },
-          { confidence: 28.4378490447998, tag: { en: 'conservation' } },
-          { confidence: 27.6119117736816, tag: { en: 'generate' } },
-          { confidence: 26.8089275360107, tag: { en: 'field' } },
-          { confidence: 26.7237510681152, tag: { en: 'turbines' } },
-          { confidence: 24.6973609924316, tag: { en: 'sustainable' } },
-          { confidence: 24.5924892425537, tag: { en: 'rotate' } },
-          { confidence: 22.7650680541992, tag: { en: 'wind turbine' } },
-          { confidence: 22.5577297210693, tag: { en: 'spin' } },
-          { confidence: 21.8265838623047, tag: { en: 'industrial' } },
-          { confidence: 21.6182594299316, tag: { en: 'rotation' } },
-          { confidence: 21.4078102111816, tag: { en: 'blade' } },
-          { confidence: 20.2887496948242, tag: { en: 'supply' } },
-          { confidence: 19.7955188751221, tag: { en: 'grass' } },
-          { confidence: 19.4653644561768, tag: { en: 'clouds' } },
-          { confidence: 19.2393360137939, tag: { en: 'clean' } },
-          { confidence: 18.6121807098389, tag: { en: 'innovation' } },
-          { confidence: 18.498327255249, tag: { en: 'ecological' } },
-          { confidence: 17.9364452362061, tag: { en: 'tower' } },
-          { confidence: 17.7292976379395, tag: { en: 'metal' } },
-          { confidence: 17.1421661376953, tag: { en: 'development' } },
-          { confidence: 16.3832683563232, tag: { en: 'cloud' } },
-          { confidence: 15.456823348999, tag: { en: 'summer' } },
-          { confidence: 14.8535871505737, tag: { en: 'plant' } },
-          { confidence: 14.7669134140015, tag: { en: 'efficiency' } },
-          { confidence: 14.7602138519287, tag: { en: 'resource' } },
-          { confidence: 14.610107421875, tag: { en: 'global' } },
-          { confidence: 14.2498035430908, tag: { en: 'climate' } },
-          { confidence: 14.2464599609375, tag: { en: 'antenna' } },
-          { confidence: 14.0767755508423, tag: { en: 'hill' } },
-          { confidence: 13.8497953414917, tag: { en: 'sustainability' } },
-          { confidence: 13.6378221511841, tag: { en: 'production' } },
-          { confidence: 13.5639219284058, tag: { en: 'station' } },
-          { confidence: 12.091742515564, tag: { en: 'sun' } },
-          { confidence: 11.9781112670898, tag: { en: 'air' } },
-          { confidence: 11.8787231445312, tag: { en: 'windmills' } },
-          { confidence: 11.8780956268311, tag: { en: 'generating' } },
-          { confidence: 11.874174118042, tag: { en: 'rotating' } },
-          { confidence: 11.8566007614136, tag: { en: 'watts' } },
-          { confidence: 11.7261447906494, tag: { en: 'warming' } },
-          { confidence: 11.6822423934937, tag: { en: 'nobody' } },
-          { confidence: 11.4290208816528, tag: { en: 'country' } },
-          { confidence: 10.9928340911865, tag: { en: 'friendly' } },
-          { confidence: 10.8657855987549, tag: { en: 'blades' } },
-          { confidence: 10.7817945480347, tag: { en: 'meadow' } },
-          { confidence: 10.5663185119629, tag: { en: 'wings' } },
-          { confidence: 10.5478401184082, tag: { en: 'agriculture' } },
-          { confidence: 9.97280883789062, tag: { en: 'weather' } },
-          { confidence: 9.92061901092529, tag: { en: 'horizon' } },
-          { confidence: 9.90944004058838, tag: { en: 'generators' } },
-          { confidence: 9.89438819885254, tag: { en: 'park' } },
-          { confidence: 9.87064361572266, tag: { en: 'travel' } },
-          { confidence: 9.84805297851562, tag: { en: 'protected' } },
-          { confidence: 9.84509563446045, tag: { en: 'windy' } },
-          { confidence: 9.80161094665527, tag: { en: 'mountain' } },
-          { confidence: 9.65241813659668, tag: { en: 'fuel' } },
-          { confidence: 9.6292781829834, tag: { en: 'pollution' } },
-          { confidence: 9.53695011138916, tag: { en: 'scene' } },
-          { confidence: 9.48581886291504, tag: { en: 'stand' } },
-          { confidence: 9.43144130706787, tag: { en: 'spring' } },
-          { confidence: 9.39527130126953, tag: { en: 'cloudy' } },
-          { confidence: 8.99770641326904, tag: { en: 'sunset' } },
-          { confidence: 8.84893894195557, tag: { en: 'mast' } },
-          { confidence: 8.82423782348633, tag: { en: 'rural' } },
-          { confidence: 8.67487812042236, tag: { en: 'change' } },
-          { confidence: 8.39142608642578, tag: { en: 'future' } },
-          { confidence: 8.2391300201416, tag: { en: 'countryside' } },
-          { confidence: 8.22562217712402, tag: { en: 'outdoors' } },
-          { confidence: 8.12704086303711, tag: { en: 'scenery' } },
-          { confidence: 8.04152679443359, tag: { en: 'natural' } },
-          { confidence: 8.02031707763672, tag: { en: 'water' } },
-          { confidence: 8.01870822906494, tag: { en: 'sunlight' } },
-          { confidence: 8.01632785797119, tag: { en: 'rotor' } },
-          { confidence: 7.92649078369141, tag: { en: 'wind power' } },
-          { confidence: 7.90218782424927, tag: { en: 'global warming' } },
-          { confidence: 7.88784790039062, tag: { en: 'spinning' } },
-          { confidence: 7.85436201095581, tag: { en: 'day' } },
-          { confidence: 7.77296495437622, tag: { en: 'desert' } },
-          { confidence: 7.46073818206787, tag: { en: 'silhouette' } },
-          { confidence: 7.27894926071167, tag: { en: 'device' } },
-          { confidence: 7.26188135147095, tag: { en: 'sand' } },
-          { confidence: 7.02126455307007, tag: { en: 'modern' } },
-          { confidence: 7.01708889007568, tag: { en: 'line' } }
-        ]
+        tags: [{ confidence: 100, tag: { en: 'turbine' } }]
       },
       status: { text: '', type: 'success' }
     }
   };
+};
+
+export const taggingAPI = downloadURL => {
+  const apiKey = 'acc_3c47f36a59b801b';
+  const apiSecret = '8d6dbf63b22129bbbcea0aa0dd861b54';
+  const imageUrl = downloadURL;
+
+  request
+    .get(
+      `https://api.imagga.com/v2/tags?image_url=${encodeURIComponent(
+        imageUrl
+      )}`,
+      function(error, response, body) {
+        JSON.stringify(body);
+      }
+    )
+    .auth(apiKey, apiSecret, true);
 };

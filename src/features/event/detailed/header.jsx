@@ -63,9 +63,14 @@ function EventDetailedHeader({
           </>
         )}
         {isHost && (
-          <Button as={Link} to={`/manage/${event.id}`} color="orange">
-            Manage Event
-          </Button>
+          <>
+            <Button as={Link} to={`/manage/${event.id}`} color="orange">
+              Manage Event
+            </Button>
+            <Button as={Link} to={`/imageUpload/${event.id}`} color="green">
+              Upload Image
+            </Button>
+          </>
         )}
       </Segment>
     </Segment.Group>

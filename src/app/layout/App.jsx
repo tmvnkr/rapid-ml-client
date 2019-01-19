@@ -7,8 +7,8 @@ import EventDetailedPage from '../../features/event/detailed/detailed';
 import PeopleDashboard from '../../features/user/dashboard/dashboard';
 import UserDetailedPage from '../../features/user/detailed/detailed';
 import SettingsDashboard from '../../features/user/settings/dashboard';
-import EventFormCreate from '../../features/event/form/form-create';
-import EventFormManage from '../../features/event/form/form-manage';
+import EventForm from '../../features/event/form/form';
+import ImageUpload from '../../features/event/image-upload/photo';
 import HomePage from '../../features/home/homepage';
 import TestComponent from '../../features/testarea/TestComponent';
 import ModalManager from '../../features/modals/manager';
@@ -32,11 +32,12 @@ export default function App() {
                 <Route path="/collections" component={EventDashboard} />
                 <Route path="/test" component={TestComponent} />
                 <Route path="/collection/:id" component={EventDetailedPage} />
-                <Route path="/manage/:id" component={EventFormManage} />
+                <Route path="/manage/:id" component={EventForm} />
+                <Route path="/imageUpload/:id" component={ImageUpload} />
                 <Route path="/people" component={PeopleDashboard} />
                 <Route path="/profile/:id" component={UserDetailedPage} />
                 <Route path="/settings" component={SettingsDashboard} />
-                <Route path="/createEvent" component={EventFormCreate} />
+                <Route path="/createEvent" component={EventForm} />
               </Switch>
             </Container>
           </Fragment>
