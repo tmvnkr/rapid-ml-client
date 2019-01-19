@@ -6,9 +6,10 @@ import EventDetailedHeader from './header';
 import EventDetailedInfo from './info';
 import EventDetailedChat from './chat';
 import EventDetailedSidebar from './sidebar';
-import TEST from './testElement';
+import EventDetailedTaggedImage from './tagged-image';
 import { objectToArray } from '../../../app/common/util/helpers';
 import { goingToEvent, cancelGoingToEvent } from '../../user/actions';
+import { openModal } from '../../modals/actions';
 
 const mapState = state => {
   let event = {};
@@ -28,7 +29,8 @@ const mapState = state => {
 
 const actions = {
   goingToEvent,
-  cancelGoingToEvent
+  cancelGoingToEvent,
+  openModal
 };
 
 function EventDetailedPage(props) {
@@ -54,7 +56,7 @@ function EventDetailedPage(props) {
 
   return (
     <Grid>
-      <Grid.Column width={10}>
+      <Grid.Column width={11}>
         <EventDetailedHeader
           event={event}
           isHost={isHost}
@@ -62,11 +64,11 @@ function EventDetailedPage(props) {
           goingToEvent={goingToEvent}
           cancelGoingToEvent={cancelGoingToEvent}
         />
-        <TEST event={event} />
+        <EventDetailedTaggedImage event={event} />
         <EventDetailedInfo event={event} />
         <EventDetailedChat />
       </Grid.Column>
-      <Grid.Column width={6}>
+      <Grid.Column width={5}>
         <EventDetailedSidebar attendees={attendees} />
       </Grid.Column>
     </Grid>

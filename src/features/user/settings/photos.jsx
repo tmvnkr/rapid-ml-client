@@ -16,7 +16,12 @@ import { toastr } from 'react-redux-toastr';
 import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
-import { uploadProfileImage, deletePhoto, setMainPhoto } from '../actions';
+import {
+  uploadProfileImage,
+  deletePhoto,
+  setMainPhoto,
+  deleteTaggedPhoto
+} from '../actions';
 
 const query = ({ auth }) => {
   return [
@@ -32,7 +37,8 @@ const query = ({ auth }) => {
 const actions = {
   uploadProfileImage,
   deletePhoto,
-  setMainPhoto
+  setMainPhoto,
+  deleteTaggedPhoto
 };
 
 const mapState = state => ({
@@ -78,6 +84,14 @@ class PhotosPage extends Component {
     }
   };
 
+  handleTaggedPhotoDelete = photo => async () => {
+    try {
+      this.props.deleteTaggedPhoto(photo);
+    } catch (error) {
+      toastr.error('Oops', error.message);
+    }
+  };
+
   handleSetMainPhoto = photo => async () => {
     try {
       this.props.setMainPhoto(photo);
@@ -113,11 +127,26 @@ class PhotosPage extends Component {
 
   render() {
     const { photos, profile, loading } = this.props;
-    let filteredPhotos;
+    let filteredUserPhotos;
+    let filteredTaggedPhotos;
     if (photos) {
-      filteredPhotos = photos.filter(photo => {
-        return photo.url !== profile.photoURL;
-      });
+      filteredUserPhotos = photos
+        .filter(photo => {
+          return photo.url !== profile.photoURL;
+        })
+        .filter(photo => {
+          return photo.url.includes('%2Fuser_images%2');
+        });
+    }
+
+    if (photos) {
+      filteredTaggedPhotos = photos
+        .filter(photo => {
+          return photo.url !== profile.photoURL;
+        })
+        .filter(photo => {
+          return photo.url.includes('%2Ftagged_images%2');
+        });
     }
     return (
       <Segment>
@@ -182,7 +211,7 @@ class PhotosPage extends Component {
         </Grid>
 
         <Divider />
-        <Header sub color="teal" content="All Photos" />
+        <Header sub color="teal" content="All Profile Photos" />
 
         <Card.Group itemsPerRow={5}>
           <Card>
@@ -190,7 +219,7 @@ class PhotosPage extends Component {
             <Button positive>Main Photo</Button>
           </Card>
           {photos &&
-            filteredPhotos.map(photo => (
+            filteredUserPhotos.map(photo => (
               <Card key={photo.id}>
                 <Image src={photo.url} />
                 <div className="ui two buttons">
@@ -207,6 +236,29 @@ class PhotosPage extends Component {
                     color="red"
                   />
                 </div>
+              </Card>
+            ))}
+        </Card.Group>
+        <Divider />
+        <Header sub color="teal" content="All Collection Photos" />
+
+        <Card.Group itemsPerRow={3}>
+          {photos &&
+            filteredTaggedPhotos.map(photo => (
+              <Card style={{ boxShadow: 'none' }} key={photo.id}>
+                <Image
+                  src={photo.url}
+                  style={{
+                    boxShadow: '0 1px 3px 0 #d4d4d5'
+                  }}
+                />
+                <Button
+                  name="delete"
+                  basic
+                  color="red"
+                  icon="trash"
+                  onClick={this.handleTaggedPhotoDelete(photo)}
+                />
               </Card>
             ))}
         </Card.Group>

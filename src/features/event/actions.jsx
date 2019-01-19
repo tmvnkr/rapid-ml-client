@@ -6,27 +6,9 @@ import {
   asyncActionFinish,
   asyncActionError
 } from '../async/actions';
-// import { fetchSampleData } from '../../app/data/mockAPI'; DELETE_EVENT,
 import { createNewEvent } from '../../app/common/util/helpers';
 import firebase from '../../app/config/firebase';
 import request from 'request';
-
-// const taggingAPI = downloadURL => {
-//   const apiKey = 'acc_3c47f36a59b801b';
-//   const apiSecret = '8d6dbf63b22129bbbcea0aa0dd861b54';
-//   const imageUrl = downloadURL;
-
-//   request
-//     .get(
-//       `https://api.imagga.com/v2/tags?image_url=${encodeURIComponent(
-//         imageUrl
-//       )}`,
-//       function(error, response, body) {
-//         JSON.stringify(body);
-//       }
-//     )
-//     .auth(apiKey, apiSecret, true);
-// };
 
 export const createEvent = event => {
   return async (dispatch, getState, { getFirestore }) => {
@@ -76,7 +58,7 @@ export const uploadImage = (file, fileName, event) => async (
   const user = firebase.auth().currentUser;
   const path = `${user.uid}/tagged_images`;
   const options = {
-    name: 'TAGGED_' + imageName
+    name: imageName
   };
   try {
     // upload file to firebase storage
@@ -84,7 +66,7 @@ export const uploadImage = (file, fileName, event) => async (
     // get url of image
     let downloadURL = await uploadedFile.uploadTaskSnapshot.downloadURL;
     const apiKey = 'acc_3c47f36a59b801b';
-    const apiSecret = process.env.REACT_APP_TAGGING_API_KEY;
+    const apiSecret = '8d6dbf63b22129bbbcea0aa0dd861b54';
     const imageUrl = downloadURL;
 
     await request
@@ -93,7 +75,6 @@ export const uploadImage = (file, fileName, event) => async (
           imageUrl
         )}`,
         function(error, response, body) {
-          console.log(JSON.stringify(body));
           let imageTags = body;
           firestore.update(`collections/${event}`, {
             imageURL: downloadURL,
@@ -137,8 +118,9 @@ export const uploadImage = (file, fileName, event) => async (
         subcollections: [{ collection: 'photos' }]
       },
       {
-        name: 'TAGGED_' + imageName,
-        url: downloadURL
+        name: imageName,
+        url: downloadURL,
+        collectionId: event
       }
     );
   } catch (error) {

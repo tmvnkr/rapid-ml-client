@@ -15,8 +15,8 @@ function EventDetailedSidebar({ attendees }) {
         color="teal">
         {attendees && attendees.length}{' '}
         {attendees && attendees.length === 1
-          ? ' Person likes this'
-          : ' People like this'}
+          ? ' Person is interested'
+          : ' People are interested'}
       </Segment>
       <Segment attached>
         <List relaxed divided>
@@ -28,13 +28,13 @@ function EventDetailedSidebar({ attendees }) {
                     style={{ position: 'absolute' }}
                     color="orange"
                     ribbon="right">
-                    Host
+                    Creator
                   </Label>
                 )}
 
                 <img
                   style={{
-                    width: '100px',
+                    width: '70px',
                     float: 'left',
                     paddingRight: '20px'
                   }}
@@ -43,7 +43,7 @@ function EventDetailedSidebar({ attendees }) {
                 />
                 <Item.Content>
                   <Item.Header as="h3">
-                    <span style={{ lineHeight: '4em' }}>
+                    <span style={{ lineHeight: '2em' }}>
                       <Link to={`/profile/${attendee.id}`}>
                         {' '}
                         {attendee.displayName}{' '}

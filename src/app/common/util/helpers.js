@@ -1,5 +1,4 @@
 import moment from 'moment';
-import request from 'request';
 
 export const objectToArray = object => {
   if (object) {
@@ -15,6 +14,9 @@ export const createNewEvent = (user, photoURL, event) => {
     hostedBy: user.displayName,
     hostPhotoURL: photoURL || '/assets/user.png',
     created: Date.now(),
+    nsfw: '',
+    imageURL: '',
+    imageTags: '',
     attendees: {
       [user.uid]: {
         going: true,
@@ -23,30 +25,6 @@ export const createNewEvent = (user, photoURL, event) => {
         displayName: user.displayName,
         host: true
       }
-    },
-    taggedImage: {
-      imageURL: '',
-      result: {
-        tags: [{ confidence: 100, tag: { en: 'turbine' } }]
-      },
-      status: { text: '', type: 'success' }
     }
   };
-};
-
-export const taggingAPI = downloadURL => {
-  const apiKey = 'acc_3c47f36a59b801b';
-  const apiSecret = '8d6dbf63b22129bbbcea0aa0dd861b54';
-  const imageUrl = downloadURL;
-
-  request
-    .get(
-      `https://api.imagga.com/v2/tags?image_url=${encodeURIComponent(
-        imageUrl
-      )}`,
-      function(error, response, body) {
-        JSON.stringify(body);
-      }
-    )
-    .auth(apiKey, apiSecret, true);
 };

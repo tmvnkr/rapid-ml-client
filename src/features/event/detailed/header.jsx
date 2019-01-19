@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Segment, Image, Item, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 const eventImageStyle = {
@@ -21,6 +21,21 @@ function EventDetailedHeader({
   goingToEvent,
   cancelGoingToEvent
 }) {
+  const [hasImage, setHasImage] = useState('');
+
+  useEffect(
+    () => {
+      try {
+        if (event.imageTags && JSON.parse(event.imageTags)) {
+          setHasImage(event.imageURL);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [event.imageURL]
+  );
+
   return (
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: '0' }}>
@@ -52,13 +67,20 @@ function EventDetailedHeader({
         {!isHost && (
           <>
             {isGoing ? (
-              <Button onClick={() => cancelGoingToEvent(event)}>
-                Cancel My Place
-              </Button>
+              <Button
+                onClick={() => cancelGoingToEvent(event)}
+                content="Cancel interest in collection"
+                labelPosition="left"
+                icon="thumbs down outline"
+              />
             ) : (
-              <Button onClick={() => goingToEvent(event)} color="teal">
-                JOIN THIS EVENT
-              </Button>
+              <Button
+                onClick={() => goingToEvent(event)}
+                color="teal"
+                content="Show interest in collection"
+                labelPosition="left"
+                icon="thumbs up outline"
+              />
             )}
           </>
         )}
@@ -67,7 +89,12 @@ function EventDetailedHeader({
             <Button as={Link} to={`/manage/${event.id}`} color="orange">
               Manage Event
             </Button>
-            <Button as={Link} to={`/imageUpload/${event.id}`} color="green">
+
+            <Button
+              disabled={!!hasImage}
+              as={Link}
+              to={`/imageUpload/${event.id}`}
+              color="green">
               Upload Image
             </Button>
           </>

@@ -7,6 +7,7 @@ import Dropzone from 'react-dropzone';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 import { uploadImage } from '../actions';
+import { Route, Redirect } from 'react-router';
 
 const mapState = state => {
   let event = {};
@@ -166,6 +167,16 @@ class PhotosPage extends Component {
             </>
           )}
         </Grid>
+        <Route
+          path="/imageUpload"
+          render={() => {
+            if (this.props.imageURL !== '' && this.props.id === undefined) {
+              return <Redirect to={`/collections`} />;
+            } else {
+              return <Redirect to={`/collection/${this.props.id}`} />;
+            }
+          }}
+        />
       </Segment>
     );
   }

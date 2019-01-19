@@ -10,10 +10,11 @@ import {
   Header
 } from 'semantic-ui-react';
 
-function TestComponent({ event }) {
+function EventDetailedTaggedImage({ event }) {
   const [hidden, setHidden] = useState(true);
   const [numberOfItems, setNumberOfItems] = useState(10);
   const [data, setData] = useState({});
+  const [hasImage, setHasImage] = useState('');
 
   useEffect(
     () => {
@@ -22,13 +23,26 @@ function TestComponent({ event }) {
         if (event.imageTags && JSON.parse(event.imageTags)) {
           rawData = JSON.parse(event.imageTags);
           setData(rawData.result.tags);
-          console.error('hey');
+          setHasImage(event.imageURL);
         }
       } catch (error) {
         console.error(error);
       }
     },
     [hidden]
+  );
+
+  useEffect(
+    () => {
+      try {
+        if (event.imageTags && JSON.parse(event.imageTags)) {
+          setHasImage(event.imageURL);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [event.imageURL]
   );
 
   const setTagMenuState = () => {
@@ -45,22 +59,27 @@ function TestComponent({ event }) {
 
   return (
     <>
-      {data && (
+      {hasImage !== '' && (
         <>
-          <Segment
+          {/* <Segment
             textAlign="center"
             attached="top"
             inverted
             color="teal"
             style={{ border: 'none' }}>
             <Header>Chat about this event</Header>
-          </Segment>
+          </Segment> */}
 
-          <Segment attached>
+          <Segment>
             <Table celled striped>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell colSpan="3">
+                  <Table.HeaderCell
+                    style={{
+                      backgroundColor: 'white',
+                      border: '1px solid rgba(34,36,38,.1)'
+                    }}
+                    colSpan="3">
                     <Image fluid src={event.imageURL} />
                     <br />
                     <Button
@@ -190,4 +209,4 @@ function TestComponent({ event }) {
   );
 }
 
-export default TestComponent;
+export default EventDetailedTaggedImage;

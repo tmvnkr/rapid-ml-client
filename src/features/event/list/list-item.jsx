@@ -42,9 +42,11 @@ export default function ListItem(props) {
           </Item>
         </Item.Group>
       </Segment>
-      <Segment>
-        <Image src={`/assets/categoryImages/${event.category}.jpg`} fluid />
-      </Segment>
+      {event.imageURL && (
+        <Segment>
+          <Image src={event.imageURL} fluid />
+        </Segment>
+      )}
       {!event.cancelled && (
         <>
           <Segment>
