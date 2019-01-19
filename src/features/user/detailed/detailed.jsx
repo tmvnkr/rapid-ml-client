@@ -41,10 +41,13 @@ const actions = {
 };
 
 class UserDetailedPage extends Component {
-  // async componentDidMount() {
-  //   let events = await this.props.getUserEvents(this.props.userUid);
-  //   console.log(events);
-  // }
+  async componentDidMount() {
+    let events = await this.props.getUserEvents(this.props.userUid);
+  }
+
+  changeTab = (event, data) => {
+    this.props.getUserEvents(this.props.userUid, data.activeIndex);
+  };
 
   render() {
     const {
@@ -67,7 +70,11 @@ class UserDetailedPage extends Component {
         <UserDetailedDescription profile={profile} />
         <UserDetailedSidebar isCurrentUser={isCurrentUser} />
         {photos && photos.length > 0 && <UserDetailedPhotos photos={photos} />}
-        <UserDetailedEvents events={events} eventsLoading={eventsLoading} />
+        <UserDetailedEvents
+          events={events}
+          eventsLoading={eventsLoading}
+          changeTab={this.changeTab}
+        />
       </Grid>
     );
   }

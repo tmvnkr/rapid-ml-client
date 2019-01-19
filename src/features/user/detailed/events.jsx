@@ -5,20 +5,24 @@ import format from 'date-fns/format';
 
 const panes = [
   { menuItem: 'All Collections', pane: { key: 'allEvents' } },
-  { menuItem: 'Past Collections', pane: { key: 'pastEvents' } },
-  { menuItem: 'Future Collections', pane: { key: 'futureEvents' } },
+  { menuItem: 'Latest Interested', pane: { key: 'pastEvents' } },
+  { menuItem: 'Oldest Collections', pane: { key: 'futureEvents' } },
   { menuItem: 'Created Collections', pane: { key: 'createdEvents' } }
 ];
 
-const UserDeteiledEvents = ({ events, eventsLoading }) => {
+const UserDeteiledEvents = ({ events, eventsLoading, changeTab }) => {
   return (
     <Grid.Column width={12}>
       <Segment attached loading={eventsLoading}>
         <Header icon="images outline" content="Collections" />
-        <Tab panes={panes} menu={{ secondary: true, pointing: true }} />
+        <Tab
+          onTabChange={(event, data) => changeTab(event, data)}
+          panes={panes}
+          menu={{ secondary: true, pointing: true }}
+        />
         <br />
 
-        <Card.Group itemsPerRow={5}>
+        <Card.Group itemsPerRow={3}>
           {events &&
             events.map(event => (
               <Card as={Link} to={`/collection/${event.id}`} key={event.id}>

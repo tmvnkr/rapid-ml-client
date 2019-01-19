@@ -164,7 +164,9 @@ export const goingToEvent = event => {
         eventId: event.id,
         userUid: user.uid,
         eventDate: event.date,
-        host: false
+        host: false,
+        eventCreated: event.created,
+        interestDate: Date.now()
       });
       toastr.success('Success', 'You have showed interest for the collection');
     } catch (error) {
@@ -198,32 +200,30 @@ export const getUserEvents = (userUid, activeTab) => {
   return async (dispatch, getState) => {
     dispatch(asyncActionStart());
     const firestore = firebase.firestore();
-    const today = new Date(Date.now());
     let eventsRef = firestore.collection('collection_interested');
     let query;
     switch (activeTab) {
-      case 1: // Past
+      case 1: // Newest Interested
         query = eventsRef
           .where('userUid', '==', userUid)
-          .where('eventDate', '<=', today)
-          .orderBy('eventDate', 'desc');
+          .orderBy('interestDate', 'desc');
         break;
-      case 2: // Future
+      case 2: // Oldest Collections
         query = eventsRef
           .where('userUid', '==', userUid)
-          .where('eventDate', '>=', today)
-          .orderBy('eventDate');
+          .orderBy('eventCreated', 'asc');
         break;
       case 3: // Created
         query = eventsRef
           .where('userUid', '==', userUid)
           .where('host', '==', true)
-          .orderBy('eventDate', 'desc');
+          .orderBy('eventCreated', 'desc');
         break;
       default:
+        // All
         query = eventsRef
           .where('userUid', '==', userUid)
-          .orderBy('eventDate', 'desc');
+          .orderBy('eventCreated', 'desc');
     }
     try {
       let querySnap = await query.get();

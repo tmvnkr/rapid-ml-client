@@ -61,15 +61,6 @@ function EventDetailedTaggedImage({ event }) {
     <>
       {hasImage !== '' && (
         <>
-          {/* <Segment
-            textAlign="center"
-            attached="top"
-            inverted
-            color="teal"
-            style={{ border: 'none' }}>
-            <Header>Chat about this event</Header>
-          </Segment> */}
-
           <Segment>
             <Table celled striped>
               <Table.Header>

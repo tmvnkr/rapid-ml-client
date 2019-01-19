@@ -24,7 +24,9 @@ export const createEvent = event => {
           eventId: createdEvent.id,
           userUid: user.uid,
           eventDate: event.date,
-          host: true
+          host: true,
+          eventCreated: event.created,
+          interestDate: Date.now()
         }
       );
 
@@ -148,8 +150,6 @@ export const cancelToggle = (cancelled, eventId) => {
 
 export const getEventsForDashboard = lastEvent => {
   return async (dispatch, getState) => {
-    // let today = Math.round(new Date().getTime() / 1000);
-    // console.log(today);
     const firestore = firebase.firestore();
     const eventsRef = firestore.collection('collections');
     try {
@@ -164,17 +164,12 @@ export const getEventsForDashboard = lastEvent => {
 
       lastEvent
         ? (query = eventsRef
-            // .where('created', '<=', today)
-            .orderBy('created')
+            .orderBy('created', 'desc')
             .startAfter(startAfter)
             .limit(2))
-        : (query = eventsRef
-            // .where('created', '>=', today)
-            .orderBy('created')
-            .limit(2));
+        : (query = eventsRef.orderBy('created', 'desc').limit(4));
 
       let querySnap = await query.get();
-      console.log(querySnap);
       if (querySnap.docs.length === 0) {
         dispatch(asyncActionFinish());
         return querySnap;
