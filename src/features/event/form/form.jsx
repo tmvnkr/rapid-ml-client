@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-//import { withFirestore } from 'react-redux-firebase';
 import {
   composeValidators,
   combineValidators,
   isRequired,
   hasLengthGreaterThan
 } from 'revalidate';
+import moment from 'moment';
 import { withFirestore } from 'react-redux-firebase';
 import Script from 'react-load-script';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
@@ -193,6 +193,10 @@ function EventForm(props) {
               component={DateInput}
               dateFormat="YYYY-MM-DD"
               placeholder="Collection date"
+              showYearDropdown={true}
+              showMonthDropdown={true}
+              dropdownMode="select"
+              maxDate={moment().subtract(0, 'years')}
             />
             <Button
               disabled={invalid || submitting || pristine}

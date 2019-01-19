@@ -8,7 +8,7 @@ import PeopleDashboard from '../../features/user/dashboard/dashboard';
 import UserDetailedPage from '../../features/user/detailed/detailed';
 import SettingsDashboard from '../../features/user/settings/dashboard';
 import EventForm from '../../features/event/form/form';
-import ImageUpload from '../../features/event/image-upload/photo';
+import ImageUpload from '../../features/event/image-upload/image-upload';
 import HomePage from '../../features/home/homepage';
 import TestComponent from '../../features/testarea/TestComponent';
 import ModalManager from '../../features/modals/manager';

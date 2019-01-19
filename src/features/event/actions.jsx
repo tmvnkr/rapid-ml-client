@@ -61,6 +61,7 @@ export const uploadImage = (file, fileName, event) => async (
     name: imageName
   };
   try {
+    dispatch(asyncActionStart());
     // upload file to firebase storage
     let uploadedFile = await firebase.uploadFile(path, file, null, options);
     // get url of image
@@ -68,7 +69,6 @@ export const uploadImage = (file, fileName, event) => async (
     const apiKey = 'acc_3c47f36a59b801b';
     const apiSecret = '8d6dbf63b22129bbbcea0aa0dd861b54';
     const imageUrl = downloadURL;
-
     await request
       .get(
         `https://api.imagga.com/v2/tags?image_url=${encodeURIComponent(
@@ -96,7 +96,6 @@ export const uploadImage = (file, fileName, event) => async (
         }
       )
       .auth(apiKey, apiSecret, true);
-
     // get collectionDoc
     // let collectionDoc = await firestore.get(`users/${user.uid}`);
     let userDoc = await firestore.get(`users/${user.uid}`);
@@ -111,7 +110,7 @@ export const uploadImage = (file, fileName, event) => async (
       });
     }
     // add the new photo as to photos collection
-    return await firestore.add(
+    await firestore.add(
       {
         collection: 'users',
         doc: user.uid,
@@ -123,8 +122,10 @@ export const uploadImage = (file, fileName, event) => async (
         collectionId: event
       }
     );
+    dispatch(asyncActionFinish());
   } catch (error) {
     console.log(error);
+    dispatch(asyncActionError());
     throw new Error('Problem uploading image');
   }
 };
@@ -147,7 +148,8 @@ export const cancelToggle = (cancelled, eventId) => {
 
 export const getEventsForDashboard = lastEvent => {
   return async (dispatch, getState) => {
-    // let today = new Date(Date.now());
+    // let today = Math.round(new Date().getTime() / 1000);
+    // console.log(today);
     const firestore = firebase.firestore();
     const eventsRef = firestore.collection('collections');
     try {
@@ -162,17 +164,17 @@ export const getEventsForDashboard = lastEvent => {
 
       lastEvent
         ? (query = eventsRef
-            // .where('date', '>=', today)
-            .orderBy('date')
+            // .where('created', '<=', today)
+            .orderBy('created')
             .startAfter(startAfter)
             .limit(2))
         : (query = eventsRef
-            // .where('date', '>=', today)
-            .orderBy('date')
+            // .where('created', '>=', today)
+            .orderBy('created')
             .limit(2));
 
       let querySnap = await query.get();
-
+      console.log(querySnap);
       if (querySnap.docs.length === 0) {
         dispatch(asyncActionFinish());
         return querySnap;

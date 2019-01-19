@@ -129,6 +129,7 @@ class PhotosPage extends Component {
     const { photos, profile, loading } = this.props;
     let filteredUserPhotos;
     let filteredTaggedPhotos;
+
     if (photos) {
       filteredUserPhotos = photos
         .filter(photo => {

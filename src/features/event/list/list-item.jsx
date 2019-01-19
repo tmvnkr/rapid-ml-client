@@ -31,6 +31,13 @@ export default function ListItem(props) {
                 Created by{' '}
                 <Link to={`/profile/${event.hostUid}`}>{event.hostedBy}</Link>
               </Item.Description>
+              <Item.Description>
+                <b>
+                  {format(event.created, 'dddd DD MMMM YYYY') +
+                    ' at ' +
+                    format(event.created, 'HH:mm')}
+                </b>
+              </Item.Description>
               {event.cancelled && (
                 <Label
                   ribbon="right"

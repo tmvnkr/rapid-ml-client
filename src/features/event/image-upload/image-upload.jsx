@@ -11,21 +11,23 @@ import { Route, Redirect } from 'react-router';
 
 const mapState = state => {
   let event = {};
-
   if (
     state.firestore.ordered.collections &&
     state.firestore.ordered.collections[0]
   ) {
     event = state.firestore.ordered.collections[0];
   }
-  return event;
+  return {
+    event,
+    loading: state.async.loading
+  };
 };
 
 const actions = {
   uploadImage
 };
 
-class PhotosPage extends Component {
+class EventDetailedTaggedImage extends Component {
   state = {
     files: [],
     fileName: '',
@@ -66,7 +68,7 @@ class PhotosPage extends Component {
       await this.props.uploadImage(
         this.state.image,
         this.state.filename,
-        this.props.id
+        this.props.event.id
       );
       this.cancelCrop();
       toastr.success(
@@ -150,12 +152,14 @@ class PhotosPage extends Component {
                     </div>
                     <Button.Group>
                       <Button
+                        loading={this.props.loading}
                         onClick={this.uploadImage}
                         style={{ width: '180px' }}
                         positive
                         icon="check"
                       />
                       <Button
+                        loading={this.props.loading}
                         onClick={this.cancelCrop}
                         style={{ width: '180px' }}
                         icon="close"
@@ -170,10 +174,20 @@ class PhotosPage extends Component {
         <Route
           path="/imageUpload"
           render={() => {
-            if (this.props.imageURL !== '' && this.props.id === undefined) {
+            if (
+              this.props.event.imageURL !== '' &&
+              this.props.event.id === undefined &&
+              this.props.event.imageURL !== undefined
+            ) {
+              console.log(this.props.event.imageURL, this.props.id);
               return <Redirect to={`/collections`} />;
+            } else if (
+              this.props.event.imageURL !== '' &&
+              this.props.event.imageURL !== undefined
+            ) {
+              return <Redirect to={`/collection/${this.props.event.id}`} />;
             } else {
-              return <Redirect to={`/collection/${this.props.id}`} />;
+              return null;
             }
           }}
         />
@@ -186,5 +200,11 @@ export default withFirestore(
   connect(
     mapState,
     actions
-  )(PhotosPage)
+  )(EventDetailedTaggedImage)
 );
+
+// else if (
+//   this.props.location.pathName === `/collection/${this.props.id}`
+// ) {
+//   return <Redirect to={`/imageUpload/${this.props.id}`} />;
+// }
