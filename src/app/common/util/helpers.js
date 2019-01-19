@@ -14,7 +14,6 @@ export const createNewEvent = (user, photoURL, event) => {
     hostedBy: user.displayName,
     hostPhotoURL: photoURL || '/assets/user.png',
     created: Date.now(),
-    nsfw: '',
     imageURL: '',
     imageTags: '',
     attendees: {

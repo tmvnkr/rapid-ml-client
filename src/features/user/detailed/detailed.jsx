@@ -42,7 +42,7 @@ const actions = {
 
 class UserDetailedPage extends Component {
   async componentDidMount() {
-    let events = await this.props.getUserEvents(this.props.userUid);
+    await this.props.getUserEvents(this.props.userUid);
   }
 
   changeTab = (event, data) => {
@@ -67,8 +67,8 @@ class UserDetailedPage extends Component {
     return (
       <Grid>
         <UserDetailedHeader profile={profile} />
-        <UserDetailedDescription profile={profile} />
         <UserDetailedSidebar isCurrentUser={isCurrentUser} />
+        <UserDetailedDescription profile={profile} />
         {photos && photos.length > 0 && <UserDetailedPhotos photos={photos} />}
         <UserDetailedEvents
           events={events}

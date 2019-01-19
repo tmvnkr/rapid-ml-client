@@ -85,21 +85,7 @@ export const uploadImage = (file, fileName, event) => async (
         }
       )
       .auth(apiKey, apiSecret, true);
-
-    await request
-      .get(
-        'https://api.imagga.com/v2/categories/nsfw_beta?image_url=' +
-          encodeURIComponent(imageUrl),
-        function(error, response, body) {
-          let nsfw = body;
-          firestore.update(`collections/${event}`, {
-            nsfw: nsfw
-          });
-        }
-      )
-      .auth(apiKey, apiSecret, true);
     // get collectionDoc
-    // let collectionDoc = await firestore.get(`users/${user.uid}`);
     let userDoc = await firestore.get(`users/${user.uid}`);
     // get tags from api with downloadURL and store in collection
     // check if collection has a photo, if not update imageURL field with new image
@@ -187,6 +173,27 @@ export const getEventsForDashboard = lastEvent => {
     } catch (error) {
       console.log(error);
       dispatch(asyncActionError());
+    }
+  };
+};
+
+export const addEventComment = (eventId, values) => {
+  return async (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+    const profile = getState().firebase.profile;
+    const user = firebase.auth().currentUser;
+    let newComment = {
+      displayName: profile.displayName,
+      photoURL: profile.photoURL || 'assets/user.png',
+      uid: user.uid,
+      text: values.comment,
+      date: Date.now()
+    };
+    try {
+      await firebase.push(`event_chat/${eventId}`, newComment);
+    } catch (error) {
+      console.log(error);
+      toastr.error('Oops', 'Problem adding comment');
     }
   };
 };

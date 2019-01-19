@@ -19,7 +19,7 @@ const UserDetailedHeader = ({ profile }) => {
   }
 
   return (
-    <Grid.Column width={16}>
+    <Grid.Column width={12}>
       <Segment>
         <Item.Group>
           <Item>

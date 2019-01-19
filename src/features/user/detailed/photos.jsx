@@ -4,11 +4,11 @@ import LazyLoad from 'react-lazyload';
 
 const UserDetailedPhotos = ({ photos }) => {
   return (
-    <Grid.Column width={12}>
+    <Grid.Column width={16}>
       <Segment attached>
         <Header icon="photo" content="Photos" />
 
-        <Image.Group size="small">
+        <Image.Group>
           {photos &&
             photos.map(photo => (
               <LazyLoad
@@ -16,7 +16,10 @@ const UserDetailedPhotos = ({ photos }) => {
                 height={150}
                 offset={-10}
                 placeholder={<Image src="/assets/user.png" />}>
-                <Image fluid src={photo.url} />
+                <Image
+                  style={{ maxHeight: '300px', verticalAlign: 'top' }}
+                  src={photo.url}
+                />
               </LazyLoad>
             ))}
         </Image.Group>

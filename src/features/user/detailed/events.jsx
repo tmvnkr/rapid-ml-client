@@ -4,15 +4,19 @@ import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
 
 const panes = [
-  { menuItem: 'All Collections', pane: { key: 'allEvents' } },
-  { menuItem: 'Latest Interested', pane: { key: 'pastEvents' } },
-  { menuItem: 'Oldest Collections', pane: { key: 'futureEvents' } },
-  { menuItem: 'Created Collections', pane: { key: 'createdEvents' } }
+  {
+    menuItem: 'All Collections',
+    text: 'Hello',
+    pane: { key: 'allCollections' }
+  },
+  { menuItem: 'Latest Interested', pane: { key: 'latestInterested' } },
+  { menuItem: 'Oldest Collections', pane: { key: 'oldestCollections' } },
+  { menuItem: 'Created Collections', pane: { key: 'createdCollections' } }
 ];
 
 const UserDeteiledEvents = ({ events, eventsLoading, changeTab }) => {
   return (
-    <Grid.Column width={12}>
+    <Grid.Column width={16}>
       <Segment attached loading={eventsLoading}>
         <Header icon="images outline" content="Collections" />
         <Tab
@@ -22,15 +26,25 @@ const UserDeteiledEvents = ({ events, eventsLoading, changeTab }) => {
         />
         <br />
 
-        <Card.Group itemsPerRow={3}>
+        <Card.Group itemsPerRow={6}>
           {events &&
             events.map(event => (
               <Card as={Link} to={`/collection/${event.id}`} key={event.id}>
-                <Image src={`/assets/categoryImages/${event.category}.jpg`} />
+                <Image
+                  src={
+                    event.imageURL ||
+                    `/assets/categoryImages/${event.category}.jpg`
+                  }
+                />
                 <Card.Content>
                   <Card.Header textAlign="center">{event.title}</Card.Header>
                   <Card.Meta textAlign="center">
-                    <div>{format(event.date && event.date, 'DD-MM-YYYY')}</div>
+                    <div>
+                      {format(
+                        event.created && event.created,
+                        'DD-MM-YYYY HH:mm'
+                      )}
+                    </div>
                   </Card.Meta>
                 </Card.Content>
               </Card>
