@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Header, Item, Segment, Icon, Image } from 'semantic-ui-react';
 import differenceInYears from 'date-fns/difference_in_years';
 
-const UserDetailedHeader = ({ profile, photos }) => {
+const UserDetailedHeader = ({ profile, photos, following }) => {
   const [randomImage, setRandomImage] = useState(profile.photoURL);
+  const [nrFollowing, setNrFollowing] = useState(0);
 
   useEffect(
     () => {
@@ -15,6 +16,14 @@ const UserDetailedHeader = ({ profile, photos }) => {
     [photos]
   );
 
+  useEffect(
+    () => {
+      if (following) {
+        setNrFollowing(following.length);
+      }
+    },
+    [following]
+  );
   let age = 'unknown age';
   if (profile.dateOfBirth) {
     age = differenceInYears(Date.now(), profile.dateOfBirth);
@@ -40,7 +49,7 @@ const UserDetailedHeader = ({ profile, photos }) => {
   };
 
   const eventImageStyle = {
-    filter: 'blur(10px)',
+    filter: 'blur(7px)',
     width: '100%'
   };
 
@@ -68,22 +77,55 @@ const UserDetailedHeader = ({ profile, photos }) => {
                   style={{
                     color: 'white',
                     paddingLeft: '30px',
-                    paddingTop: '200px'
+                    paddingTop: '180px',
+                    textShadow: '2px 2px #000'
                   }}>
                   {profile.displayName}
                 </Header>{' '}
                 <Icon
                   name={gender}
                   size="big"
-                  style={{ color: 'white', paddingLeft: '30px' }}
+                  style={{
+                    color: 'white',
+                    paddingLeft: '30px',
+                    textShadow: '2px 2px #000'
+                  }}
                 />
                 <br />
-                <Header as="h3" style={{ color: 'white', paddingLeft: '30px' }}>
+                <Header
+                  as="h3"
+                  style={{
+                    color: 'white',
+                    paddingLeft: '30px',
+                    textShadow: '2px 2px #000'
+                  }}>
                   {profile.occupation}
                 </Header>
                 <br />
-                <Header as="h3" style={{ color: 'white', paddingLeft: '30px' }}>
+                <Header
+                  as="h3"
+                  style={{
+                    color: 'white',
+                    paddingLeft: '30px',
+                    textShadow: '2px 2px #000'
+                  }}>
                   {age}, Lives in {profile.city || 'unknown city'}
+                </Header>
+                <br />
+                <br />
+                <Header
+                  as="h3"
+                  style={{
+                    color: 'white',
+                    paddingLeft: '30px',
+                    textShadow: '2px 2px #000'
+                  }}>
+                  <Icon
+                    name="users"
+                    size="big"
+                    style={{ color: 'white', textShadow: '2px 2px #000' }}
+                  />
+                  followers {` ${nrFollowing}`}
                 </Header>
               </Item.Content>
             </Item>

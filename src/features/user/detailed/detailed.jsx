@@ -62,24 +62,29 @@ class UserDetailedPage extends Component {
       events,
       eventsLoading,
       followUser,
-      following
+      following,
+      unfollowUser
     } = this.props;
     const isCurrentUser = auth.uid === match.params.id;
     const loading = Object.values(requesting).some(a => a === true);
     const isFollowing = !isEmpty(following);
 
     if (loading) return <LoadingComponent inverted={true} />;
-
     return (
       <Grid>
-        <UserDetailedHeader profile={profile} photos={photos} />
+        <UserDetailedHeader
+          following={following}
+          profile={profile}
+          photos={photos}
+        />
         <UserDetailedSidebar
           unfollowUser={unfollowUser}
           isFollowing={isFollowing}
-          isCurrentUser={isCurrentUser}
           profile={profile}
           followUser={followUser}
+          isCurrentUser={isCurrentUser}
         />
+
         <UserDetailedDescription profile={profile} />
         {photos && photos.length > 0 && <UserDetailedPhotos photos={photos} />}
         <UserDetailedEvents
@@ -97,5 +102,7 @@ export default compose(
     mapState,
     actions
   ),
-  firestoreConnect((auth, userUid, match) => userDetailedQuery(auth, userUid))
+  firestoreConnect((auth, userUid, match) =>
+    userDetailedQuery(auth, userUid, match)
+  )
 )(UserDetailedPage);

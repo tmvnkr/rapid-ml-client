@@ -4,7 +4,7 @@ import EventActivityItem from './activity-item';
 
 function CollectionActivity({ activities, contextRef }) {
   return (
-    <Sticky context={contextRef} offset={100}>
+    <Sticky style={{ zIndex: '0' }} context={contextRef} offset={100}>
       <Header attached="top" content="Recent Activity" />
       <Segment attached>
         <Feed>

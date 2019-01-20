@@ -268,6 +268,7 @@ export const followUser = userToFollow => async (
       },
       following
     );
+    toastr.success('Hooray!', `You are now following ${following.displayName}`);
   } catch (error) {
     console.log(error);
   }
@@ -286,6 +287,7 @@ export const unfollowUser = userToUnfollow => async (
       doc: user.uid,
       subcollections: [{ collection: 'following', doc: userToUnfollow.id }]
     });
+    toastr.success('Success', `Unfollowed`);
   } catch (error) {
     console.log(error);
   }

@@ -16,7 +16,7 @@ function SignedInMenu({ signOut, profile, auth }) {
         text={profile.displayName}
         openOnFocus
         style={{ zIndex: '900' }}>
-        <Dropdown.Menu style={{ left: '-40px' }}>
+        <Dropdown.Menu style={{ left: '-40px', zIndex: '900' }}>
           >
           <Dropdown.Item text="Create Collection" icon="plus" />
           <Dropdown.Item text="My Collections" icon="calendar" />

@@ -11,7 +11,8 @@ const eventImageTextStyle = {
   left: '5%',
   width: '100%',
   height: 'auto',
-  color: 'white'
+  color: 'white',
+  textShadow: '2px 2px #000'
 };
 
 function EventDetailedHeader({
