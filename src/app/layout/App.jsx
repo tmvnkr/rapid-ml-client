@@ -12,6 +12,7 @@ import ImageUpload from '../../features/event/image-upload/image-upload';
 import HomePage from '../../features/home/homepage';
 import TestComponent from '../../features/testarea/TestComponent';
 import ModalManager from '../../features/modals/manager';
+import { UserIsAuthenticated } from '../../features/auth/auth-wrapper';
 
 export default function App() {
   return (
@@ -31,13 +32,34 @@ export default function App() {
               <Switch>
                 <Route path="/collections" component={EventDashboard} />
                 <Route path="/test" component={TestComponent} />
-                <Route path="/collection/:id" component={EventDetailedPage} />
-                <Route path="/manage/:id" component={EventForm} />
-                <Route path="/imageUpload/:id" component={ImageUpload} />
-                <Route path="/people" component={PeopleDashboard} />
-                <Route path="/profile/:id" component={UserDetailedPage} />
-                <Route path="/settings" component={SettingsDashboard} />
-                <Route path="/createEvent" component={EventForm} />
+                <Route
+                  path="/collection/:id"
+                  component={UserIsAuthenticated(EventDetailedPage)}
+                />
+                <Route
+                  path="/manage/:id"
+                  component={UserIsAuthenticated(EventForm)}
+                />
+                <Route
+                  path="/imageUpload/:id"
+                  component={UserIsAuthenticated(ImageUpload)}
+                />
+                <Route
+                  path="/people"
+                  component={UserIsAuthenticated(PeopleDashboard)}
+                />
+                <Route
+                  path="/profile/:id"
+                  component={UserIsAuthenticated(UserDetailedPage)}
+                />
+                <Route
+                  path="/settings"
+                  component={UserIsAuthenticated(SettingsDashboard)}
+                />
+                <Route
+                  path="/createEvent"
+                  component={UserIsAuthenticated(EventForm)}
+                />
               </Switch>
             </Container>
           </Fragment>

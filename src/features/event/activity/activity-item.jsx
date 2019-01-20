@@ -15,7 +15,7 @@ class EventActivityItem extends Component {
               {activity.hostedBy}
             </Feed.User>{' '}
             has created{' '}
-            <Link to={{ pathname: '/event/' + activity.eventId }}>
+            <Link to={{ pathname: '/collection/' + activity.eventId }}>
               {activity.title}
             </Link>
           </div>
@@ -40,7 +40,7 @@ class EventActivityItem extends Component {
               {activity.hostedBy}
             </Feed.User>{' '}
             has uploaded an image to{' '}
-            <Link to={{ pathname: '/event/' + activity.eventId }}>
+            <Link to={{ pathname: '/collection/' + activity.eventId }}>
               {activity.title}
             </Link>
             <Feed.Extra images>
