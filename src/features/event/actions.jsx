@@ -112,7 +112,6 @@ export const uploadImage = (file, fileName, event) => async (
     );
     dispatch(asyncActionFinish());
   } catch (error) {
-    console.log(error);
     dispatch(asyncActionError());
     throw new Error('Problem uploading image');
   }
@@ -132,7 +131,6 @@ export const cancelToggle = (cancelled, eventId) => {
       }, 3000);
     } catch (error) {
       dispatch(asyncActionError());
-      console.log(error);
     }
   };
 };
@@ -174,7 +172,6 @@ export const getEventsForDashboard = lastEvent => {
       dispatch(asyncActionFinish());
       return querySnap;
     } catch (error) {
-      console.log(error);
       dispatch(asyncActionError());
     }
   };
@@ -197,7 +194,6 @@ export const addEventComment = (eventId, values, parentId) => {
       await firebase.push(`event_chat/${eventId}`, newComment);
       toastr.success('Yeey!', 'Comment added');
     } catch (error) {
-      console.log(error);
       toastr.error('Oops', 'Problem adding comment');
     }
   };

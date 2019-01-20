@@ -237,7 +237,6 @@ export const cancelGoingToEvent = event => {
         `You are no longer interested in ${event.title}`
       );
     } catch (error) {
-      console.log(error);
       toastr.error('Oops', 'Something went wrong');
     }
   };
@@ -288,7 +287,6 @@ export const getUserEvents = (userUid, activeTab) => {
 
       dispatch(asyncActionFinish());
     } catch (error) {
-      console.log(error);
       dispatch(asyncActionError());
     }
   };
@@ -316,9 +314,7 @@ export const followUser = userToFollow => async (
       following
     );
     toastr.success('Hooray!', `You are now following ${following.displayName}`);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const unfollowUser = userToUnfollow => async (
@@ -335,7 +331,5 @@ export const unfollowUser = userToUnfollow => async (
       subcollections: [{ collection: 'following', doc: userToUnfollow.id }]
     });
     toastr.success('Success', `Unfollowed`);
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };

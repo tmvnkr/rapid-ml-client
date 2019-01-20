@@ -197,7 +197,6 @@ class EventDetailedTaggedImage extends Component {
               this.props.event.id === undefined &&
               this.props.event.imageURL !== undefined
             ) {
-              console.log(this.props.event.imageURL, this.props.id);
               return <Redirect to={`/collections`} />;
             } else if (
               this.props.event.imageURL !== '' &&
