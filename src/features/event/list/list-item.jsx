@@ -16,46 +16,52 @@ import { objectToArray } from '../../../app/common/util/helpers';
 export default function ListItem(props) {
   const { event } = props;
   return (
-    <Segment.Group>
-      <Segment>
-        <Item.Group>
-          <Item>
-            <Item.Image size="tiny" rounded src={event.hostPhotoURL} inline />
-            <Item.Content>
-              {!event.cancelled && (
-                <Item.Header as={Link} to={`/collection/${event.id}`}>
-                  {event.title}
-                </Item.Header>
-              )}
-              <Item.Description>
-                Created by{' '}
-                <Link to={`/profile/${event.hostUid}`}>{event.hostedBy}</Link>
-              </Item.Description>
-              <Item.Description>
-                <b>
-                  {format(event.created, 'dddd DD MMMM YYYY') +
-                    ' at ' +
-                    format(event.created, 'HH:mm')}
-                </b>
-              </Item.Description>
-              {event.cancelled && (
-                <Label
-                  ribbon="right"
-                  color="red"
-                  content="User set this message as hidden"
-                />
-              )}
-            </Item.Content>
-          </Item>
-        </Item.Group>
-      </Segment>
-      {event.imageURL && (
-        <Segment>
-          <Image src={event.imageURL} fluid />
-        </Segment>
-      )}
+    <>
       {!event.cancelled && (
-        <>
+        <Segment.Group>
+          <Segment>
+            <Item.Group>
+              <Item>
+                <Item.Image
+                  size="tiny"
+                  rounded
+                  src={event.hostPhotoURL}
+                  inline
+                />
+                <Item.Content>
+                  <Item.Header as={Link} to={`/collection/${event.id}`}>
+                    {event.title}
+                  </Item.Header>
+
+                  <Item.Description>
+                    Created by{' '}
+                    <Link to={`/profile/${event.hostUid}`}>
+                      {event.hostedBy}
+                    </Link>
+                  </Item.Description>
+                  <Item.Description>
+                    <b>
+                      {format(event.created, 'dddd DD MMMM YYYY') +
+                        ' at ' +
+                        format(event.created, 'HH:mm')}
+                    </b>
+                  </Item.Description>
+                  {event.cancelled && (
+                    <Label
+                      ribbon="right"
+                      color="red"
+                      content="User set this message as hidden"
+                    />
+                  )}
+                </Item.Content>
+              </Item>
+            </Item.Group>
+          </Segment>
+          {event.imageURL && (
+            <Segment>
+              <Image src={event.imageURL} fluid />
+            </Segment>
+          )}
           <Segment>
             <span>
               <Icon name="clock outline" /> {format(event.date, 'DD-MM-YYYY')}
@@ -71,18 +77,18 @@ export default function ListItem(props) {
                 ))}
             </List>
           </Segment>
-        </>
+          <Segment clearing>
+            <span>{event.description}</span>
+            <Button
+              as={Link}
+              to={`/collection/${event.id}`}
+              color="teal"
+              floated="right"
+              content="View"
+            />
+          </Segment>
+        </Segment.Group>
       )}
-      <Segment clearing>
-        {!event.cancelled && <span>{event.description}</span>}
-        <Button
-          as={Link}
-          to={`/collection/${event.id}`}
-          color="teal"
-          floated="right"
-          content="View"
-        />
-      </Segment>
-    </Segment.Group>
+    </>
   );
 }

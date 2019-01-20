@@ -132,6 +132,13 @@ function EventForm(props) {
     loading
   } = props;
 
+  let collection;
+  if (event.id) {
+    collection = <h1>Manage Collection Information</h1>;
+  } else {
+    collection = <h1>Create Collection Information</h1>;
+  }
+
   return (
     <Grid>
       <Script
@@ -140,8 +147,10 @@ function EventForm(props) {
         }&libraries=places`}
         onLoad={handleScriptLoaded}
       />
+
       <Grid.Column width={10}>
         <Grid.Column width={10} />
+        {collection}
         <Segment>
           <Header sub color="teal" content="Collection Details" />
           <Form onSubmit={handleSubmit(onFormSubmit)}>
@@ -209,16 +218,18 @@ function EventForm(props) {
             <Button onClick={history.goBack} type="button">
               Cancel
             </Button>
-            <Button
-              loading={loading}
-              onClick={() => cancelToggle(!event.cancelled, event.id)}
-              color={event.cancelled ? 'green' : 'red'}
-              type="button"
-              floated="right"
-              content={
-                event.cancelled ? 'Show collection publicly' : 'Hide event'
-              }
-            />
+            {event.id && (
+              <Button
+                loading={loading}
+                onClick={() => cancelToggle(!event.cancelled, event.id)}
+                color={event.cancelled ? 'green' : 'red'}
+                type="button"
+                floated="right"
+                content={
+                  event.cancelled ? 'Show collection publicly' : 'Hide event'
+                }
+              />
+            )}
           </Form>
         </Segment>
       </Grid.Column>

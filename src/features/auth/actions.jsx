@@ -10,8 +10,8 @@ export const login = creds => {
         .auth()
         .signInWithEmailAndPassword(creds.email, creds.password);
       dispatch(closeModal());
+      toastr.success('Login Success!');
     } catch (error) {
-      console.log(error);
       throw new SubmissionError({
         _error: 'Login failed: incorrect username or password'
       });
@@ -39,8 +39,11 @@ export const registerUser = user => {
       };
       await firestore.set(`users/${createdUser.uid}`, { ...newUser });
       dispatch(closeModal());
+      toastr.success(
+        'You registered successfully',
+        'Start by logging in to your new account'
+      );
     } catch (error) {
-      console.log(error);
       throw new SubmissionError({
         _error: error.message
       });
@@ -65,8 +68,9 @@ export const socialLogin = selectedProvider => {
           createdAt: firestore.FieldValue.serverTimestamp()
         });
       }
+      toastr.success('Login Success!');
     } catch (error) {
-      console.log(error);
+      toastr.error('Login Success!', error);
     }
   };
 };

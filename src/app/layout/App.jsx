@@ -12,6 +12,7 @@ import ImageUpload from '../../features/event/image-upload/image-upload';
 import HomePage from '../../features/home/homepage';
 import TestComponent from '../../features/testarea/TestComponent';
 import ModalManager from '../../features/modals/manager';
+import NotFound from '../../app/layout/not-found';
 import { UserIsAuthenticated } from '../../features/auth/auth-wrapper';
 
 export default function App() {
@@ -60,6 +61,8 @@ export default function App() {
                   path="/createEvent"
                   component={UserIsAuthenticated(EventForm)}
                 />
+                <Route path="/error" component={NotFound} />
+                <Route component={NotFound} />
               </Switch>
             </Container>
           </Fragment>
