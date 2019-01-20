@@ -2,8 +2,8 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   body {
-  background-color: rgb(234, 234, 234) !important;
-  height: 0% !important;
+    background: linear-gradient(0.25turn,#f5d6a7,#fdc8e9,#bb8ceb) !important;
+  height: 100% !important;
 }
 
 /*timepicker style*/
@@ -109,6 +109,10 @@ const GlobalStyle = createGlobalStyle`
   padding-bottom: 0 !important;
   padding-left: 2em !important;
 }
+
+/* .ui.segment {
+  background-image: radial-gradient( farthest-corner at -6498px 33px, #f5f5f5 0%, #fff8ff 69%, #edddff 135% ) !important;
+} */
 
 body::-webkit-scrollbar {
   width: 0.7em;

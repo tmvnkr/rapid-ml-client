@@ -16,6 +16,9 @@ function SettingsNav() {
         <Menu.Item as={NavLink} to="/settings/photos">
           My Photos
         </Menu.Item>
+        <Menu.Item as={NavLink} to="/settings/themes">
+          My Theme
+        </Menu.Item>
       </Menu>
       <Grid.Row />
       <Menu vertical>

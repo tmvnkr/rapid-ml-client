@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'semantic-ui-react';
 
 function HomePage({ history }) {
   return (
@@ -15,11 +16,11 @@ function HomePage({ history }) {
           <h2>Use the power of machine learning to tag your images!</h2>
           <div
             onClick={() => history.push('/collections')}
-            className="ui huge white inverted button"
-          >
+            className="ui huge white inverted button">
             Get Started
             <i className="right arrow icon" />
           </div>
+          <Image style={{ paddingTop: '10vh' }} fluid src="/assets/nhls.png" />
         </div>
       </div>
       <div style={{ textAlign: 'center' }}>
