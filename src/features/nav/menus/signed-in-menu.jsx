@@ -11,8 +11,13 @@ function SignedInMenu({ signOut, profile, auth }) {
         spaced="right"
         src={profile.photoURL || '/assets/user.png'}
       />
-      <Dropdown pointing="top left" text={profile.displayName} openOnFocus>
-        <Dropdown.Menu>
+      <Dropdown
+        pointing="top left"
+        text={profile.displayName}
+        openOnFocus
+        style={{ zIndex: '900' }}>
+        <Dropdown.Menu style={{ left: '-40px' }}>
+          >
           <Dropdown.Item text="Create Collection" icon="plus" />
           <Dropdown.Item text="My Collections" icon="calendar" />
           <Dropdown.Item text="My Network" icon="users" />

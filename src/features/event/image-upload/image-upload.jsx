@@ -32,7 +32,8 @@ class EventDetailedTaggedImage extends Component {
     files: [],
     fileName: '',
     cropResult: null,
-    image: {}
+    image: {},
+    aspectRatio: 16 / 9
   };
 
   async componentDidMount() {
@@ -126,8 +127,9 @@ class EventDetailedTaggedImage extends Component {
                     ref="cropper"
                     src={this.state.files[0].preview}
                     viewMode={1}
+                    aspectRatio={this.state.aspectRatio}
                     dragMode="move"
-                    guides={true}
+                    guides={false}
                     scalable={true}
                     cropBoxMovable={true}
                     cropBoxResizable={true}
@@ -135,6 +137,21 @@ class EventDetailedTaggedImage extends Component {
                     crop={this.cropImage}
                   />
                 )}
+                <Button.Group>
+                  <Button onClick={() => this.setState({ aspectRatio: 7 / 3 })}>
+                    7:3
+                  </Button>
+                  <Button
+                    onClick={() => this.setState({ aspectRatio: 16 / 9 })}>
+                    16:9
+                  </Button>
+                  <Button onClick={() => this.setState({ aspectRatio: 4 / 3 })}>
+                    4:3
+                  </Button>
+                  <Button onClick={() => this.setState({ aspectRatio: 1 / 1 })}>
+                    1:1
+                  </Button>
+                </Button.Group>
               </Grid.Column>
               <Grid.Column width={8}>
                 <Header
@@ -144,7 +161,8 @@ class EventDetailedTaggedImage extends Component {
                 />
                 {this.state.files[0] && (
                   <>
-                    <div style={{ height: '600px', backgroundColor: 'grey' }}>
+                    <div
+                      style={{ height: '600px', backgroundColor: '#f2f2f2' }}>
                       <Image
                         style={{ maxHeight: '600px' }}
                         src={this.state.cropResult}

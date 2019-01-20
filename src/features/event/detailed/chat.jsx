@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Segment, Header, Comment } from 'semantic-ui-react';
 import EventDetailedChatForm from './chat-form';
 import distanceInWords from 'date-fns/distance_in_words';
