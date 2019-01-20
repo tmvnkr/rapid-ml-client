@@ -121,14 +121,17 @@ export const uploadImage = (file, fileName, event) => async (
 export const cancelToggle = (cancelled, eventId) => {
   return async (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
-    // const message = cancelled
-    //   ? 'Are you sure you want to hide the collection?'
-    //   : 'This will show the event in the collections page again, are you sure?';
     try {
+      dispatch(asyncActionStart());
       await firestore.update(`collections/${eventId}`, {
         cancelled: cancelled
       });
+      setTimeout(function() {
+        dispatch(asyncActionFinish());
+        toastr.success('Success!', 'Collection visibility has been changed!');
+      }, 3000);
     } catch (error) {
+      dispatch(asyncActionError());
       console.log(error);
     }
   };
@@ -192,6 +195,7 @@ export const addEventComment = (eventId, values, parentId) => {
     };
     try {
       await firebase.push(`event_chat/${eventId}`, newComment);
+      toastr.success('Yeey!', 'Comment added');
     } catch (error) {
       console.log(error);
       toastr.error('Oops', 'Problem adding comment');

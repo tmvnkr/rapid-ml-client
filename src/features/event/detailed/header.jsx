@@ -20,7 +20,8 @@ function EventDetailedHeader({
   isHost,
   isGoing,
   goingToEvent,
-  cancelGoingToEvent
+  cancelGoingToEvent,
+  loading
 }) {
   const [hasImage, setHasImage] = useState('');
 
@@ -69,6 +70,7 @@ function EventDetailedHeader({
           <>
             {isGoing ? (
               <Button
+                loading={loading}
                 onClick={() => cancelGoingToEvent(event)}
                 content="Cancel interest in collection"
                 labelPosition="left"
@@ -76,6 +78,7 @@ function EventDetailedHeader({
               />
             ) : (
               <Button
+                loading={loading}
                 onClick={() => goingToEvent(event)}
                 color="teal"
                 content="Show interest in collection"

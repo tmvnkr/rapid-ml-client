@@ -103,16 +103,16 @@ const GlobalStyle = createGlobalStyle`
   margin-left: 0.5em;
 }
 
+.ui.sticky {
+  z-index: 0 !important;
+}
+
 /*chat comments*/
 
 .ui.comments .comment .comments {
   padding-bottom: 0 !important;
   padding-left: 2em !important;
 }
-
-/* .ui.segment {
-  background-image: radial-gradient( farthest-corner at -6498px 33px, #f5f5f5 0%, #fff8ff 69%, #edddff 135% ) !important;
-} */
 
 body::-webkit-scrollbar {
   width: 0.7em;

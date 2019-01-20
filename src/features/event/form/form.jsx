@@ -31,6 +31,7 @@ const mapState = state => {
   }
 
   return {
+    loading: state.async.loading,
     initialValues: event,
     event
   };
@@ -127,7 +128,8 @@ function EventForm(props) {
     pristine,
     history,
     event,
-    cancelToggle
+    cancelToggle,
+    loading
   } = props;
 
   return (
@@ -208,6 +210,7 @@ function EventForm(props) {
               Cancel
             </Button>
             <Button
+              loading={loading}
               onClick={() => cancelToggle(!event.cancelled, event.id)}
               color={event.cancelled ? 'green' : 'red'}
               type="button"
