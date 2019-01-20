@@ -7,17 +7,6 @@ import { Link } from 'react-router-dom';
 function EventDetailedChat({ addEventComment, eventId, eventChat }) {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
-  const [commentCount, setCommentCount] = useState(0);
-
-  let childs = 0;
-
-  useEffect(
-    () => {
-      setCommentCount(childs + eventChat.length);
-      return commentCount;
-    },
-    [eventChat]
-  );
 
   const handleOpenReplyForm = id => () => {
     setShowReplyForm(true);
@@ -27,10 +16,6 @@ function EventDetailedChat({ addEventComment, eventId, eventChat }) {
   const handleCloseReplyForm = () => {
     setSelectedCommentId(null);
     setShowReplyForm(false);
-  };
-
-  const getChildsCount = count => {
-    childs = childs + count;
   };
 
   return (
@@ -71,7 +56,6 @@ function EventDetailedChat({ addEventComment, eventId, eventChat }) {
                         parentId={comment.id}
                       />
                     )}
-                    {getChildsCount(comment.childNodes.length)}
                   </Comment.Actions>
                 </Comment.Content>
 

@@ -5,13 +5,14 @@ admin.initializeApp(functions.config().firebase);
 const newActivity = (type, event, id) => {
   return {
     type: type,
-    eventDate: newEvent.date,
-    hostedBy: newEvent.hostedBy,
-    title: newEvent.title,
-    photoURL: newEvent.hostPhotoURL,
+    eventDate: event.date,
+    hostedBy: event.hostedBy,
+    title: event.title,
+    photoURL: event.hostPhotoURL,
     timestamp: admin.firestore.FieldValue.serverTimestamp(),
-    hostUid: newEvent.hostUid,
-    eventId: event.id
+    hostUid: event.hostUid,
+    eventId: id,
+    imageURL: event.imageURL
   };
 };
 
@@ -43,33 +44,70 @@ exports.cancelActivity = functions.firestore
   .onUpdate((event, context) => {
     let updatedEvent = event.after.data();
     let previousEventData = event.before.data();
-    console.log({ event });
-    console.log({ context });
-    console.log({ updatedEvent });
-    console.log({ previousEventData });
 
     if (
-      !updatedEvent.cancelled ||
-      updatedEvent.cancelled === previousEventData.cancelled
-    )
+      updatedEvent.cancelled ||
+      updatedEvent.cancelled !== previousEventData.cancelled
+    ) {
+      console.log({ event });
+      console.log({ context });
+      console.log({ updatedEvent });
+      console.log({ previousEventData });
+
+      const activity = newActivity(
+        'cancelledEvent',
+        updatedEvent,
+        context.params.eventId
+      );
+
+      console.log({ activity });
+
+      return admin
+        .firestore()
+        .collection('activity')
+        .add(activity)
+        .then(docRef => {
+          return console.log('Activity created with ID: ', docRef.id);
+        })
+        .catch(err => {
+          return console.log('Error adding activity', err);
+        });
+    } else {
       return false;
+    }
+  });
 
-    const activity = newActivity(
-      'cancelledEvent',
-      updatedEvent,
-      context.params.eventId
-    );
+exports.imageUploadActivity = functions.firestore
+  .document('collections/{eventId}')
+  .onUpdate((event, context) => {
+    let updatedEvent = event.after.data();
+    let previousEventData = event.before.data();
 
-    console.log({ activity });
+    if (updatedEvent.imageURL !== previousEventData.imageURL) {
+      console.log({ event });
+      console.log({ context });
+      console.log({ updatedEvent });
+      console.log({ previousEventData });
 
-    return admin
-      .firestore()
-      .collection('activity')
-      .add(activity)
-      .then(docRef => {
-        return console.log('Activity created with ID: ', docRef.id);
-      })
-      .catch(err => {
-        return console.log('Error adding activity', err);
-      });
+      const activity = newActivity(
+        'imageUpload',
+        updatedEvent,
+        context.params.eventId
+      );
+
+      console.log({ activity });
+
+      return admin
+        .firestore()
+        .collection('activity')
+        .add(activity)
+        .then(docRef => {
+          return console.log('Activity created with ID: ', docRef.id);
+        })
+        .catch(err => {
+          return console.log('Error adding activity', err);
+        });
+    } else {
+      return false;
+    }
   });

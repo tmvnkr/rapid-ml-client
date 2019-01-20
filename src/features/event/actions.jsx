@@ -25,7 +25,7 @@ export const createEvent = event => {
           userUid: user.uid,
           eventDate: event.date,
           host: true,
-          eventCreated: event.created,
+          eventCreated: Date.now(),
           interestDate: Date.now()
         }
       );
