@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Segment, Header, Comment } from 'semantic-ui-react';
 import EventDetailedChatForm from './chat-form';
 import distanceInWords from 'date-fns/distance_in_words';
@@ -7,6 +7,17 @@ import { Link } from 'react-router-dom';
 function EventDetailedChat({ addEventComment, eventId, eventChat }) {
   const [showReplyForm, setShowReplyForm] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [commentCount, setCommentCount] = useState(0);
+
+  let childs = 0;
+
+  useEffect(
+    () => {
+      setCommentCount(childs + eventChat.length);
+      return commentCount;
+    },
+    [eventChat]
+  );
 
   const handleOpenReplyForm = id => () => {
     setShowReplyForm(true);
@@ -16,6 +27,10 @@ function EventDetailedChat({ addEventComment, eventId, eventChat }) {
   const handleCloseReplyForm = () => {
     setSelectedCommentId(null);
     setShowReplyForm(false);
+  };
+
+  const getChildsCount = count => {
+    childs = childs + count;
   };
 
   return (
@@ -56,13 +71,14 @@ function EventDetailedChat({ addEventComment, eventId, eventChat }) {
                         parentId={comment.id}
                       />
                     )}
+                    {getChildsCount(comment.childNodes.length)}
                   </Comment.Actions>
                 </Comment.Content>
 
                 {comment.childNodes &&
                   comment.childNodes.map(child => (
-                    <Comment.Group>
-                      <Comment key={child.id}>
+                    <Comment.Group key={child.id}>
+                      <Comment>
                         <Comment.Avatar
                           src={child.photoURL || '/assets/user.png'}
                         />
