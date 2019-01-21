@@ -41,7 +41,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "analyze": "source-map-explorer build/static/js/1.8ea7f319.chunk.jsnp"
+    "analyze": "source-map-explorer build/static/js/1.8ea7f319.chunk.jsnp",
+    "deploy": "npm run build && firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
