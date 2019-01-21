@@ -68,13 +68,16 @@ function EventDetailedTaggedImage({ event }) {
                   <Table.HeaderCell
                     style={{
                       backgroundColor: 'white',
-                      border: '1px solid rgba(34,36,38,.1)'
+                      paddingLeft: '0px',
+                      paddingRight: '0px',
+                      paddingTop: '0px',
+                      paddingBottom: '10px'
                     }}
                     colSpan="3">
                     <Image fluid src={event.imageURL} />
                     <br />
                     <Button
-                      color="teal"
+                      color="orange"
                       content={hidden ? 'Show Tags' : 'Hide Tags'}
                       onClick={setTagMenuState}
                     />

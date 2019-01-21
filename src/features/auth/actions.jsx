@@ -10,7 +10,10 @@ export const login = creds => {
         .auth()
         .signInWithEmailAndPassword(creds.email, creds.password);
       dispatch(closeModal());
-      toastr.success('Login Success!');
+      toastr.success(
+        'Login Success, we hope you like our app! 🚀!',
+        'Have Fun! Sincerely, Codrut Marin & Tim Vaneker 👍🏻'
+      );
     } catch (error) {
       throw new SubmissionError({
         _error: 'Login failed: incorrect username or password'
@@ -68,7 +71,10 @@ export const socialLogin = selectedProvider => {
           createdAt: firestore.FieldValue.serverTimestamp()
         });
       }
-      toastr.success('Login Success!');
+      toastr.success(
+        'Login Success, we hope you like our app! 🚀!',
+        'Have Fun! Sincerely, Codrut Marin & Tim Vaneker 👍🏻'
+      );
     } catch (error) {
       toastr.error('Login Success!', error);
     }
@@ -82,7 +88,10 @@ export const updatePassword = creds => {
     try {
       await user.updatePassword(creds.newPassword1);
       await dispatch(reset('account'));
-      toastr.success('Success', 'Your password has been updated');
+      toastr.success(
+        'Login Success, we hope you like our app! 🚀!',
+        'Have Fun! Sincerely, Codrut Marin & Tim Vaneker 👍🏻'
+      );
     } catch (error) {
       throw new SubmissionError({
         _error: error.message

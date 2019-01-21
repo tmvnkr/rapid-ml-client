@@ -58,7 +58,6 @@ class EventActivityItem extends Component {
 
   render() {
     const { activity } = this.props;
-
     return (
       <Feed.Event>
         <Feed.Label>

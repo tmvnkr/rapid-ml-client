@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Segment, Image, Item, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import format from 'date-fns/format';
+
 const eventImageStyle = {
   filter: 'brightness(30%)'
 };
@@ -59,6 +61,14 @@ function EventDetailedHeader({
                 <p>
                   Created by <strong>{event.hostedBy}</strong>
                 </p>
+                <p>
+                  on{' '}
+                  <strong>
+                    {format(event.created, 'dddd DD MMMM YYYY') +
+                      ' at ' +
+                      format(event.created, 'HH:mm')}
+                  </strong>
+                </p>
               </Item.Content>
             </Item>
           </Item.Group>
@@ -80,7 +90,7 @@ function EventDetailedHeader({
               <Button
                 loading={loading}
                 onClick={() => goingToEvent(event)}
-                color="teal"
+                color="orange"
                 content="Show interest in collection"
                 labelPosition="left"
                 icon="thumbs up outline"
@@ -91,7 +101,7 @@ function EventDetailedHeader({
         {isHost && (
           <>
             <Button as={Link} to={`/manage/${event.id}`} color="orange">
-              Manage Event
+              Manage Collection
             </Button>
 
             <Button

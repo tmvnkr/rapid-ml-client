@@ -23,11 +23,14 @@ export default function ListItem(props) {
             <Item.Group>
               <Item>
                 <Item.Image
+                  as={Link}
+                  to={`/profile/${event.hostUid}`}
                   size="tiny"
                   rounded
                   src={event.hostPhotoURL}
                   inline
                 />
+
                 <Item.Content>
                   <Item.Header as={Link} to={`/collection/${event.id}`}>
                     {event.title}
@@ -46,6 +49,14 @@ export default function ListItem(props) {
                         format(event.created, 'HH:mm')}
                     </b>
                   </Item.Description>
+                  <Label
+                    style={{ bottom: '70px' }}
+                    as={Link}
+                    to={`/collection/${event.id}`}
+                    color="teal"
+                    ribbon="right">
+                    {event.category}
+                  </Label>
                   {event.cancelled && (
                     <Label
                       ribbon="right"
@@ -58,8 +69,19 @@ export default function ListItem(props) {
             </Item.Group>
           </Segment>
           {event.imageURL && (
-            <Segment>
-              <Image src={event.imageURL} fluid />
+            <Segment
+              style={{
+                paddingBottom: '1px',
+                paddingRight: '1px',
+                paddingTop: '1px',
+                paddingLeft: '1px'
+              }}>
+              <Image
+                as={Link}
+                to={`/collection/${event.id}`}
+                src={event.imageURL}
+                fluid
+              />
             </Segment>
           )}
           <Segment>
@@ -82,7 +104,7 @@ export default function ListItem(props) {
             <Button
               as={Link}
               to={`/collection/${event.id}`}
-              color="teal"
+              color="orange"
               floated="right"
               content="View"
             />

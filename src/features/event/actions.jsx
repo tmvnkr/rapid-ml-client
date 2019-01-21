@@ -69,7 +69,7 @@ export const uploadImage = (file, fileName, event) => async (
     // get url of image
     let downloadURL = await uploadedFile.uploadTaskSnapshot.downloadURL;
     const apiKey = 'acc_3c47f36a59b801b';
-    const apiSecret = '8d6dbf63b22129bbbcea0aa0dd861b54';
+    const apiSecret = process.env.REACT_APP_TAGGING_API_KEY;
     const imageUrl = downloadURL;
     await request
       .get(
@@ -128,7 +128,7 @@ export const cancelToggle = (cancelled, eventId) => {
       setTimeout(function() {
         dispatch(asyncActionFinish());
         toastr.success('Success!', 'Collection visibility has been changed!');
-      }, 3000);
+      }, 1500);
     } catch (error) {
       dispatch(asyncActionError());
     }

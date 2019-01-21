@@ -44,10 +44,34 @@ const actions = {
 };
 
 const category = [
-  { key: 'phone', text: 'Smartphone', value: 'phone' },
-  { key: 'horse', text: 'Horse', value: 'horse' },
-  { key: 'banana', text: 'Banana', value: 'banana' },
-  { key: 'santa', text: 'Santa Claus', value: 'santa' }
+  { key: 'academic', text: 'Academic Disciplines', value: 'academic' },
+  { key: 'arts', text: 'Arts', value: 'arts' },
+  { key: 'business', text: 'Business', value: 'business' },
+  { key: 'concepts', text: 'Concepts', value: 'concepts' },
+  { key: 'culture', text: 'Culture', value: 'culture' },
+  { key: 'education', text: 'Education', value: 'education' },
+  { key: 'entertainment', text: 'Entertainment', value: 'entertainment' },
+  { key: 'events', text: 'Events', value: 'events' },
+  { key: 'geography', text: 'Geography', value: 'geography' },
+  { key: 'health', text: 'Health', value: 'health' },
+  { key: 'history', text: 'History', value: 'history' },
+  { key: 'humanities', text: 'Humanities', value: 'humanities' },
+  { key: 'language', text: 'Language', value: 'language' },
+  { key: 'law', text: 'Law', value: 'law' },
+  { key: 'life', text: 'Life', value: 'life' },
+  { key: 'mathematics', text: 'Mathematics', value: 'mathematics' },
+  { key: 'nature', text: 'Nature', value: 'nature' },
+  { key: 'people', text: 'People', value: 'people' },
+  { key: 'philosophy', text: 'Philosophy', value: 'philosophy' },
+  { key: 'politics', text: 'Politics', value: 'politics' },
+  { key: 'reference', text: 'Reference', value: 'reference' },
+  { key: 'religion', text: 'Religion', value: 'religion' },
+  { key: 'science', text: 'Science', value: 'science' },
+  { key: 'society', text: 'Society', value: 'society' },
+  { key: 'sports', text: 'Sports', value: 'sports' },
+  { key: 'technology', text: 'Technology', value: 'technology' },
+  { key: 'universe', text: 'Universe', value: 'universe' },
+  { key: 'world', text: 'World', value: 'world' }
 ];
 
 const validate = combineValidators({
@@ -158,22 +182,21 @@ function EventForm(props) {
               name="title"
               type="text"
               component={TextInput}
-              placeholder="Give this collection a name"
+              placeholder="Give this image a name"
             />
             <Field
               name="category"
               type="text"
               component={SelectInput}
               options={category}
-              // multiple={true}
-              placeholder="What is this collection about"
+              placeholder="How would you categorize this image?"
             />
             <Field
               name="description"
               type="text"
               rows={3}
               component={TextArea}
-              placeholder="Tell use about this collection"
+              placeholder="What is this collection about?"
             />
             <Header sub color="teal" content="Collection Location Details" />
             <Field
@@ -181,7 +204,7 @@ function EventForm(props) {
               type="text"
               component={PlaceInput}
               options={{ types: ['(cities)'] }}
-              placeholder="Collection city"
+              placeholder="In which city did you take the image?"
               onSelect={handleCitySelect}
             />
             {scriptLoaded && (
@@ -194,7 +217,7 @@ function EventForm(props) {
                   radius: 1000,
                   types: ['establishment']
                 }}
-                placeholder="Collection venue"
+                placeholder="What was the exact location of the image?"
                 onSelect={handleVenueSelect}
               />
             )}
@@ -203,7 +226,7 @@ function EventForm(props) {
               type="text"
               component={DateInput}
               dateFormat="YYYY-MM-DD"
-              placeholder="Collection date"
+              placeholder="When has the image been taken?"
               showYearDropdown={true}
               showMonthDropdown={true}
               dropdownMode="select"
@@ -226,7 +249,7 @@ function EventForm(props) {
                 type="button"
                 floated="right"
                 content={
-                  event.cancelled ? 'Show collection publicly' : 'Hide event'
+                  event.cancelled ? 'Show on frontpage' : 'Hide from frontpage'
                 }
               />
             )}

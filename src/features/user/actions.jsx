@@ -88,15 +88,20 @@ export const deletePhoto = photo => async (
   const firestore = getFirestore();
   const user = firebase.auth().currentUser;
   try {
+    dispatch(asyncActionStart());
     await firebase.deleteFile(`${user.uid}/user_images/${photo.name}`);
     await firestore.delete({
       collection: 'users',
       doc: user.uid,
       subcollections: [{ collection: 'photos', doc: photo.id }]
     });
-    toastr.success('Success', 'Profile photo deleted');
+    setTimeout(function() {
+      dispatch(asyncActionFinish());
+      toastr.success('Success', 'Profile photo deleted');
+    }, 2000);
   } catch (error) {
     toastr.error('Error', error);
+    dispatch(asyncActionError());
     throw new Error('Problem deleting the photo');
   }
 };
@@ -106,6 +111,7 @@ export const deleteTaggedPhoto = photo => async (
   getState,
   { getFirebase, getFirestore }
 ) => {
+  dispatch(asyncActionStart());
   const firebase = getFirebase();
   const firestore = getFirestore();
   const user = firebase.auth().currentUser;
@@ -127,11 +133,12 @@ export const deleteTaggedPhoto = photo => async (
       doc: user.uid,
       subcollections: [{ collection: 'photos', doc: photo.id }]
     });
-    toastr.success(
-      'Success',
-      'Image deleted, this also deleted the photo and its tags in the collection it was posted'
-    );
+    setTimeout(function() {
+      dispatch(asyncActionFinish());
+      toastr.success('Success', 'Image deleted');
+    }, 2000);
   } catch (error) {
+    dispatch(asyncActionError());
     toastr.error('Error', error);
     throw new Error('Problem deleting the photo');
   }

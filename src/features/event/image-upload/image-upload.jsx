@@ -72,10 +72,7 @@ class EventDetailedTaggedImage extends Component {
         this.props.event.id
       );
       this.cancelCrop();
-      toastr.success(
-        'Success!',
-        'Image has been uploaded, please allow some time for it to be tagged'
-      );
+      toastr.success('Success!', 'Image has been uploaded and tagged!');
     } catch (error) {
       toastr.error('Oops', error.message);
     }
@@ -219,9 +216,3 @@ export default withFirestore(
     actions
   )(EventDetailedTaggedImage)
 );
-
-// else if (
-//   this.props.location.pathName === `/collection/${this.props.id}`
-// ) {
-//   return <Redirect to={`/imageUpload/${this.props.id}`} />;
-// }

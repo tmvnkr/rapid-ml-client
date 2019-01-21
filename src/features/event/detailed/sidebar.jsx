@@ -11,11 +11,13 @@ function EventDetailedSidebar({ attendees }) {
         attached="top"
         secondary
         inverted
-        color="teal">
-        {attendees && attendees.length}{' '}
-        {attendees && attendees.length === 1
-          ? ' Person is interested'
-          : ' People are interested'}
+        color="orange">
+        <b>
+          {attendees && attendees.length}{' '}
+          {attendees && attendees.length === 1
+            ? ' Person is showing interest'
+            : ' People are showing interest'}
+        </b>
       </Segment>
       <Segment attached>
         <List relaxed divided>

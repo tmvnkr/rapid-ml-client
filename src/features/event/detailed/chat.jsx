@@ -24,9 +24,9 @@ function EventDetailedChat({ addEventComment, eventId, eventChat }) {
         textAlign="center"
         attached="top"
         inverted
-        color="teal"
+        color="orange"
         style={{ border: 'none' }}>
-        <Header>Chat about this image</Header>
+        <Header>Chat about this collection</Header>
       </Segment>
 
       <Segment attached>

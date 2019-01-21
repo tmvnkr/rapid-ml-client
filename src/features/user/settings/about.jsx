@@ -9,12 +9,34 @@ import DropdownInput from '../../../app/common/form/dropdown-input';
 import { countryOptions } from '../../../app/common/form/country-input';
 
 const interests = [
-  { key: 'drinks', text: 'Drinks', value: 'drinks' },
+  { key: 'academic', text: 'Academic Disciplines', value: 'academic' },
+  { key: 'arts', text: 'Arts', value: 'arts' },
+  { key: 'business', text: 'Business', value: 'business' },
+  { key: 'concepts', text: 'Concepts', value: 'concepts' },
   { key: 'culture', text: 'Culture', value: 'culture' },
-  { key: 'film', text: 'Film', value: 'film' },
-  { key: 'food', text: 'Food', value: 'food' },
-  { key: 'music', text: 'Music', value: 'music' },
-  { key: 'travel', text: 'Travel', value: 'travel' }
+  { key: 'education', text: 'Education', value: 'education' },
+  { key: 'entertainment', text: 'Entertainment', value: 'entertainment' },
+  { key: 'events', text: 'Events', value: 'events' },
+  { key: 'geography', text: 'Geography', value: 'geography' },
+  { key: 'health', text: 'Health', value: 'health' },
+  { key: 'history', text: 'History', value: 'history' },
+  { key: 'humanities', text: 'Humanities', value: 'humanities' },
+  { key: 'language', text: 'Language', value: 'language' },
+  { key: 'law', text: 'Law', value: 'law' },
+  { key: 'life', text: 'Life', value: 'life' },
+  { key: 'mathematics', text: 'Mathematics', value: 'mathematics' },
+  { key: 'nature', text: 'Nature', value: 'nature' },
+  { key: 'people', text: 'People', value: 'people' },
+  { key: 'philosophy', text: 'Philosophy', value: 'philosophy' },
+  { key: 'politics', text: 'Politics', value: 'politics' },
+  { key: 'reference', text: 'Reference', value: 'reference' },
+  { key: 'religion', text: 'Religion', value: 'religion' },
+  { key: 'science', text: 'Science', value: 'science' },
+  { key: 'society', text: 'Society', value: 'society' },
+  { key: 'sports', text: 'Sports', value: 'sports' },
+  { key: 'technology', text: 'Technology', value: 'technology' },
+  { key: 'universe', text: 'Universe', value: 'universe' },
+  { key: 'world', text: 'World', value: 'world' }
 ];
 
 const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {

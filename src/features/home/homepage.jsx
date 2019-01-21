@@ -9,7 +9,7 @@ function HomePage({ history }) {
           <h1 className="ui inverted stackable header">
             <div className="content">
               <i>
-                <u>>R</u>APID<u>>M</u>L
+                <u>>R</u>APID<u>>M</u>L🚀
               </i>
             </div>
           </h1>

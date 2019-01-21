@@ -38,7 +38,7 @@ function Navbar(props) {
         <Menu.Item as={Link} to="/" header>
           <h1>
             <i>
-              <u>>R</u>APID<u>>M</u>L
+              <u>>R</u>APID<u>>M</u>L🚀
             </i>
           </h1>
         </Menu.Item>

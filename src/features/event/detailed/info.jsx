@@ -14,9 +14,10 @@ function EventDetailedInfo({ event }) {
       <Segment attached="top">
         <Grid>
           <Grid.Column width={1}>
-            <Icon size="large" color="teal" name="info" />
+            <Icon size="large" color="orange" name="info" />
           </Grid.Column>
           <Grid.Column width={15}>
+            <h4>Description</h4>
             <p>{event.description}</p>
           </Grid.Column>
         </Grid>
@@ -24,9 +25,10 @@ function EventDetailedInfo({ event }) {
       <Segment attached>
         <Grid verticalAlign="middle">
           <Grid.Column width={1}>
-            <Icon name="calendar" size="large" color="teal" />
+            <Icon name="calendar" size="large" color="orange" />
           </Grid.Column>
           <Grid.Column width={15}>
+            <h4>Collection taken date</h4>
             <span>{format(event.date, 'dddd Do MMMM')}</span>
           </Grid.Column>
         </Grid>
@@ -34,15 +36,16 @@ function EventDetailedInfo({ event }) {
       <Segment attached>
         <Grid verticalAlign="middle">
           <Grid.Column width={1}>
-            <Icon name="marker" size="large" color="teal" />
+            <Icon name="marker" size="large" color="orange" />
           </Grid.Column>
           <Grid.Column width={11}>
+            <h4>Collection location</h4>
             <span>{event.venue}</span>
           </Grid.Column>
           <Grid.Column width={4}>
             <Button
               onClick={showMapToggle}
-              color="teal"
+              color="orange"
               size="tiny"
               content={showMap ? 'Hide Map' : 'Show Map'}
             />

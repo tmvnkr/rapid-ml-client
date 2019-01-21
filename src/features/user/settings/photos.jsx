@@ -232,6 +232,7 @@ class PhotosPage extends Component {
                     Main
                   </Button>
                   <Button
+                    loading={loading}
                     onClick={this.handlePhotoDelete(photo)}
                     basic
                     icon="trash"
@@ -255,6 +256,7 @@ class PhotosPage extends Component {
                   }}
                 />
                 <Button
+                  loading={loading}
                   name="delete"
                   basic
                   color="red"
