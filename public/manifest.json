@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "RapidML",
+  "name": "University project where an image tagging platform was to be created",
   "icons": [
     {
       "src": "favicon.ico",

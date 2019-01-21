@@ -4,11 +4,7 @@ import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
 
 const panes = [
-  {
-    menuItem: 'All Collections',
-    text: 'Hello',
-    pane: { key: 'allCollections' }
-  },
+  { menuItem: 'All Collections', pane: { key: 'allCollections' } },
   { menuItem: 'Latest Interested', pane: { key: 'latestInterested' } },
   { menuItem: 'Oldest Collections', pane: { key: 'oldestCollections' } },
   { menuItem: 'Created Collections', pane: { key: 'createdCollections' } }
