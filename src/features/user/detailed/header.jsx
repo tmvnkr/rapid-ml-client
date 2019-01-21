@@ -9,7 +9,9 @@ const UserDetailedHeader = ({ profile, photos, following }) => {
     () => {
       if (photos) {
         let randomPhoto = photos[Math.floor(Math.random() * photos.length)];
-        setRandomImage(randomPhoto.url);
+        !randomPhoto
+          ? setRandomImage('/assets/categoryImages/universe.jpg')
+          : setRandomImage(randomPhoto.url);
       }
     },
     [photos]
@@ -47,7 +49,11 @@ const UserDetailedHeader = ({ profile, photos, following }) => {
   return (
     <Grid.Column width={12}>
       <Segment basic attached="top" style={{ padding: '0' }}>
-        <div style={{ overflow: 'hidden', height: '300px' }}>
+        <div
+          style={{
+            overflow: 'hidden',
+            height: '300px'
+          }}>
           <Image src={randomImage} style={eventImageStyle} />
         </div>
         <Segment basic style={eventImageTextStyle}>

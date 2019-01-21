@@ -218,7 +218,8 @@ export const goingToEvent = event => {
           eventId: event.id,
           userUid: user.uid,
           eventDate: event.date,
-          host: false
+          host: false,
+          interestDate: Date.now()
         });
       });
       dispatch(asyncActionFinish());
