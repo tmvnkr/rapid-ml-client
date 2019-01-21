@@ -24,3 +24,10 @@ yarn-debug.log*
 yarn-error.log*
 
 functions/node_modules/**
+.firebase/hosting.YnVpbGQ.cache
+.firebase
+/.firebase
+.firebase/**
+/.firebse/**
+/hosting.YnVpbGQ.cache
+hosting.**

@@ -20,7 +20,7 @@ function HomePage({ history }) {
             Get Started
             <i className="right arrow icon" />
           </div>
-          <Image style={{ paddingTop: '10vh' }} fluid src="/assets/nhls.png" />
+          <Image style={{ paddingTop: '10vh' }} fluid src="/assets/nhls.png" alt="NHL Stenden made by students logo" />
         </div>
       </div>
       <div style={{ textAlign: 'center' }}>

@@ -102,7 +102,10 @@ class EventDetailedTaggedImage extends Component {
           {this.state.fileName === '' && (
             <Grid.Column width={16}>
               <Header color="teal" sub content="Step 1 - Add Photo" />
-              <Dropzone onDrop={this.onDrop} multiple={false}>
+              <Dropzone
+                onDrop={this.onDrop}
+                multiple={false}
+                style={{ padding: '200px', borderStyle: 'dashed' }}>
                 <div
                   style={{
                     paddingTop: '30px',
@@ -120,7 +123,7 @@ class EventDetailedTaggedImage extends Component {
                 <Header sub color="teal" content="Step 2 - Resize image" />
                 {this.state.files[0] && (
                   <Cropper
-                    style={{ height: '600px', minHeight: '600px' }}
+                    style={{ height: '500px', minHeight: '500px' }}
                     ref="cropper"
                     src={this.state.files[0].preview}
                     viewMode={1}
@@ -159,9 +162,9 @@ class EventDetailedTaggedImage extends Component {
                 {this.state.files[0] && (
                   <>
                     <div
-                      style={{ height: '600px', backgroundColor: '#f2f2f2' }}>
+                      style={{ height: '500px', backgroundColor: '#f2f2f2' }}>
                       <Image
-                        style={{ maxHeight: '600px' }}
+                        style={{ maxHeight: '500px' }}
                         src={this.state.cropResult}
                       />
                     </div>
