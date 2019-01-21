@@ -43,13 +43,12 @@ function Navbar(props) {
           </h1>
         </Menu.Item>
         <Menu.Item as={NavLink} to="/collections" name="Collections" />
-        <Menu.Item as={NavLink} to="/test" name="Test" />
         {authenticated && <Menu.Item as={NavLink} to="/people" name="People" />}
         {authenticated && (
           <Menu.Item>
             <Button
               as={Link}
-              to="/createEvent"
+              to="/createCollection"
               floated="right"
               color="orange"
               content="Create Collection"

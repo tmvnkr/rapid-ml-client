@@ -44,7 +44,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "analyze": "source-map-explorer build/static/js/1.8ea7f319.chunk.jsnp"
   },
   "eslintConfig": {
     "extends": "react-app"

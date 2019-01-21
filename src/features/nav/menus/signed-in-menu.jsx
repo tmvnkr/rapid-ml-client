@@ -18,9 +18,24 @@ function SignedInMenu({ signOut, profile, auth }) {
         style={{ zIndex: '900' }}>
         <Dropdown.Menu style={{ left: '-40px', zIndex: '900' }}>
           >
-          <Dropdown.Item text="Create Collection" icon="plus" />
-          <Dropdown.Item text="My Collections" icon="calendar" />
-          <Dropdown.Item text="My Network" icon="users" />
+          <Dropdown.Item
+            as={Link}
+            to={`/createCollection`}
+            text="Create Collection"
+            icon="plus"
+          />
+          <Dropdown.Item
+            as={Link}
+            to={`/settings/photos`}
+            text="My Images"
+            icon="image"
+          />
+          <Dropdown.Item
+            as={Link}
+            to={`/people`}
+            text="My Network"
+            icon="users"
+          />
           <Dropdown.Item
             as={Link}
             to={`/profile/${auth.uid}`}

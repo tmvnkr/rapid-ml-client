@@ -4,7 +4,6 @@ import differenceInYears from 'date-fns/difference_in_years';
 
 const UserDetailedHeader = ({ profile, photos, following }) => {
   const [randomImage, setRandomImage] = useState(profile.photoURL);
-  const [nrFollowing, setNrFollowing] = useState(0);
 
   useEffect(
     () => {
@@ -16,14 +15,6 @@ const UserDetailedHeader = ({ profile, photos, following }) => {
     [photos]
   );
 
-  useEffect(
-    () => {
-      if (following) {
-        setNrFollowing(following.length);
-      }
-    },
-    [following]
-  );
   let age = 'unknown age';
   if (profile.dateOfBirth) {
     age = differenceInYears(Date.now(), profile.dateOfBirth);
@@ -67,7 +58,7 @@ const UserDetailedHeader = ({ profile, photos, following }) => {
                   rounded
                   style={{
                     float: 'left',
-                    paddingTop: '150px'
+                    paddingTop: '200px'
                   }}
                   size="small"
                   src={profile.photoURL || '/assets/user.png'}
@@ -77,7 +68,7 @@ const UserDetailedHeader = ({ profile, photos, following }) => {
                   style={{
                     color: 'white',
                     paddingLeft: '30px',
-                    paddingTop: '180px',
+                    paddingTop: '260px',
                     textShadow: '2px 2px #000'
                   }}>
                   {profile.displayName}
@@ -119,14 +110,8 @@ const UserDetailedHeader = ({ profile, photos, following }) => {
                     color: 'white',
                     paddingLeft: '30px',
                     textShadow: '2px 2px #000'
-                  }}>
-                  <Icon
-                    name="users"
-                    size="big"
-                    style={{ color: 'white', textShadow: '2px 2px #000' }}
-                  />
-                  followers {` ${nrFollowing}`}
-                </Header>
+                  }}
+                />
               </Item.Content>
             </Item>
           </Item.Group>

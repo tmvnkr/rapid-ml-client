@@ -7,7 +7,6 @@ import SettingsNav from './nav';
 import AboutPage from './about';
 import PhotosPage from './photos';
 import AccountPage from './account';
-import ThemesPage from './themes';
 import { updatePassword } from '../../auth/actions';
 import { updateProfile } from '../actions';
 
@@ -45,12 +44,6 @@ function SettingsDashboard({
             )}
           />
           <Route path="/settings/photos" component={PhotosPage} />
-          <Route
-            path="/settings/themes"
-            render={() => (
-              <ThemesPage updateProfile={updateProfile} initialValues={user} />
-            )}
-          />
           <Route
             path="/settings/account"
             render={() => (

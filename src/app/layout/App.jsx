@@ -10,7 +10,6 @@ import SettingsDashboard from '../../features/user/settings/dashboard';
 import EventForm from '../../features/event/form/form';
 import ImageUpload from '../../features/event/image-upload/image-upload';
 import HomePage from '../../features/home/homepage';
-import TestComponent from '../../features/testarea/TestComponent';
 import ModalManager from '../../features/modals/manager';
 import NotFound from '../../app/layout/not-found';
 import { UserIsAuthenticated } from '../../features/auth/auth-wrapper';
@@ -32,7 +31,6 @@ export default function App() {
             <Container className="main">
               <Switch>
                 <Route path="/collections" component={EventDashboard} />
-                <Route path="/test" component={TestComponent} />
                 <Route
                   path="/collection/:id"
                   component={UserIsAuthenticated(EventDetailedPage)}
@@ -58,7 +56,7 @@ export default function App() {
                   component={UserIsAuthenticated(SettingsDashboard)}
                 />
                 <Route
-                  path="/createEvent"
+                  path="/createCollection"
                   component={UserIsAuthenticated(EventForm)}
                 />
                 <Route path="/error" component={NotFound} />
