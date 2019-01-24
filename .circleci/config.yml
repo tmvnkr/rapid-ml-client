@@ -23,4 +23,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm test
       - codecov/upload:
-          file: ../coverage
+          file: { { ../coverage } }
