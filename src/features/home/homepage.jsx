@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image } from 'semantic-ui-react';
+import React from 'react'
+import { Image } from 'semantic-ui-react'
 
 function HomePage({ history }) {
   return (
@@ -20,14 +20,19 @@ function HomePage({ history }) {
             Get Started
             <i className="right arrow icon" />
           </div>
-          <Image style={{ paddingTop: '10vh' }} fluid src="/assets/nhls.png" alt="NHL Stenden made by students logo" />
+          <Image
+            style={{ paddingTop: '10vh' }}
+            fluid
+            src="/assets/nhls.png"
+            alt="NHL Stenden made by students logo"
+          />
         </div>
       </div>
       <div style={{ textAlign: 'center' }}>
         Web application made by Marin Codrut and Tim Vaneker
       </div>
     </div>
-  );
+  )
 }
 
-export default HomePage;
+export default HomePage

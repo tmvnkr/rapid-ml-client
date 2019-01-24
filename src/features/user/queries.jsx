@@ -18,7 +18,7 @@ export const userDetailedQuery = ({ auth, userUid, match }) => {
         subcollections: [{ collection: 'following', doc: match.params.id }],
         storeAs: 'following'
       }
-    ];
+    ]
   } else {
     return [
       {
@@ -27,6 +27,6 @@ export const userDetailedQuery = ({ auth, userUid, match }) => {
         subcollections: [{ collection: 'photos' }],
         storeAs: 'photos'
       }
-    ];
+    ]
   }
-};
+}

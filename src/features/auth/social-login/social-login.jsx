@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Icon } from 'semantic-ui-react';
+import React from 'react'
+import { Button, Icon } from 'semantic-ui-react'
 
 function SocialLogin({ socialLogin }) {
   return (
@@ -13,16 +13,12 @@ function SocialLogin({ socialLogin }) {
         <Icon name="facebook" /> Login with Facebook
       </Button>
 
-      <Button
-        onClick={() => socialLogin('google')}
-        type="button"
-        fluid
-        color="google plus">
+      <Button onClick={() => socialLogin('google')} type="button" fluid color="google plus">
         <Icon name="google" />
         Login with Google
       </Button>
     </div>
-  );
+  )
 }
 
-export default SocialLogin;
+export default SocialLogin

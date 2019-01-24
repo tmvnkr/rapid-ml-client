@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { Modal, Button, Divider } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Modal, Button, Divider } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-import { closeModal, openModal } from './actions';
+import { closeModal, openModal } from './actions'
 
-const actions = { closeModal, openModal };
+const actions = { closeModal, openModal }
 
 class UnauthModal extends Component {
   handleCloseModal = () => {
-    this.props.history.goBack();
-    this.props.closeModal();
-  };
+    this.props.history.goBack()
+    this.props.closeModal()
+  }
 
   render() {
-    const { openModal } = this.props;
+    const { openModal } = this.props
     return (
       <Modal size="mini" open={true} onClose={this.handleCloseModal}>
         <Modal.Header>You need to be signed in to do that!</Modal.Header>
@@ -22,10 +22,7 @@ class UnauthModal extends Component {
           <Modal.Description>
             <p>Please either login or register to see this page</p>
             <Button.Group widths={4}>
-              <Button
-                fluid
-                color="teal"
-                onClick={() => openModal('LoginModal')}>
+              <Button fluid color="teal" onClick={() => openModal('LoginModal')}>
                 Login
               </Button>
               <Button.Or />
@@ -41,7 +38,7 @@ class UnauthModal extends Component {
           </Modal.Description>
         </Modal.Content>
       </Modal>
-    );
+    )
   }
 }
 
@@ -50,4 +47,4 @@ export default withRouter(
     null,
     actions
   )(UnauthModal)
-);
+)

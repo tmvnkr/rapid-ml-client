@@ -1,8 +1,8 @@
-import React from 'react';
-import { Form, Label } from 'semantic-ui-react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import moment from 'moment';
+import React from 'react'
+import { Form, Label } from 'semantic-ui-react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import moment from 'moment'
 
 function DateInput({
   input: { value, onChange, ...restInput },
@@ -26,7 +26,7 @@ function DateInput({
         </Label>
       )}
     </Form.Field>
-  );
+  )
 }
 
-export default DateInput;
+export default DateInput

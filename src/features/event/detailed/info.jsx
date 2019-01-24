@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Segment, Grid, Icon, Button } from 'semantic-ui-react';
-import EventDetailedMap from './map';
-import format from 'date-fns/format';
+import React, { useState } from 'react'
+import { Segment, Grid, Icon, Button } from 'semantic-ui-react'
+import EventDetailedMap from './map'
+import format from 'date-fns/format'
 
 function EventDetailedInfo({ event }) {
-  const [showMap, setShowMap] = useState(false);
+  const [showMap, setShowMap] = useState(false)
 
   const showMapToggle = () => {
-    setShowMap(!showMap);
-  };
+    setShowMap(!showMap)
+  }
   return (
     <Segment.Group>
       <Segment attached="top">
@@ -52,14 +52,9 @@ function EventDetailedInfo({ event }) {
           </Grid.Column>
         </Grid>
       </Segment>
-      {showMap && (
-        <EventDetailedMap
-          lat={event.venueLatLng.lat}
-          lng={event.venueLatLng.lng}
-        />
-      )}
+      {showMap && <EventDetailedMap lat={event.venueLatLng.lat} lng={event.venueLatLng.lng} />}
     </Segment.Group>
-  );
+  )
 }
 
-export default EventDetailedInfo;
+export default EventDetailedInfo

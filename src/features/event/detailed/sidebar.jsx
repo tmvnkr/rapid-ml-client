@@ -1,6 +1,6 @@
-import React from 'react';
-import { Segment, List, Item, Label } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Segment, List, Item, Label } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 function EventDetailedSidebar({ attendees }) {
   return (
@@ -25,10 +25,7 @@ function EventDetailedSidebar({ attendees }) {
             attendees.map(attendee => (
               <Item key={attendee.id} style={{ position: 'relative' }}>
                 {attendee.host && (
-                  <Label
-                    style={{ position: 'absolute' }}
-                    color="orange"
-                    ribbon="right">
+                  <Label style={{ position: 'absolute' }} color="orange" ribbon="right">
                     Creator
                   </Label>
                 )}
@@ -45,10 +42,7 @@ function EventDetailedSidebar({ attendees }) {
                 <Item.Content>
                   <Item.Header as="h3">
                     <span style={{ lineHeight: '2em' }}>
-                      <Link to={`/profile/${attendee.id}`}>
-                        {' '}
-                        {attendee.displayName}{' '}
-                      </Link>
+                      <Link to={`/profile/${attendee.id}`}> {attendee.displayName} </Link>
                     </span>
                   </Item.Header>
                 </Item.Content>
@@ -57,7 +51,7 @@ function EventDetailedSidebar({ attendees }) {
         </List>
       </Segment>
     </div>
-  );
+  )
 }
 
-export default EventDetailedSidebar;
+export default EventDetailedSidebar

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Grid, Menu, Header } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom';
+import React from 'react'
+import { Grid, Menu, Header } from 'semantic-ui-react'
+import { NavLink } from 'react-router-dom'
 
 function SettingsNav() {
   return (
@@ -19,19 +19,13 @@ function SettingsNav() {
       </Menu>
       <Grid.Row />
       <Menu vertical>
-        <Header
-          icon="settings"
-          attached
-          inverted
-          color="grey"
-          content="Account"
-        />
+        <Header icon="settings" attached inverted color="grey" content="Account" />
         <Menu.Item as={NavLink} to="/settings/account">
           My Account
         </Menu.Item>
       </Menu>
     </Grid.Column>
-  );
+  )
 }
 
-export default SettingsNav;
+export default SettingsNav

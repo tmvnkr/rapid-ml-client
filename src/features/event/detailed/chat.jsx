@@ -1,31 +1,26 @@
-import React, { useState } from 'react';
-import { Segment, Header, Comment } from 'semantic-ui-react';
-import EventDetailedChatForm from './chat-form';
-import distanceInWords from 'date-fns/distance_in_words';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Segment, Header, Comment } from 'semantic-ui-react'
+import EventDetailedChatForm from './chat-form'
+import distanceInWords from 'date-fns/distance_in_words'
+import { Link } from 'react-router-dom'
 
 function EventDetailedChat({ addEventComment, eventId, eventChat }) {
-  const [showReplyForm, setShowReplyForm] = useState(false);
-  const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [showReplyForm, setShowReplyForm] = useState(false)
+  const [selectedCommentId, setSelectedCommentId] = useState(null)
 
   const handleOpenReplyForm = id => () => {
-    setShowReplyForm(true);
-    setSelectedCommentId(id);
-  };
+    setShowReplyForm(true)
+    setSelectedCommentId(id)
+  }
 
   const handleCloseReplyForm = () => {
-    setSelectedCommentId(null);
-    setShowReplyForm(false);
-  };
+    setSelectedCommentId(null)
+    setShowReplyForm(false)
+  }
 
   return (
     <div>
-      <Segment
-        textAlign="center"
-        attached="top"
-        inverted
-        color="orange"
-        style={{ border: 'none' }}>
+      <Segment textAlign="center" attached="top" inverted color="orange" style={{ border: 'none' }}>
         <Header>Chat about this collection</Header>
       </Segment>
 
@@ -44,9 +39,7 @@ function EventDetailedChat({ addEventComment, eventId, eventChat }) {
                   </Comment.Metadata>
                   <Comment.Text>{comment.text}</Comment.Text>
                   <Comment.Actions>
-                    <Comment.Action onClick={handleOpenReplyForm(comment.id)}>
-                      Reply
-                    </Comment.Action>
+                    <Comment.Action onClick={handleOpenReplyForm(comment.id)}>Reply</Comment.Action>
                     {showReplyForm && selectedCommentId === comment.id && (
                       <EventDetailedChatForm
                         addEventComment={addEventComment}
@@ -63,36 +56,28 @@ function EventDetailedChat({ addEventComment, eventId, eventChat }) {
                   comment.childNodes.map(child => (
                     <Comment.Group key={child.id}>
                       <Comment>
-                        <Comment.Avatar
-                          src={child.photoURL || '/assets/user.png'}
-                        />
+                        <Comment.Avatar src={child.photoURL || '/assets/user.png'} />
                         <Comment.Content>
-                          <Comment.Author
-                            as={Link}
-                            to={`/profile/${child.uid}`}>
+                          <Comment.Author as={Link} to={`/profile/${child.uid}`}>
                             {child.displayName}
                           </Comment.Author>
                           <Comment.Metadata>
-                            <div>
-                              {distanceInWords(child.date, Date.now())} ago
-                            </div>
+                            <div>{distanceInWords(child.date, Date.now())} ago</div>
                           </Comment.Metadata>
                           <Comment.Text>{child.text}</Comment.Text>
                           <Comment.Actions>
-                            <Comment.Action
-                              onClick={handleOpenReplyForm(child.id)}>
+                            <Comment.Action onClick={handleOpenReplyForm(child.id)}>
                               Reply
                             </Comment.Action>
-                            {showReplyForm &&
-                              selectedCommentId === child.id && (
-                                <EventDetailedChatForm
-                                  addEventComment={addEventComment}
-                                  eventId={eventId}
-                                  form={`reply_${child.id}`}
-                                  closeForm={handleCloseReplyForm}
-                                  parentId={child.parentId}
-                                />
-                              )}
+                            {showReplyForm && selectedCommentId === child.id && (
+                              <EventDetailedChatForm
+                                addEventComment={addEventComment}
+                                eventId={eventId}
+                                form={`reply_${child.id}`}
+                                closeForm={handleCloseReplyForm}
+                                parentId={child.parentId}
+                              />
+                            )}
                           </Comment.Actions>
                         </Comment.Content>
                       </Comment>
@@ -109,7 +94,7 @@ function EventDetailedChat({ addEventComment, eventId, eventChat }) {
         />
       </Segment>
     </div>
-  );
+  )
 }
 
-export default EventDetailedChat;
+export default EventDetailedChat

@@ -1,61 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Button,
-  Image,
-  Table,
-  Icon,
-  Segment,
-  Progress,
-  Label,
-  Header
-} from 'semantic-ui-react';
+import React, { useState, useEffect } from 'react'
+import { Button, Image, Table, Icon, Segment, Progress, Label, Header } from 'semantic-ui-react'
 
 function EventDetailedTaggedImage({ event }) {
-  const [hidden, setHidden] = useState(true);
-  const [numberOfItems, setNumberOfItems] = useState(10);
-  const [data, setData] = useState({});
-  const [hasImage, setHasImage] = useState('');
+  const [hidden, setHidden] = useState(true)
+  const [numberOfItems, setNumberOfItems] = useState(10)
+  const [data, setData] = useState({})
+  const [hasImage, setHasImage] = useState('')
 
   useEffect(
     () => {
-      let rawData;
+      let rawData
       try {
         if (event.imageTags && JSON.parse(event.imageTags)) {
-          rawData = JSON.parse(event.imageTags);
-          setData(rawData.result.tags);
-          setHasImage(event.imageURL);
+          rawData = JSON.parse(event.imageTags)
+          setData(rawData.result.tags)
+          setHasImage(event.imageURL)
         }
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
     },
     [hidden]
-  );
+  )
 
   useEffect(
     () => {
       try {
         if (event.imageTags && JSON.parse(event.imageTags)) {
-          setHasImage(event.imageURL);
+          setHasImage(event.imageURL)
         }
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
     },
     [event.imageURL]
-  );
+  )
 
   const setTagMenuState = () => {
-    setHidden(!hidden);
-  };
+    setHidden(!hidden)
+  }
 
   const showMore = () => {
-    setNumberOfItems(numberOfItems + 10);
-  };
+    setNumberOfItems(numberOfItems + 10)
+  }
 
   const showLess = () => {
-    setNumberOfItems(numberOfItems - 10);
-  };
+    setNumberOfItems(numberOfItems - 10)
+  }
 
   return (
     <>
@@ -170,12 +161,7 @@ function EventDetailedTaggedImage({ event }) {
             </Table>
             {!hidden && (
               <>
-                <Button
-                  hidden
-                  content="Hide Tags"
-                  color="teal"
-                  onClick={setTagMenuState}
-                />
+                <Button hidden content="Hide Tags" color="teal" onClick={setTagMenuState} />
                 <Button.Group floated="right">
                   <Button
                     labelPosition="right"
@@ -200,7 +186,7 @@ function EventDetailedTaggedImage({ event }) {
         </>
       )}
     </>
-  );
+  )
 }
 
-export default EventDetailedTaggedImage;
+export default EventDetailedTaggedImage

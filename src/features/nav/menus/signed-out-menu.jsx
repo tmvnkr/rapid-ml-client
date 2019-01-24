@@ -1,5 +1,5 @@
-import React from 'react';
-import { Menu, Button } from 'semantic-ui-react';
+import React from 'react'
+import { Menu, Button } from 'semantic-ui-react'
 
 function SignedOutMenu({ signIn, register }) {
   return (
@@ -13,7 +13,7 @@ function SignedOutMenu({ signIn, register }) {
         style={{ marginLeft: '0.5em' }}
       />
     </Menu.Item>
-  );
+  )
 }
 
-export default SignedOutMenu;
+export default SignedOutMenu

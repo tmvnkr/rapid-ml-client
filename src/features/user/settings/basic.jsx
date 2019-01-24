@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Segment, Form, Header, Divider, Button } from 'semantic-ui-react';
-import { Field, reduxForm } from 'redux-form';
-import moment from 'moment';
-import DateInput from '../../../app/common/form/date-input';
-import PlaceInput from '../../../app/common/form/place-input';
-import TextInput from '../../../app/common/form/text-input';
-import RadioInput from '../../../app/common/form/radio-input';
+import React, { Component } from 'react'
+import { Segment, Form, Header, Divider, Button } from 'semantic-ui-react'
+import { Field, reduxForm } from 'redux-form'
+import moment from 'moment'
+import DateInput from '../../../app/common/form/date-input'
+import PlaceInput from '../../../app/common/form/place-input'
+import TextInput from '../../../app/common/form/text-input'
+import RadioInput from '../../../app/common/form/radio-input'
 
 class BasicPage extends Component {
   render() {
-    const { pristine, submitting, handleSubmit, updateProfile } = this.props;
+    const { pristine, submitting, handleSubmit, updateProfile } = this.props
     return (
       <Segment>
         <Header dividing size="large" content="Basics" />
@@ -23,13 +23,7 @@ class BasicPage extends Component {
           />
           <Form.Group inline>
             <label>Gender: </label>
-            <Field
-              name="gender"
-              type="radio"
-              value="male"
-              label="Male"
-              component={RadioInput}
-            />
+            <Field name="gender" type="radio" value="male" label="Male" component={RadioInput} />
             <Field
               name="gender"
               type="radio"
@@ -66,7 +60,7 @@ class BasicPage extends Component {
           />
         </Form>
       </Segment>
-    );
+    )
   }
 }
 
@@ -74,4 +68,4 @@ export default reduxForm({
   form: 'userProfile',
   enableReinitialize: true,
   destroyOnUnmount: false
-})(BasicPage);
+})(BasicPage)

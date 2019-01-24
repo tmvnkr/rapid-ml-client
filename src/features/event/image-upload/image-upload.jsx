@@ -1,31 +1,28 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { toastr } from 'react-redux-toastr';
-import { withFirestore } from 'react-redux-firebase';
-import { Image, Segment, Header, Grid, Icon, Button } from 'semantic-ui-react';
-import Dropzone from 'react-dropzone';
-import Cropper from 'react-cropper';
-import 'cropperjs/dist/cropper.css';
-import { uploadImage } from '../actions';
-import { Route, Redirect } from 'react-router';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { toastr } from 'react-redux-toastr'
+import { withFirestore } from 'react-redux-firebase'
+import { Image, Segment, Header, Grid, Icon, Button } from 'semantic-ui-react'
+import Dropzone from 'react-dropzone'
+import Cropper from 'react-cropper'
+import 'cropperjs/dist/cropper.css'
+import { uploadImage } from '../actions'
+import { Route, Redirect } from 'react-router'
 
 const mapState = state => {
-  let event = {};
-  if (
-    state.firestore.ordered.collections &&
-    state.firestore.ordered.collections[0]
-  ) {
-    event = state.firestore.ordered.collections[0];
+  let event = {}
+  if (state.firestore.ordered.collections && state.firestore.ordered.collections[0]) {
+    event = state.firestore.ordered.collections[0]
   }
   return {
     event,
     loading: state.async.loading
-  };
-};
+  }
+}
 
 const actions = {
   uploadImage
-};
+}
 
 class EventDetailedTaggedImage extends Component {
   state = {
@@ -34,64 +31,60 @@ class EventDetailedTaggedImage extends Component {
     cropResult: null,
     image: {},
     aspectRatio: 16 / 9
-  };
+  }
 
   async componentDidMount() {
-    const { firestore, match } = this.props;
-    await firestore.setListener(`collections/${match.params.id}`);
+    const { firestore, match } = this.props
+    await firestore.setListener(`collections/${match.params.id}`)
   }
 
   async componentWillUnmount() {
-    const { firestore, match } = this.props;
-    await firestore.unsetListener(`collections/${match.params.id}`);
+    const { firestore, match } = this.props
+    await firestore.unsetListener(`collections/${match.params.id}`)
   }
 
   cropImage = () => {
     if (typeof this.refs.cropper.getCroppedCanvas() === 'undefined') {
-      return;
+      return
     }
 
     this.refs.cropper.getCroppedCanvas().toBlob(blob => {
       try {
-        let imageUrl = URL.createObjectURL(blob);
+        let imageUrl = URL.createObjectURL(blob)
         this.setState({
           cropResult: imageUrl,
           image: blob
-        });
+        })
       } catch (error) {
-        return;
+        return
       }
-    }, 'image/jpeg');
-  };
+    }, 'image/jpeg')
+  }
 
   uploadImage = async () => {
     try {
-      await this.props.uploadImage(
-        this.state.image,
-        this.state.filename,
-        this.props.event.id
-      );
-      this.cancelCrop();
-      toastr.success('Success!', 'Image has been uploaded and tagged!');
+      await this.props.uploadImage(this.state.image, this.state.filename, this.props.event.id)
+      this.cancelCrop()
+      toastr.success('Success!', 'Image has been uploaded and tagged!')
     } catch (error) {
-      toastr.error('Oops', error.message);
+      toastr.error('Oops', error.message)
     }
-  };
+  }
 
   cancelCrop = () => {
     this.setState({
       files: [],
       image: {},
       fileName: ''
-    });
-  };
+    })
+  }
 
   onDrop = files => {
     this.setState({
       files,
       fileName: files[0].name
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -138,35 +131,18 @@ class EventDetailedTaggedImage extends Component {
                   />
                 )}
                 <Button.Group>
-                  <Button onClick={() => this.setState({ aspectRatio: 7 / 3 })}>
-                    7:3
-                  </Button>
-                  <Button
-                    onClick={() => this.setState({ aspectRatio: 16 / 9 })}>
-                    16:9
-                  </Button>
-                  <Button onClick={() => this.setState({ aspectRatio: 4 / 3 })}>
-                    4:3
-                  </Button>
-                  <Button onClick={() => this.setState({ aspectRatio: 1 / 1 })}>
-                    1:1
-                  </Button>
+                  <Button onClick={() => this.setState({ aspectRatio: 7 / 3 })}>7:3</Button>
+                  <Button onClick={() => this.setState({ aspectRatio: 16 / 9 })}>16:9</Button>
+                  <Button onClick={() => this.setState({ aspectRatio: 4 / 3 })}>4:3</Button>
+                  <Button onClick={() => this.setState({ aspectRatio: 1 / 1 })}>1:1</Button>
                 </Button.Group>
               </Grid.Column>
               <Grid.Column width={8}>
-                <Header
-                  sub
-                  color="teal"
-                  content="Step 3 - Preview and Upload"
-                />
+                <Header sub color="teal" content="Step 3 - Preview and Upload" />
                 {this.state.files[0] && (
                   <>
-                    <div
-                      style={{ height: '500px', backgroundColor: '#f2f2f2' }}>
-                      <Image
-                        style={{ maxHeight: '500px' }}
-                        src={this.state.cropResult}
-                      />
+                    <div style={{ height: '500px', backgroundColor: '#f2f2f2' }}>
+                      <Image style={{ maxHeight: '500px' }} src={this.state.cropResult} />
                     </div>
                     <Button.Group>
                       <Button
@@ -197,19 +173,19 @@ class EventDetailedTaggedImage extends Component {
               this.props.event.id === undefined &&
               this.props.event.imageURL !== undefined
             ) {
-              return <Redirect to={`/collections`} />;
+              return <Redirect to={`/collections`} />
             } else if (
               this.props.event.imageURL !== '' &&
               this.props.event.imageURL !== undefined
             ) {
-              return <Redirect to={`/collection/${this.props.event.id}`} />;
+              return <Redirect to={`/collection/${this.props.event.id}`} />
             } else {
-              return null;
+              return null
             }
           }}
         />
       </Segment>
-    );
+    )
   }
 }
 
@@ -218,4 +194,4 @@ export default withFirestore(
     mapState,
     actions
   )(EventDetailedTaggedImage)
-);
+)

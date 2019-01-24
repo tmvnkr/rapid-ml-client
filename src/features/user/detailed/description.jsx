@@ -1,19 +1,11 @@
-import React from 'react';
-import {
-  Grid,
-  Header,
-  Icon,
-  Item,
-  List,
-  Segment,
-  Flag
-} from 'semantic-ui-react';
-import format from 'date-fns/format';
+import React from 'react'
+import { Grid, Header, Icon, Item, List, Segment, Flag } from 'semantic-ui-react'
+import format from 'date-fns/format'
 
 const UserDetailedDescription = ({ profile }) => {
-  let createdAt = 'unknown';
+  let createdAt = 'unknown'
   if (profile.createdAt) {
-    createdAt = format(profile.createdAt, 'D MMMM YYYY');
+    createdAt = format(profile.createdAt, 'D MMMM YYYY')
   }
   return (
     <Grid.Column width={12}>
@@ -24,10 +16,7 @@ const UserDetailedDescription = ({ profile }) => {
             <p>
               I am a: <strong>{profile.occupation || 'tbn'}</strong>
             </p>
-            <p>
-              Originally from:{' '}
-              {(profile.origin && <Flag name={profile.origin} />) || 'tbn'}
-            </p>
+            <p>Originally from: {(profile.origin && <Flag name={profile.origin} />) || 'tbn'}</p>
             <p>
               Member Since: <strong>{createdAt}</strong>
             </p>
@@ -52,7 +41,7 @@ const UserDetailedDescription = ({ profile }) => {
         </Grid>
       </Segment>
     </Grid.Column>
-  );
-};
+  )
+}
 
-export default UserDetailedDescription;
+export default UserDetailedDescription

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Card, Grid, Header, Image, Segment, Tab } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import format from 'date-fns/format';
+import React from 'react'
+import { Card, Grid, Header, Image, Segment, Tab } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import format from 'date-fns/format'
 
 const panes = [
   { menuItem: 'All Collections', pane: { key: 'allCollections' } },
   { menuItem: 'Latest Interested', pane: { key: 'latestInterested' } },
   { menuItem: 'Oldest Collections', pane: { key: 'oldestCollections' } },
   { menuItem: 'Created Collections', pane: { key: 'createdCollections' } }
-];
+]
 
 const UserDeteiledEvents = ({ events, eventsLoading, changeTab }) => {
   return (
@@ -26,21 +26,11 @@ const UserDeteiledEvents = ({ events, eventsLoading, changeTab }) => {
           {events &&
             events.map(event => (
               <Card as={Link} to={`/collection/${event.id}`} key={event.id}>
-                <Image
-                  src={
-                    event.imageURL ||
-                    `/assets/categoryImages/${event.category}.jpg`
-                  }
-                />
+                <Image src={event.imageURL || `/assets/categoryImages/${event.category}.jpg`} />
                 <Card.Content>
                   <Card.Header textAlign="center">{event.title}</Card.Header>
                   <Card.Meta textAlign="center">
-                    <div>
-                      {format(
-                        event.created && event.created,
-                        'DD-MM-YYYY HH:mm'
-                      )}
-                    </div>
+                    <div>{format(event.created && event.created, 'DD-MM-YYYY HH:mm')}</div>
                   </Card.Meta>
                 </Card.Content>
               </Card>
@@ -48,7 +38,7 @@ const UserDeteiledEvents = ({ events, eventsLoading, changeTab }) => {
         </Card.Group>
       </Segment>
     </Grid.Column>
-  );
-};
+  )
+}
 
-export default UserDeteiledEvents;
+export default UserDeteiledEvents

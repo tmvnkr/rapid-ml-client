@@ -1,35 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Grid, Header, Item, Segment, Icon, Image } from 'semantic-ui-react';
-import differenceInYears from 'date-fns/difference_in_years';
+import React, { useState, useEffect } from 'react'
+import { Grid, Header, Item, Segment, Icon, Image } from 'semantic-ui-react'
+import differenceInYears from 'date-fns/difference_in_years'
 
 const UserDetailedHeader = ({ profile, photos, following }) => {
-  const [randomImage, setRandomImage] = useState(profile.photoURL);
+  const [randomImage, setRandomImage] = useState(profile.photoURL)
 
   useEffect(
     () => {
       if (photos) {
-        let randomPhoto = photos[Math.floor(Math.random() * photos.length)];
+        let randomPhoto = photos[Math.floor(Math.random() * photos.length)]
         !randomPhoto
           ? setRandomImage('/assets/categoryImages/universe.jpg')
-          : setRandomImage(randomPhoto.url);
+          : setRandomImage(randomPhoto.url)
       }
     },
     [photos]
-  );
+  )
 
-  let age = 'unknown age';
+  let age = 'unknown age'
   if (profile.dateOfBirth) {
-    age = differenceInYears(Date.now(), profile.dateOfBirth);
+    age = differenceInYears(Date.now(), profile.dateOfBirth)
   } else {
-    age = 'unknown age';
+    age = 'unknown age'
   }
-  let gender = '';
+  let gender = ''
   if (profile.gender === 'male') {
-    gender = 'man';
+    gender = 'man'
   } else if (profile.gender === 'female') {
-    gender = 'woman';
+    gender = 'woman'
   } else {
-    gender = '';
+    gender = ''
   }
 
   const eventImageTextStyle = {
@@ -39,12 +39,12 @@ const UserDetailedHeader = ({ profile, photos, following }) => {
     width: '100%',
     height: 'auto',
     color: 'white'
-  };
+  }
 
   const eventImageStyle = {
     filter: 'blur(7px)',
     width: '100%'
-  };
+  }
 
   return (
     <Grid.Column width={12}>
@@ -124,7 +124,7 @@ const UserDetailedHeader = ({ profile, photos, following }) => {
         </Segment>
       </Segment>
     </Grid.Column>
-  );
-};
+  )
+}
 
-export default UserDetailedHeader;
+export default UserDetailedHeader

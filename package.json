@@ -41,8 +41,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
-    "cov": "cat ./coverage/lcov.info | codacy-coverage --accountToken 8NLlJ6ZuUGKlJQ3Q2Xz4 --username vaneker --projectName rapid-ml-client -p",
+    "test": "react-scripts test --coverage && cat ./coverage/lcov.info | codacy-coverage --accountToken 8NLlJ6ZuUGKlJQ3Q2Xz4 --username vaneker --projectName rapid-ml-client",
     "analyze": "source-map-explorer build/static/js/1.8ea7f319.chunk.jsnp",
     "deploy": "npm run build && firebase deploy"
   },

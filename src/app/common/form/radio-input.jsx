@@ -1,5 +1,5 @@
-import React from 'react';
-import { Form } from 'semantic-ui-react';
+import React from 'react'
+import { Form } from 'semantic-ui-react'
 
 function RadioInput({ input, width, type, label }) {
   return (
@@ -8,7 +8,7 @@ function RadioInput({ input, width, type, label }) {
         <input {...input} type={type} /> <label>{label}</label>
       </div>
     </Form.Field>
-  );
+  )
 }
 
-export default RadioInput;
+export default RadioInput

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -33,9 +33,8 @@ const GlobalStyle = createGlobalStyle`
     rgb(156, 32, 172) 89%
   ) !important;
 }
-
-.masthead.segment {
-  min-height: 700px;
+ 
+.masthead.segment { 
   padding: 1em 0 !important;
 }
 
@@ -128,6 +127,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle

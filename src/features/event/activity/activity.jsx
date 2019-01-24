@@ -1,6 +1,6 @@
-import React from 'react';
-import { Header, Segment, Feed, Sticky } from 'semantic-ui-react';
-import EventActivityItem from './activity-item';
+import React from 'react'
+import { Header, Segment, Feed, Sticky } from 'semantic-ui-react'
+import EventActivityItem from './activity-item'
 
 function CollectionActivity({ activities, contextRef }) {
   return (
@@ -9,13 +9,11 @@ function CollectionActivity({ activities, contextRef }) {
       <Segment attached>
         <Feed>
           {activities &&
-            activities.map(activity => (
-              <EventActivityItem key={activity.id} activity={activity} />
-            ))}
+            activities.map(activity => <EventActivityItem key={activity.id} activity={activity} />)}
         </Feed>
       </Segment>
     </Sticky>
-  );
+  )
 }
 
-export default CollectionActivity;
+export default CollectionActivity

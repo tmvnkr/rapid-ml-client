@@ -1,6 +1,6 @@
-import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Card, Image } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 const PersonCard = ({ user }) => {
   return (
@@ -13,7 +13,7 @@ const PersonCard = ({ user }) => {
         <span>{user.city}</span>
       </Card.Meta>
     </Card>
-  );
-};
+  )
+}
 
-export default PersonCard;
+export default PersonCard

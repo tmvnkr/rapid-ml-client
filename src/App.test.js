@@ -1,3 +1,3 @@
 it('renders without crashing', () => {
-  return;
-});
+  return
+})

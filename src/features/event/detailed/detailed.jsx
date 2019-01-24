@@ -1,31 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { toastr } from 'react-redux-toastr';
-import { withFirestore, firebaseConnect, isEmpty } from 'react-redux-firebase';
-import { compose } from 'redux';
-import { Grid } from 'semantic-ui-react';
-import EventDetailedHeader from './header';
-import EventDetailedInfo from './info';
-import EventDetailedChat from './chat';
-import EventDetailedSidebar from './sidebar';
-import EventDetailedTaggedImage from './tagged-image';
-import {
-  objectToArray,
-  createDataTree
-} from '../../../app/common/util/helpers';
-import LoadingComponent from '../../../app/layout/loading';
-import { goingToEvent, cancelGoingToEvent } from '../../user/actions';
-import { openModal } from '../../modals/actions';
-import { addEventComment } from '../actions';
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { toastr } from 'react-redux-toastr'
+import { withFirestore, firebaseConnect, isEmpty } from 'react-redux-firebase'
+import { compose } from 'redux'
+import { Grid } from 'semantic-ui-react'
+import EventDetailedHeader from './header'
+import EventDetailedInfo from './info'
+import EventDetailedChat from './chat'
+import EventDetailedSidebar from './sidebar'
+import EventDetailedTaggedImage from './tagged-image'
+import { objectToArray, createDataTree } from '../../../app/common/util/helpers'
+import LoadingComponent from '../../../app/layout/loading'
+import { goingToEvent, cancelGoingToEvent } from '../../user/actions'
+import { openModal } from '../../modals/actions'
+import { addEventComment } from '../actions'
 
 const mapState = (state, ownProps) => {
-  let event = {};
+  let event = {}
 
-  if (
-    state.firestore.ordered.collections &&
-    state.firestore.ordered.collections[0]
-  ) {
-    event = state.firestore.ordered.collections[0];
+  if (state.firestore.ordered.collections && state.firestore.ordered.collections[0]) {
+    event = state.firestore.ordered.collections[0]
   }
 
   return {
@@ -36,38 +30,38 @@ const mapState = (state, ownProps) => {
     eventChat:
       !isEmpty(state.firebase.data.event_chat) &&
       objectToArray(state.firebase.data.event_chat[ownProps.match.params.id])
-  };
-};
+  }
+}
 
 const actions = {
   goingToEvent,
   cancelGoingToEvent,
   openModal,
   addEventComment
-};
+}
 
 function EventDetailedPage(props) {
-  const [initialLoading, setInitialLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true)
 
   useEffect(() => {
-    const { firestore, match } = props;
-    (async function() {
+    const { firestore, match } = props
+    ;(async function() {
       try {
-        let event = await firestore.get(`collections/${match.params.id}`);
+        let event = await firestore.get(`collections/${match.params.id}`)
         if (!event.exists) {
-          toastr.error('Not found', 'Collection not found');
-          props.history.push('/error');
+          toastr.error('Not found', 'Collection not found')
+          props.history.push('/error')
         }
-        await firestore.setListener(`collections/${match.params.id}`);
-        setInitialLoading(false);
+        await firestore.setListener(`collections/${match.params.id}`)
+        setInitialLoading(false)
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
-    })();
+    })()
     return function cleanup() {
-      firestore.unsetListener(`collections/${match.params.id}`);
-    };
-  }, []);
+      firestore.unsetListener(`collections/${match.params.id}`)
+    }
+  }, [])
 
   const {
     requesting,
@@ -79,21 +73,19 @@ function EventDetailedPage(props) {
     addEventComment,
     eventChat,
     match
-  } = props;
+  } = props
   const attendees =
     event &&
     event.attendees &&
     objectToArray(event.attendees).sort(function(a, b) {
-      return a.joinDate - b.joinDate;
-    });
-  const isHost = event.hostUid === auth.uid;
-  const isGoing =
-    attendees && attendees.some(attendee => attendee.id === auth.uid);
-  const chatTree = !isEmpty(eventChat) && createDataTree(eventChat);
-  const loadingCollection = requesting[`events/${match.params.id}`];
+      return a.joinDate - b.joinDate
+    })
+  const isHost = event.hostUid === auth.uid
+  const isGoing = attendees && attendees.some(attendee => attendee.id === auth.uid)
+  const chatTree = !isEmpty(eventChat) && createDataTree(eventChat)
+  const loadingCollection = requesting[`events/${match.params.id}`]
 
-  if (loadingCollection || initialLoading)
-    return <LoadingComponent inverted={true} />;
+  if (loadingCollection || initialLoading) return <LoadingComponent inverted={true} />
   return (
     <Grid>
       <Grid.Column width={11}>
@@ -117,7 +109,7 @@ function EventDetailedPage(props) {
         <EventDetailedSidebar attendees={attendees} />
       </Grid.Column>
     </Grid>
-  );
+  )
 }
 
 export default compose(
@@ -127,4 +119,4 @@ export default compose(
     actions
   ),
   firebaseConnect(props => [`event_chat/${props.match.params.id}`])
-)(EventDetailedPage);
+)(EventDetailedPage)

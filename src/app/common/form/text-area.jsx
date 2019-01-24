@@ -1,13 +1,7 @@
-import React from 'react';
-import { Form, Label } from 'semantic-ui-react';
+import React from 'react'
+import { Form, Label } from 'semantic-ui-react'
 
-function TextArea({
-  input,
-  rows,
-  type,
-  placeholder,
-  meta: { touched, error }
-}) {
+function TextArea({ input, rows, type, placeholder, meta: { touched, error } }) {
   return (
     <Form.Field error={touched && !!error}>
       <textarea {...input} placeholder={placeholder} rows={rows} />
@@ -17,7 +11,7 @@ function TextArea({
         </Label>
       )}
     </Form.Field>
-  );
+  )
 }
 
-export default TextArea;
+export default TextArea

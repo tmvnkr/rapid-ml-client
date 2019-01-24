@@ -1,14 +1,7 @@
-import React from 'react';
-import { Label, Select, Form } from 'semantic-ui-react';
+import React from 'react'
+import { Label, Select, Form } from 'semantic-ui-react'
 
-function SelectInput({
-  input,
-  type,
-  placeholder,
-  multiple,
-  options,
-  meta: { touched, error }
-}) {
+function SelectInput({ input, type, placeholder, multiple, options, meta: { touched, error } }) {
   return (
     <Form.Field error={touched && !!error}>
       <Select
@@ -24,7 +17,7 @@ function SelectInput({
         </Label>
       )}
     </Form.Field>
-  );
+  )
 }
 
-export default SelectInput;
+export default SelectInput

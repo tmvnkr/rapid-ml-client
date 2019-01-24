@@ -1,27 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
-import {
-  Image,
-  Segment,
-  Header,
-  Divider,
-  Grid,
-  Button,
-  Card,
-  Icon
-} from 'semantic-ui-react';
-import { toastr } from 'react-redux-toastr';
-import Dropzone from 'react-dropzone';
-import Cropper from 'react-cropper';
-import 'cropperjs/dist/cropper.css';
-import {
-  uploadProfileImage,
-  deletePhoto,
-  setMainPhoto,
-  deleteTaggedPhoto
-} from '../actions';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+import { Image, Segment, Header, Divider, Grid, Button, Card, Icon } from 'semantic-ui-react'
+import { toastr } from 'react-redux-toastr'
+import Dropzone from 'react-dropzone'
+import Cropper from 'react-cropper'
+import 'cropperjs/dist/cropper.css'
+import { uploadProfileImage, deletePhoto, setMainPhoto, deleteTaggedPhoto } from '../actions'
 
 const query = ({ auth }) => {
   return [
@@ -31,22 +17,22 @@ const query = ({ auth }) => {
       subcollections: [{ collection: 'photos' }],
       storeAs: 'photos'
     }
-  ];
-};
+  ]
+}
 
 const actions = {
   uploadProfileImage,
   deletePhoto,
   setMainPhoto,
   deleteTaggedPhoto
-};
+}
 
 const mapState = state => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
   photos: state.firestore.ordered.photos,
   loading: state.async.loading
-});
+})
 
 class PhotosPage extends Component {
   state = {
@@ -54,100 +40,97 @@ class PhotosPage extends Component {
     fileName: '',
     cropResult: null,
     image: {}
-  };
+  }
 
   cancelCrop = () => {
     this.setState({
       files: [],
       image: {}
-    });
-  };
+    })
+  }
 
   uploadImage = async () => {
     try {
-      await this.props.uploadProfileImage(
-        this.state.image,
-        this.state.fileName
-      );
-      this.cancelCrop();
-      toastr.success('Success', 'Photo has been uploaded');
+      await this.props.uploadProfileImage(this.state.image, this.state.fileName)
+      this.cancelCrop()
+      toastr.success('Success', 'Photo has been uploaded')
     } catch (error) {
-      toastr.error('Oops', error.message);
+      toastr.error('Oops', error.message)
     }
-  };
+  }
 
   handlePhotoDelete = photo => async () => {
     try {
-      this.props.deletePhoto(photo);
+      this.props.deletePhoto(photo)
     } catch (error) {
-      toastr.error('Oops', error.message);
+      toastr.error('Oops', error.message)
     }
-  };
+  }
 
   handleTaggedPhotoDelete = photo => async () => {
     try {
-      this.props.deleteTaggedPhoto(photo);
+      this.props.deleteTaggedPhoto(photo)
     } catch (error) {
-      toastr.error('Oops', error.message);
+      toastr.error('Oops', error.message)
     }
-  };
+  }
 
   handleSetMainPhoto = photo => async () => {
     try {
-      await this.props.setMainPhoto(photo);
+      await this.props.setMainPhoto(photo)
     } catch (error) {
-      toastr.error('Oops', error.message);
+      toastr.error('Oops', error.message)
     }
-  };
+  }
 
   cropImage = () => {
     if (typeof this.refs.cropper.getCroppedCanvas() === 'undefined') {
-      return;
+      return
     }
 
     this.refs.cropper.getCroppedCanvas().toBlob(blob => {
       try {
-        let imageUrl = URL.createObjectURL(blob);
+        let imageUrl = URL.createObjectURL(blob)
         this.setState({
           cropResult: imageUrl,
           image: blob
-        });
+        })
       } catch (error) {
-        return;
+        return
       }
-    }, 'image/jpeg');
-  };
+    }, 'image/jpeg')
+  }
 
   onDrop = files => {
     this.setState({
       files,
       fileName: files[0].name
-    });
-  };
+    })
+  }
 
   render() {
-    const { photos, profile, loading } = this.props;
-    let filteredUserPhotos;
-    let filteredTaggedPhotos;
+    const { photos, profile, loading } = this.props
+    let filteredUserPhotos
+    let filteredTaggedPhotos
 
     if (photos) {
       filteredUserPhotos = photos
         .filter(photo => {
-          return photo.url !== profile.photoURL;
+          return photo.url !== profile.photoURL
         })
         .filter(photo => {
-          return photo.url.includes('%2Fuser_images%2');
-        });
+          return photo.url.includes('%2Fuser_images%2')
+        })
     }
 
     if (photos) {
       filteredTaggedPhotos = photos
         .filter(photo => {
-          return photo.url !== profile.photoURL;
+          return photo.url !== profile.photoURL
         })
         .filter(photo => {
-          return photo.url.includes('%2Ftagged_images%2');
-        });
+          return photo.url.includes('%2Ftagged_images%2')
+        })
     }
     return (
       <Segment>
@@ -267,7 +250,7 @@ class PhotosPage extends Component {
             ))}
         </Card.Group>
       </Segment>
-    );
+    )
   }
 }
 
@@ -277,4 +260,4 @@ export default compose(
     actions
   ),
   firestoreConnect(auth => query(auth))
-)(PhotosPage);
+)(PhotosPage)

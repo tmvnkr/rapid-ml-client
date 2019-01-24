@@ -1,5 +1,5 @@
-import firebase from 'firebase';
-import 'firebase/firestore';
+import firebase from 'firebase'
+import 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -8,9 +8,9 @@ const firebaseConfig = {
   projectId: 'rapidml',
   storageBucket: 'rapidml.appspot.com',
   messagingSenderId: '230159999974'
-};
+}
 
-firebase.initializeApp(firebaseConfig);
-firebase.firestore();
+firebase.initializeApp(firebaseConfig)
+firebase.firestore()
 
-export default firebase;
+export default firebase

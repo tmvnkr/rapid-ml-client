@@ -1,13 +1,7 @@
-import React from 'react';
-import { Label, Dropdown, Form } from 'semantic-ui-react';
+import React from 'react'
+import { Label, Dropdown, Form } from 'semantic-ui-react'
 
-function DropdownInput({
-  input,
-  width,
-  placeholder,
-  options,
-  meta: { touched, error }
-}) {
+function DropdownInput({ input, width, placeholder, options, meta: { touched, error } }) {
   return (
     <Form.Field error={touched && !!error} width={width}>
       <Dropdown
@@ -25,7 +19,7 @@ function DropdownInput({
         </Label>
       )}
     </Form.Field>
-  );
+  )
 }
 
-export default DropdownInput;
+export default DropdownInput

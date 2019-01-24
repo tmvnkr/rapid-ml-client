@@ -1,12 +1,12 @@
-import React from 'react';
-import { Button, Divider, Form, Header, Segment } from 'semantic-ui-react';
-import { Field, reduxForm } from 'redux-form';
-import RadioInput from '../../../app/common/form/radio-input';
-import TextInput from '../../../app/common/form/text-input';
-import TextArea from '../../../app/common/form/text-area';
-import SelectInput from '../../../app/common/form/select-input';
-import DropdownInput from '../../../app/common/form/dropdown-input';
-import { countryOptions } from '../../../app/common/form/country-input';
+import React from 'react'
+import { Button, Divider, Form, Header, Segment } from 'semantic-ui-react'
+import { Field, reduxForm } from 'redux-form'
+import RadioInput from '../../../app/common/form/radio-input'
+import TextInput from '../../../app/common/form/text-input'
+import TextArea from '../../../app/common/form/text-area'
+import SelectInput from '../../../app/common/form/select-input'
+import DropdownInput from '../../../app/common/form/dropdown-input'
+import { countryOptions } from '../../../app/common/form/country-input'
 
 const interests = [
   { key: 'academic', text: 'Academic Disciplines', value: 'academic' },
@@ -37,7 +37,7 @@ const interests = [
   { key: 'technology', text: 'Technology', value: 'technology' },
   { key: 'universe', text: 'Universe', value: 'universe' },
   { key: 'world', text: 'World', value: 'world' }
-];
+]
 
 const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
   return (
@@ -47,13 +47,7 @@ const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
       <Form onSubmit={handleSubmit(updateProfile)}>
         <Form.Group inline>
           <label>Tell us your status: </label>
-          <Field
-            name="status"
-            component={RadioInput}
-            type="radio"
-            value="single"
-            label="Single"
-          />
+          <Field name="status" component={RadioInput} type="radio" value="single" label="Single" />
           <Field
             name="status"
             component={RadioInput}
@@ -96,19 +90,14 @@ const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
           placeholder="Select your country"
         />
         <Divider />
-        <Button
-          disabled={pristine || submitting}
-          size="large"
-          positive
-          content="Update Profile"
-        />
+        <Button disabled={pristine || submitting} size="large" positive content="Update Profile" />
       </Form>
     </Segment>
-  );
-};
+  )
+}
 
 export default reduxForm({
   form: 'userProfile',
   enableReinitialize: true,
   destroyOnUnmount: false
-})(AboutPage);
+})(AboutPage)

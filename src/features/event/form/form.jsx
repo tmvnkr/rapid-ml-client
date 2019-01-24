@@ -1,47 +1,39 @@
 /*global google*/
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
-import {
-  composeValidators,
-  combineValidators,
-  isRequired,
-  hasLengthGreaterThan
-} from 'revalidate';
-import moment from 'moment';
-import { withFirestore } from 'react-redux-firebase';
-import Script from 'react-load-script';
-import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react';
-import { createEvent, updateEvent, cancelToggle } from '../actions';
-import TextInput from '../../../app/common/form/text-input';
-import TextArea from '../../../app/common/form/text-area';
-import SelectInput from '../../../app/common/form/select-input';
-import DateInput from '../../../app/common/form/date-input';
-import PlaceInput from '../../../app/common/form/place-input';
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { reduxForm, Field } from 'redux-form'
+import { composeValidators, combineValidators, isRequired, hasLengthGreaterThan } from 'revalidate'
+import moment from 'moment'
+import { withFirestore } from 'react-redux-firebase'
+import Script from 'react-load-script'
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import { Segment, Form, Button, Grid, Header } from 'semantic-ui-react'
+import { createEvent, updateEvent, cancelToggle } from '../actions'
+import TextInput from '../../../app/common/form/text-input'
+import TextArea from '../../../app/common/form/text-area'
+import SelectInput from '../../../app/common/form/select-input'
+import DateInput from '../../../app/common/form/date-input'
+import PlaceInput from '../../../app/common/form/place-input'
 
 const mapState = state => {
-  let event = {};
+  let event = {}
 
-  if (
-    state.firestore.ordered.collections &&
-    state.firestore.ordered.collections[0]
-  ) {
-    event = state.firestore.ordered.collections[0];
+  if (state.firestore.ordered.collections && state.firestore.ordered.collections[0]) {
+    event = state.firestore.ordered.collections[0]
   }
 
   return {
     loading: state.async.loading,
     initialValues: event,
     event
-  };
-};
+  }
+}
 
 const actions = {
   createEvent,
   updateEvent,
   cancelToggle
-};
+}
 
 const category = [
   { key: 'academic', text: 'Academic Disciplines', value: 'academic' },
@@ -72,7 +64,7 @@ const category = [
   { key: 'technology', text: 'Technology', value: 'technology' },
   { key: 'universe', text: 'Universe', value: 'universe' },
   { key: 'world', text: 'World', value: 'world' }
-];
+]
 
 const validate = combineValidators({
   title: isRequired({ message: 'The event title is required' }),
@@ -86,64 +78,64 @@ const validate = combineValidators({
   city: isRequired('city'),
   venue: isRequired('venue'),
   date: isRequired('date')
-});
+})
 
 function EventForm(props) {
-  const [cityLatLng, setCityLatLng] = useState({});
-  const [venueLatLng, setVenueLatLng] = useState({});
-  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [cityLatLng, setCityLatLng] = useState({})
+  const [venueLatLng, setVenueLatLng] = useState({})
+  const [scriptLoaded, setScriptLoaded] = useState(false)
 
-  const handleScriptLoaded = () => setScriptLoaded(true);
+  const handleScriptLoaded = () => setScriptLoaded(true)
 
   useEffect(() => {
-    const { firestore, match } = props;
-    (async function() {
+    const { firestore, match } = props
+    ;(async function() {
       try {
-        await firestore.setListener(`collections/${match.params.id}`);
+        await firestore.setListener(`collections/${match.params.id}`)
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
-    })();
+    })()
     return function cleanup() {
-      firestore.unsetListener(`collections/${match.params.id}`);
-    };
-  }, []);
+      firestore.unsetListener(`collections/${match.params.id}`)
+    }
+  }, [])
 
   const handleCitySelect = selectedCity => {
     geocodeByAddress(selectedCity)
       .then(results => getLatLng(results[0]))
       .then(latlng => {
-        setCityLatLng(latlng);
+        setCityLatLng(latlng)
       })
       .then(() => {
-        props.change('city', selectedCity);
-      });
-  };
+        props.change('city', selectedCity)
+      })
+  }
 
   const handleVenueSelect = selectedVenue => {
     geocodeByAddress(selectedVenue)
       .then(results => getLatLng(results[0]))
       .then(latlng => {
-        setVenueLatLng(latlng);
+        setVenueLatLng(latlng)
       })
       .then(() => {
-        props.change('venue', selectedVenue);
-      });
-  };
+        props.change('venue', selectedVenue)
+      })
+  }
 
   const onFormSubmit = values => {
-    values.venueLatLng = venueLatLng;
+    values.venueLatLng = venueLatLng
     if (props.initialValues.id) {
       if (Object.keys(values.venueLatLng).length === 0) {
-        values.venueLatLng = props.event.venueLatLng;
+        values.venueLatLng = props.event.venueLatLng
       }
-      props.updateEvent(values);
-      props.history.goBack();
+      props.updateEvent(values)
+      props.history.goBack()
     } else {
-      props.createEvent(values);
-      props.history.push('/collections');
+      props.createEvent(values)
+      props.history.push('/collections')
     }
-  };
+  }
 
   const {
     handleSubmit,
@@ -154,13 +146,13 @@ function EventForm(props) {
     event,
     cancelToggle,
     loading
-  } = props;
+  } = props
 
-  let collection;
+  let collection
   if (event.id) {
-    collection = <h1>Manage Collection Information</h1>;
+    collection = <h1>Manage Collection Information</h1>
   } else {
-    collection = <h1>Create Collection Information</h1>;
+    collection = <h1>Create Collection Information</h1>
   }
 
   return (
@@ -232,10 +224,7 @@ function EventForm(props) {
               dropdownMode="select"
               maxDate={moment().subtract(0, 'years')}
             />
-            <Button
-              disabled={invalid || submitting || pristine}
-              positive
-              type="submit">
+            <Button disabled={invalid || submitting || pristine} positive type="submit">
               Submit
             </Button>
             <Button onClick={history.goBack} type="button">
@@ -248,25 +237,19 @@ function EventForm(props) {
                 color={event.cancelled ? 'green' : 'red'}
                 type="button"
                 floated="right"
-                content={
-                  event.cancelled ? 'Show on frontpage' : 'Hide from frontpage'
-                }
+                content={event.cancelled ? 'Show on frontpage' : 'Hide from frontpage'}
               />
             )}
           </Form>
         </Segment>
       </Grid.Column>
     </Grid>
-  );
+  )
 }
 
 export default withFirestore(
   connect(
     mapState,
     actions
-  )(
-    reduxForm({ form: 'eventForm', enableReinitialize: true, validate })(
-      EventForm
-    )
-  )
-);
+  )(reduxForm({ form: 'eventForm', enableReinitialize: true, validate })(EventForm))
+)

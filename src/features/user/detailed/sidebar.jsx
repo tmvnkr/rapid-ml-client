@@ -1,26 +1,13 @@
-import React from 'react';
-import { Button, Grid, Segment } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Button, Grid, Segment } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
-const UserDetailedSidebar = ({
-  isCurrentUser,
-  followUser,
-  profile,
-  isFollowing,
-  unfollowUser
-}) => {
+const UserDetailedSidebar = ({ isCurrentUser, followUser, profile, isFollowing, unfollowUser }) => {
   return (
     <Grid.Column width={4}>
       <Segment>
         {isCurrentUser && (
-          <Button
-            as={Link}
-            to="/settings"
-            color="teal"
-            fluid
-            basic
-            content="Edit Profile"
-          />
+          <Button as={Link} to="/settings" color="teal" fluid basic content="Edit Profile" />
         )}
         {!isCurrentUser && !isFollowing && (
           <Button
@@ -33,17 +20,11 @@ const UserDetailedSidebar = ({
         )}
 
         {!isCurrentUser && isFollowing && (
-          <Button
-            onClick={() => unfollowUser(profile)}
-            color="teal"
-            fluid
-            basic
-            content="Unfollow"
-          />
+          <Button onClick={() => unfollowUser(profile)} color="teal" basic content="Unfollow" />
         )}
       </Segment>
     </Grid.Column>
-  );
-};
+  )
+}
 
-export default UserDetailedSidebar;
+export default UserDetailedSidebar

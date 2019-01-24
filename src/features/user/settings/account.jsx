@@ -1,21 +1,8 @@
-import React from 'react';
-import {
-  Segment,
-  Header,
-  Form,
-  Divider,
-  Label,
-  Button,
-  Icon
-} from 'semantic-ui-react';
-import { Field, reduxForm } from 'redux-form';
-import {
-  combineValidators,
-  matchesField,
-  isRequired,
-  composeValidators
-} from 'revalidate';
-import TextInput from '../../../app/common/form/text-input';
+import React from 'react'
+import { Segment, Header, Form, Divider, Label, Button, Icon } from 'semantic-ui-react'
+import { Field, reduxForm } from 'redux-form'
+import { combineValidators, matchesField, isRequired, composeValidators } from 'revalidate'
+import TextInput from '../../../app/common/form/text-input'
 
 const validate = combineValidators({
   newPassword1: isRequired({ message: 'Please enter a password' }),
@@ -23,16 +10,9 @@ const validate = combineValidators({
     isRequired({ message: 'Please confirm your new password' }),
     matchesField('newPassword1')({ message: 'Passwords do not match' })
   )()
-});
+})
 
-function AccountPage({
-  error,
-  invalid,
-  submitting,
-  handleSubmit,
-  updatePassword,
-  providerId
-}) {
+function AccountPage({ error, invalid, submitting, handleSubmit, updatePassword, providerId }) {
   return (
     <Segment>
       <Header dividing size="large" content="Account" />
@@ -97,7 +77,7 @@ function AccountPage({
         </div>
       )}
     </Segment>
-  );
+  )
 }
 
-export default reduxForm({ form: 'account', validate })(AccountPage);
+export default reduxForm({ form: 'account', validate })(AccountPage)

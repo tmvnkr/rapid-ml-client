@@ -1,36 +1,36 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { withFirebase } from 'react-redux-firebase';
-import { Menu, Container, Button } from 'semantic-ui-react';
-import { NavLink, Link, withRouter } from 'react-router-dom';
-import SignedOutMenu from '../menus/signed-out-menu';
-import SignedInMenu from '../menus/signed-in-menu';
-import { openModal } from '../../modals/actions';
+import React from 'react'
+import { connect } from 'react-redux'
+import { withFirebase } from 'react-redux-firebase'
+import { Menu, Container, Button } from 'semantic-ui-react'
+import { NavLink, Link, withRouter } from 'react-router-dom'
+import SignedOutMenu from '../menus/signed-out-menu'
+import SignedInMenu from '../menus/signed-in-menu'
+import { openModal } from '../../modals/actions'
 
 const actions = {
   openModal
-};
+}
 
 const mapState = state => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile
-});
+})
 
 function Navbar(props) {
   const handleSignIn = () => {
-    props.openModal('LoginModal');
-  };
+    props.openModal('LoginModal')
+  }
 
   const handleRegister = () => {
-    props.openModal('RegisterModal');
-  };
+    props.openModal('RegisterModal')
+  }
 
   const handleSignOut = () => {
-    props.firebase.logout();
-    props.history.push('/');
-  };
+    props.firebase.logout()
+    props.history.push('/')
+  }
 
-  const authenticated = props.auth.isLoaded && !props.auth.isEmpty;
+  const authenticated = props.auth.isLoaded && !props.auth.isEmpty
 
   return (
     <Menu inverted fixed="top">
@@ -58,17 +58,13 @@ function Navbar(props) {
           </Menu.Item>
         )}
         {authenticated ? (
-          <SignedInMenu
-            auth={props.auth}
-            profile={props.profile}
-            signOut={handleSignOut}
-          />
+          <SignedInMenu auth={props.auth} profile={props.profile} signOut={handleSignOut} />
         ) : (
           <SignedOutMenu signIn={handleSignIn} register={handleRegister} />
         )}
       </Container>
     </Menu>
-  );
+  )
 }
 export default withRouter(
   withFirebase(
@@ -77,4 +73,4 @@ export default withRouter(
       actions
     )(Navbar)
   )
-);
+)
